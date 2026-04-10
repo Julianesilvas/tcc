@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — Happy Baby</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="imgs/logo.png" alt="Happy Baby Logo" class="logo">
+    </header>
+
+    <nav>
+        <a href="index.html" class="nav-btn">Início</a>
+        <a href="baba.html" class="nav-btn">Babás</a>
+        <a href="contato.html" class="nav-btn ativo">Contato</a>
+
+        <input 
+    type="text" 
+    id="buscaCidade" 
+    placeholder="🔍 Buscar por cidade..." 
+    onkeyup="filtrarBabas()"
+>
+    </nav>
+
+    <main>
+        <section class="secao-contato">
+            <div class="contato-box">
+                <h2 class="titulo-secao">Fale conosco</h2>
+                <p class="subtitulo">Tem dúvidas ou precisa de ajuda? Entre em contato!</p>
+
+                <div class="contato-item">
+                    <span class="contato-icone">📧</span>
+                    <a href="mailto:contato@happybaby.com">contato@happybaby.com</a>
+                </div>
+
+                <div class="contato-item">
+                    <span class="contato-icone">📱</span>
+                    <span>(11) 99999-9999</span>
+                </div>
+
+                <div class="contato-item">
+                    <span class="contato-icone">📍</span>
+                    <span>São Paulo — SP, Brasil</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Happy Baby — Feito com 💛</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

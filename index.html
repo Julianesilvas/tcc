@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Baby</title>
+    <meta name="description" content="Cuidando de quem você mais ama, com segurança e carinho">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="imgs/logo.png" alt="Happy Baby Logo" class="logo">
+    </header>
+
+    <nav>
+        <a href="index.html" class="nav-btn ativo">Início</a>
+        <a href="baba.html" class="nav-btn">Babás</a>
+        <a href="contato.html" class="nav-btn">Contato</a>
+
+        <input 
+    type="text" 
+    id="buscaCidade" 
+    placeholder=" Buscar por cidade..." 
+    onkeyup="filtrarBabas()"
+>
+
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="box-inicio">
+                <span class="tag">✨ Confiança em primeiro lugar</span>
+                <h1>Bem-vindo à <span class="destaque">Happy Baby</span></h1>
+                <p class="subtitulo">
+                    Encontre babás confiáveis de forma rápida, segura e prática.
+                </p>
+                <a href="baba.html" class="botao-principal btn-anim">
+                    Encontrar Babás →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Happy Baby — Feito com 💛</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

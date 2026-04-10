@@ -1,0 +1,476 @@
+/* ================================================
+   HAPPY BABY — styles.css
+   Um único arquivo de estilos para todas as páginas
+   ================================================ */
+
+/* ===== VARIÁVEIS ===== */
+:root {
+    --marrom:       #a6885d;
+    --marrom-claro: #c5a46b;
+    --marrom-escuro:#5a4633;
+    --bege:         #f8f6f3;
+    --bege-card:    #ffffff;
+    --texto-suave:  #7a6a58;
+    --sombra:       0 8px 25px rgba(90, 70, 51, 0.12);
+    --raio:         18px;
+    --fonte-titulo: 'Playfair Display', serif;
+    --fonte-corpo:  'Nunito', sans-serif;
+}
+
+/* ===== RESET / BASE ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    background: var(--bege);
+    color: var(--marrom-escuro);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 30px 20px;
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align: center;
+    padding: 18px 0 10px;
+    background: var(--bege-card);
+    border-bottom: 1px solid rgba(166,136,93,0.15);
+}
+
+.logo {
+    width: 110px;
+}
+
+/* ===== MENU DE NAVEGAÇÃO ===== */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background: var(--marrom);
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(90,70,51,0.2);
+
+    nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #a6885d;
+    padding: 10px;
+    position: relative;
+}
+}
+
+#buscaCidade {
+    position: absolute;
+    right: 20px;
+}
+
+#buscaCidade {
+    padding: 10px 15px 10px 35px;
+    width: 220px;
+
+    border-radius: 20px;
+    border: none;
+
+    background: rgba(255, 255, 255, 0.9);
+    color: #5a4633;
+
+    font-size: 14px;
+    outline: none;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    transition: 0.3s;
+}
+
+/* EFEITO AO CLICAR */
+#buscaCidade:focus {
+    width: 260px;
+    background: white;
+}
+
+/* ÍCONE DE LUPA */
+#buscaCidade {
+    background-image: url("https://cdn-icons-png.flaticon.com/512/622/622669.png");
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.nav-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--fonte-corpo);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.nav-btn:hover {
+    background: rgba(255,255,255,0.28);
+    transform: translateY(-2px);
+}
+
+.nav-btn.ativo {
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+/* ===== ANIMAÇÕES DE BOTÃO (via JS) ===== */
+.btn-anim {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-anim:active {
+    transform: scale(0.96) !important;
+}
+
+/* ===== PÁGINA INICIAL — HERO ===== */
+.hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(197,164,107,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse at 20% 80%, rgba(166,136,93,0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.box-inicio {
+    background: var(--bege-card);
+    padding: 55px 60px;
+    border-radius: 28px;
+    text-align: center;
+    box-shadow: var(--sombra);
+    animation: subir 0.7s ease both;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+}
+
+.tag {
+    display: inline-block;
+    background: rgba(166,136,93,0.12);
+    color: var(--marrom);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+
+.box-inicio h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 36px;
+    color: var(--marrom-escuro);
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+
+.destaque {
+    color: var(--marrom);
+}
+
+.subtitulo {
+    font-size: 17px;
+    color: var(--texto-suave);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* ===== BOTÃO PRINCIPAL ===== */
+.botao-principal {
+    display: inline-block;
+    background: var(--marrom);
+    color: white;
+    padding: 15px 32px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(166,136,93,0.4);
+    letter-spacing: 0.3px;
+}
+
+.botao-principal:hover {
+    background: var(--marrom-escuro);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(90,70,51,0.25);
+}
+
+/* ===== ANIMAÇÃO ===== */
+@keyframes subir {
+    from { transform: translateY(24px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ===== SEÇÃO BABÁS ===== */
+.secao-babas {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.titulo-secao {
+    font-family: var(--fonte-titulo);
+    font-size: 30px;
+    color: var(--marrom-escuro);
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+/* ===== GRID DOS CARDS ===== */
+.grid-babas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+/* ===== CARD DA BABÁ ===== */
+.baba {
+    background: var(--bege-card);
+    border-radius: var(--raio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.baba:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 35px rgba(90,70,51,0.16);
+}
+
+.baba img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #ede8e1; /* placeholder quando sem foto */
+}
+
+.baba-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+}
+
+.baba h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 18px;
+    color: var(--marrom-escuro);
+    text-align: center;
+}
+
+.baba p {
+    font-size: 14px;
+    color: var(--texto-suave);
+    text-align: center;
+}
+
+.avaliacao {
+    font-size: 15px;
+    color: #f5b301;
+    letter-spacing: 2px;
+}
+
+/* ===== BOTÃO CONTRATAR ===== */
+.btn-contratar {
+    margin-top: auto;
+    padding: 11px 0;
+    width: 90%;
+    border-radius: 50px;
+    border: none;
+    background: var(--marrom);
+    color: white;
+    font-family: var(--fonte-corpo);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 3px 10px rgba(166,136,93,0.3);
+}
+
+.btn-contratar:hover {
+    background: var(--marrom-escuro);
+    transform: translateY(-2px);
+}
+
+/* ===== PERFIL DETALHADO ===== */
+.perfil {
+    text-align: center;
+    animation: subir 0.5s ease both;
+    max-width: 420px;
+    margin: 0 auto;
+    background: var(--bege-card);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+}
+
+.foto-grande {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 5px solid rgba(166,136,93,0.2);
+    background: #ede8e1;
+}
+
+.perfil h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--marrom-escuro);
+    margin-bottom: 8px;
+}
+
+.perfil-local {
+    font-size: 14px;
+    color: var(--texto-suave);
+    margin-bottom: 6px;
+}
+
+.perfil-nota {
+    font-size: 15px;
+    color: var(--marrom-escuro);
+    font-weight: 600;
+    margin-bottom: 22px;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-voltar {
+    background: transparent;
+    border: 2px solid var(--marrom);
+    color: var(--marrom);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-voltar:hover {
+    background: var(--marrom);
+    color: white;
+}
+
+/* ===== PÁGINA CONTATO ===== */
+.secao-contato {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 55vh;
+}
+
+.contato-box {
+    background: var(--bege-card);
+    padding: 50px 60px;
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+    text-align: center;
+    animation: subir 0.6s ease both;
+    max-width: 460px;
+    width: 100%;
+}
+
+.contato-box .subtitulo {
+    margin-bottom: 32px;
+}
+
+.contato-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 16px;
+    color: var(--marrom-escuro);
+    font-weight: 600;
+}
+
+.contato-item a {
+    color: var(--marrom);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.contato-item a:hover {
+    color: var(--marrom-escuro);
+}
+
+.contato-icone {
+    font-size: 22px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 14px;
+    background: #ede8e1;
+    color: var(--marrom-escuro);
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: auto;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 600px) {
+    .box-inicio {
+        padding: 36px 24px;
+    }
+
+    .box-inicio h1 {
+        font-size: 26px;
+    }
+
+    .contato-box {
+        padding: 36px 24px;
+    }
+
+    .grid-babas {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 400px) {
+    .grid-babas {
+        grid-template-columns: 1fr;
+    }
+}

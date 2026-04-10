@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babás — Happy Baby</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="imgs/logo.png" alt="Happy Baby Logo" class="logo">
+    </header>
+
+    <nav>
+        <a href="index.html" class="nav-btn">Início</a>
+        <a href="baba.html" class="nav-btn ativo">Babás</a>
+        <a href="contato.html" class="nav-btn">Contato</a>
+        
+        <input 
+    type="text" 
+    id="buscaCidade" 
+    placeholder="🔍 Buscar por cidade..." 
+    onkeyup="filtrarBabas()"
+>
+    </nav>
+
+    <main>
+        <section class="secao-babas">
+            <h2 class="titulo-secao">Babás disponíveis</h2>
+
+            <div id="listaBabas" class="grid-babas">
+
+                <div class="baba btn-anim">
+                    <img src="imgs/AnaLaura.jpeg" alt="Foto de Ana Laura">
+                    <div class="baba-info">
+                        <h3>Ana Laura</h3>
+                        <p>São Carlos — SP</p>
+                        <div class="avaliacao">⭐⭐⭐☆☆</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil1')">Ver Perfil</button>
+                    </div>
+                </div>
+
+                <div class="baba btn-anim">
+                    <img src="imgs/Mariany.jpeg" alt="Foto de Mariany Ruas">
+                    <div class="baba-info">
+                        <h3>Mariany Ruas</h3>
+                        <p>Belo Horizonte — MG</p>
+                        <div class="avaliacao">⭐⭐⭐⭐☆</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil2')">Ver Perfil</button>
+                    </div>
+                </div>
+
+                <div class="baba btn-anim">
+                    <img src="imgs/Julia.jpeg" alt="Foto de Julia Penedo">
+                    <div class="baba-info">
+                        <h3>Julia Penedo</h3>
+                        <p>Rio Branco — AC</p>
+                        <div class="avaliacao">⭐⭐⭐⭐☆</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil3')">Ver Perfil</button>
+                    </div>
+                </div>
+
+                <div class="baba btn-anim">
+                    <img src="imgs/Heloisa.jpeg" alt="Foto de Heloisa Inácio">
+                    <div class="baba-info">
+                        <h3>Heloisa Inácio</h3>
+                        <p>São Gonçalo — RJ</p>
+                        <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil4')">Ver Perfil</button>
+                    </div>
+                </div>
+
+                <div class="baba btn-anim">
+                    <img src="imgs/Juliane.jpeg" alt="Foto de Juliane Santana">
+                    <div class="baba-info">
+                        <h3>Juliane Santana</h3>
+                        <p>Feira de Santana — BA</p>
+                        <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil5')">Ver Perfil</button>
+                    </div>
+                </div>
+
+                <div class="baba btn-anim">
+                    <img src="imgs/Carol.jpeg" alt="Foto de Caroline Aparecida">
+                    <div class="baba-info">
+                        <h3>Caroline Aparecida</h3>
+                        <p>Porto Alegre — RS</p>
+                        <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil6')">Ver Perfil</button>
+                    </div>
+                </div>
+
+                <div class="baba btn-anim">
+                    <img src="imgs/Lorena.jpeg" alt="Foto de Lorena Costa">
+                    <div class="baba-info">
+                        <h3>Lorena Costa</h3>
+                        <p>Amapá — AP</p>
+                        <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+                        <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil7')">Ver Perfil</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== PERFIS ===== -->
+            <div id="perfil1" class="perfil" style="display:none;">
+                <img src="imgs/AnaLaura.jpeg" alt="Ana Laura" class="foto-grande">
+                <h2>Ana Laura</h2>
+                <p class="perfil-local">São Carlos — SP</p>
+                <p class= perfil-experiencia">8 meses de experiência</p>
+                <p class="perfil-nota">Atenciosa e cuidadosa</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+            <div id="perfil2" class="perfil" style="display:none;">
+                <img src="imgs/Mariany.jpeg" alt="Mariany Ruas" class="foto-grande">
+                <h2>Mariany Ruas</h2>
+                <p class="perfil-local">Belo Horizonte — MG</p>
+                <p class= perfil-experiencia">2 anos de experiência</p>
+                <p class="perfil-nota">Muito responsável</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+            <div id="perfil3" class="perfil" style="display:none;">
+                <img src="imgs/Julia.jpeg" alt="Julia Penedo" class="foto-grande">
+                <h2>Julia Penedo</h2>
+                <p class="perfil-local">Rio Branco — AC</p>
+                <p class= perfil-experiencia">1 ano de experiência</p>
+                <p class="perfil-nota">Muito dedicada</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+            <div id="perfil4" class="perfil" style="display:none;">
+                <img src="imgs/Heloisa.jpeg" alt="Heloisa Inácio" class="foto-grande">
+                <h2>Heloisa Inácio</h2>
+                <p class="perfil-local">São Gonçalo — RJ</p>
+                <p class= perfil-experiencia">1 ano e 3 meses de experiência</p>
+                <p class="perfil-nota">Muito esforçada</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+            <div id="perfil5" class="perfil" style="display:none;">
+                <img src="imgs/Juliane.jpeg" alt="Juliane Santana" class="foto-grande">
+                <h2>Juliane Santana</h2>
+                <p class="perfil-local">Feira de Santana — BA</p>
+                <p class= perfil-experiencia">3 anos de experiência</p>
+                <p class="perfil-nota">Carinhosa e delicada</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+            <div id="perfil6" class="perfil" style="display:none;">
+                <img src="imgs/Carol.jpeg" alt="Caroline Aparecida" class="foto-grande">
+                <h2>Caroline Aparecida</h2>
+                <p class="perfil-local">Porto Alegre — RS</p>
+                <p class= perfil-experiencia">4 meses de experiência</p>
+                <p class="perfil-nota">Muito responsável</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+            <div id="perfil7" class="perfil" style="display:none;">
+                <img src="imgs/Lorena.jpeg" alt="Lorena Costa" class="foto-grande">
+                <h2>Lorena Costa</h2>
+                <p class="perfil-local">Amapá — AP</p>
+                <p class= perfil-experiencia">1 ano de experiência</p>
+                <p class="perfil-nota">Muito organizada</p>
+                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Happy Baby — Feito com 💛</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
