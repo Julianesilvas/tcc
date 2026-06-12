@@ -6,8 +6,8 @@
 /* ===== VARIÁVEIS ===== */
 :root {
     --marrom:       #a6885d;
-    --marrom-claro: #c5a46b;
-    --marrom-escuro:#5a4633;
+    --marrom-claro: #a0692d;
+    --marrom-escuro:#6d420e;
     --bege:         #f8f6f3;
     --bege-card:    #ffffff;
     --texto-suave:  #7a6a58;
@@ -220,7 +220,7 @@ nav {
     border: none;
     cursor: pointer;
     transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 15px rgba(166,136,93,0.4);
+    box-shadow: 0 4px 15px #6d420e;
     letter-spacing: 0.3px;
 }
 
@@ -480,7 +480,7 @@ footer {
 ========================================== */
 
 .hero-novo {
-    background: #cfe8ff;
+    background: #ffdfba;
     padding: 70px 5%;
     overflow: hidden;
 }
@@ -503,13 +503,13 @@ footer {
     font-size: 4rem;
     line-height: 1.05;
     font-weight: 900;
-    color: #1f2c3d;
+    color: #3a2812;
     margin-bottom: 25px;
     text-transform: uppercase;
 }
 
 .hero-texto h1 span {
-    background: #ffe35c;
+    background: #6d420e;
     padding: 0 8px;
     border-radius: 6px;
 }
@@ -524,7 +524,7 @@ footer {
     padding-left: 28px;
     margin-bottom: 15px;
     font-size: 1.2rem;
-    color: #374151;
+    color: #514137;
 }
 
 .hero-texto ul li::before {
@@ -537,7 +537,7 @@ footer {
 
 .btn-hero {
     display: inline-block;
-    background: #d83fa3;
+    background: #50310d;
     color: white;
     text-decoration: none;
     padding: 18px 35px;
@@ -549,7 +549,7 @@ footer {
 
 .btn-hero:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(216,63,163,.25);
+    box-shadow: 0 10px 20px rgba(75, 70, 61, 0.373);
 }
 
 .hero-imagem {
@@ -566,7 +566,7 @@ footer {
 
     border-radius: 80px;
 
-    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+    box-shadow: 0 15px 40px rgba(27, 26, 26, 0.15);
 }
 
 @media (max-width: 900px) {
