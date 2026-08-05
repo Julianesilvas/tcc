@@ -626,20 +626,16 @@ footer {
 }
 
 .tabela-calendario{
-
     width:100%;
-
+    table-layout:fixed;
     border-collapse:collapse;
-
-    text-align:center;
-
 }
 
-.tabela-calendario td,
-.tabela-calendario th{
-
-    padding:12px;
-
+.tabela-calendario th,
+.tabela-calendario td{
+    width:12.5%;
+    text-align:center;
+    padding:10px 6px;
 }
 
 .perfil-direita{
