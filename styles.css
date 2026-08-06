@@ -695,3 +695,143 @@ footer {
     margin-top:20px;
 
 }
+
+/* ================= CONTATO ================= */
+
+.contato{
+    padding:70px 8%;
+    background:#f8f5f0;
+}
+
+.contato-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.contato h2{
+    text-align:center;
+    color:#6d4c41;
+    margin-bottom:20px;
+    font-size:38px;
+}
+
+.texto-contato{
+    text-align:center;
+    max-width:900px;
+    margin:0 auto 40px;
+    line-height:1.8;
+    color:#555;
+}
+
+.como-funciona{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    margin-bottom:40px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.passos{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-top:25px;
+}
+
+.passo{
+    background:#efe4d3;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.passo span{
+    font-size:35px;
+}
+
+.form-contato{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.form-contato h3{
+    margin-bottom:25px;
+    color:#6d4c41;
+}
+
+.linha-form{
+    display:flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.linha-form input,
+.linha-form select{
+    flex:1;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:15px;
+}
+
+textarea{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    resize:vertical;
+    font-size:15px;
+}
+
+.dias{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:15px 0 25px;
+}
+
+.aceite{
+    display:block;
+    margin:25px 0;
+}
+
+.seguranca{
+    background:#efe4d3;
+    margin-top:40px;
+    padding:30px;
+    border-left:6px solid #a67c52;
+    border-radius:12px;
+}
+
+.seguranca h3{
+    margin-bottom:15px;
+    color:#6d4c41;
+}
+
+.seguranca p{
+    margin-bottom:12px;
+    line-height:1.7;
+}
+
+@media(max-width:900px){
+
+.passos{
+grid-template-columns:1fr 1fr;
+}
+
+.linha-form{
+flex-direction:column;
+}
+
+}
+
+@media(max-width:600px){
+
+.passos{
+grid-template-columns:1fr;
+}
+
+}
