@@ -77,3 +77,73 @@ function voltarBabas() {
     });
     document.getElementById("listaBabas").style.display = "grid";
 }
+
+// ================================================
+//  CONTRATAR — navegação entre etapas do formulário
+// ================================================
+
+let etapaAtual = 1;
+const totalEtapas = 5;
+
+function mostrarEtapa(numero) {
+    // Esconde todas as etapas
+    document.querySelectorAll(".etapa").forEach(etapa => {
+        etapa.style.display = "none";
+    });
+
+    // Mostra só a etapa pedida
+    const etapa = document.getElementById("etapa" + numero);
+    if (etapa) {
+        etapa.style.display = "block";
+    }
+
+    // Atualiza a barra de progresso (vamos estilizar no próximo passo)
+    document.querySelectorAll(".progresso").forEach(barra => {
+        barra.classList.remove("ativa");
+    });
+    const barraAtual = document.querySelector(".etapa" + numero);
+    if (barraAtual) {
+        barraAtual.classList.add("ativa");
+    }
+
+    etapaAtual = numero;
+
+    // Sobe a página pro topo ao trocar de etapa
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function irProximaEtapa() {
+    const etapa = document.getElementById("etapa" + etapaAtual);
+    const camposObrigatorios = etapa.querySelectorAll("[required]");
+
+    // Verifica se todos os campos obrigatórios da etapa atual estão preenchidos
+    for (const campo of camposObrigatorios) {
+        if (!campo.checkValidity()) {
+            campo.reportValidity(); // mostra a mensagem padrão do navegador
+            return; // impede de avançar
+        }
+    }
+
+    if (etapaAtual < totalEtapas) {
+        mostrarEtapa(etapaAtual + 1);
+    } else {
+        finalizarContratacao();
+    }
+}
+
+function voltarEtapa() {
+    if (etapaAtual > 1) {
+        mostrarEtapa(etapaAtual - 1);
+    }
+}
+
+// Inicializa mostrando só a etapa 1 e escondendo a tela de sucesso
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("etapa1")) {
+        mostrarEtapa(1);
+    }
+    const sucesso = document.getElementById("sucesso");
+    if (sucesso) {
+        sucesso.style.display = "none";
+    }
+});
