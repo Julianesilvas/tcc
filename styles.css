@@ -835,3 +835,87 @@ grid-template-columns:1fr;
 }
 
 }
+/* ================================================
+   CONTRATAR — etapas do formulário
+   ================================================ */
+
+.pagina-contratar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.etapa {
+    background: var(--bege-card);
+    padding: 40px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    margin-bottom: 30px;
+    animation: subir 0.5s ease both;
+}
+
+.etapa h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--marrom-escuro);
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.etapa h3 {
+    color: var(--marrom-escuro);
+    font-size: 17px;
+    margin: 20px 0 12px;
+}
+
+.texto-etapa {
+    color: var(--texto-suave);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* ===== BARRA DE PROGRESSO ===== */
+
+.barra-progresso {
+    width: 100%;
+    height: 10px;
+    background: #ede4d8;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.progresso {
+    height: 100%;
+    background: var(--marrom);
+    border-radius: 50px;
+    transition: width 0.4s ease;
+}
+
+.progresso.etapa1 { width: 20%; }
+.progresso.etapa2 { width: 40%; }
+.progresso.etapa3 { width: 60%; }
+.progresso.etapa4 { width: 80%; }
+.progresso.etapa5 { width: 100%; }
+
+/* ===== CHECKBOXES / ATIVIDADES ===== */
+
+.dias label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f4eee8;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    color: var(--marrom-escuro);
+    cursor: pointer;
+}
+
+.dias input[type="checkbox"] {
+    accent-color: var(--marrom);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(166,136,93,0.2);
+    margin: 24px 0;
+}
