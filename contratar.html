@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contratar Babá | Happy Baby</title>
+
+    <meta name="description"
+        content="Solicite a contratação de uma babá pela Happy Baby.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <img src="imgs/logo.png" alt="Happy Baby Logo" class="logo">
+
+</header>
+
+<nav>
+
+    <a href="index.html" class="nav-btn">Início</a>
+
+    <a href="baba.html" class="nav-btn">Babás</a>
+
+    <a href="contato.html" class="nav-btn ativo">Contato</a>
+
+</nav>
+
+<main>
+
+<section class="pagina-contratar">
+
+<div class="banner-contato">
+
+<h1>Contratar uma babá</h1>
+
+<p>
+
+Encontrar alguém para cuidar do seu filho é uma decisão importante.
+
+Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a profissional, oferecendo mais segurança, confiança e tranquilidade durante todo o processo.
+
+</p>
+
+</div>
+
+<div class="sobre-happy">
+
+<h2>Como funciona?</h2>
+
+<p>
+
+Sua solicitação será analisada cuidadosamente pela nossa equipe.
+
+Após avaliarmos suas necessidades e verificarmos a disponibilidade da profissional escolhida, entraremos em contato para dar continuidade ao processo.
+
+Nenhum contato é realizado diretamente entre a família e a babá antes dessa análise.
+
+</p>
+
+</div>
+
+<!-- ETAPA 1 -->
+
+<div class="etapa">
+
+<div class="barra-progresso">
+
+<div class="progresso etapa1"></div>
+
+</div>
+
+<h2>Etapa 1 de 5</h2>
+
+<h3>Dados do responsável</h3>
+
+<form class="form-contato">
+
+<div class="linha-form">
+
+<input type="text"
+placeholder="Nome completo"
+required>
+
+<input type="text"
+placeholder="CPF"
+required>
+
+</div>
+
+<div class="linha-form">
+
+<input type="date"
+required>
+
+<input type="tel"
+placeholder="Telefone / WhatsApp"
+required>
+
+</div>
+
+<div class="linha-form">
+
+<input type="email"
+placeholder="E-mail"
+required>
+
+<input type="text"
+placeholder="Cidade"
+required>
+
+</div>
+
+<div class="linha-form">
+
+<input type="text"
+placeholder="Estado"
+required>
+
+<input type="text"
+placeholder="Endereço"
+required>
+
+</div>
+
+<div class="linha-form">
+
+<input type="text"
+placeholder="CEP">
+
+<input type="text"
+placeholder="Profissão">
+
+</div>
+
+<label class="aceite">
+
+<input type="checkbox" required>
+
+Confirmo que todas as informações acima são verdadeiras.
+
+</label>
+
+<button
+type="button"
+class="btn-contratar">
+
+Próxima etapa →
+
+</button>
+
+</form>
+
+</div>
+<!-- ================= ETAPA 2 ================= -->
+
+<div class="etapa">
+
+    <div class="barra-progresso">
+
+        <div class="progresso etapa2"></div>
+
+    </div>
+
+    <h2>Etapa 2 de 5</h2>
+
+    <h3>Sobre a criança</h3>
+
+    <p class="texto-etapa">
+
+        Essas informações nos ajudam a encontrar uma profissional que se adapte
+        à rotina e às necessidades da sua família.
+
+    </p>
+
+    <form class="form-contato">
+
+        <div class="linha-form">
+
+            <input type="number"
+                placeholder="Quantidade de crianças"
+                min="1"
+                required>
+
+            <input type="text"
+                placeholder="Idade(s)"
+                required>
+
+        </div>
+
+        <div class="linha-form">
+
+            <select required>
+
+                <option selected disabled>Faixa etária</option>
+
+                <option>Recém-nascido</option>
+
+                <option>0 a 2 anos</option>
+
+                <option>3 a 5 anos</option>
+
+                <option>6 a 10 anos</option>
+
+                <option>Acima de 10 anos</option>
+
+            </select>
+
+            <select required>
+
+                <option selected disabled>Necessita de cuidados especiais?</option>
+
+                <option>Não</option>
+
+                <option>Sim</option>
+
+            </select>
+
+        </div>
+
+        <div class="linha-form">
+
+            <input type="text"
+                placeholder="Possui alguma alergia?">
+
+            <input type="text"
+                placeholder="Utiliza medicamentos?">
+
+        </div>
+
+        <div class="linha-form">
+
+            <input type="text"
+                placeholder="Horário que costuma acordar">
+
+            <input type="text"
+                placeholder="Horário que costuma dormir">
+
+        </div>
+
+        <textarea rows="5"
+            placeholder="Conte um pouco sobre a personalidade da criança. Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
+
+        <textarea rows="5"
+            placeholder="Descreva a rotina da criança (alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes)."></textarea>
+
+        <h3>Atividades que a criança gosta</h3>
+
+        <div class="dias">
+
+            <label><input type="checkbox"> Brincadeiras</label>
+
+            <label><input type="checkbox"> Desenhar</label>
+
+            <label><input type="checkbox"> Pintar</label>
+
+            <label><input type="checkbox"> Ler livros</label>
+
+            <label><input type="checkbox"> Música</label>
+
+            <label><input type="checkbox"> Dançar</label>
+
+            <label><input type="checkbox"> Passear</label>
+
+            <label><input type="checkbox"> Parque</label>
+
+            <label><input type="checkbox"> Jogos educativos</label>
+
+            <label><input type="checkbox"> Assistir desenhos</label>
+
+            <label><input type="checkbox"> Esportes</label>
+
+            <label><input type="checkbox"> Outras</label>
+
+        </div>
+
+        <div class="linha-form">
+
+            <button type="button" class="btn-voltar">
+
+                ← Voltar
+
+            </button>
+
+            <button type="button" class="btn-contratar">
+
+                Próxima etapa →
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- ================= ETAPA 3 ================= -->
+
+<div class="etapa">
+
+    <div class="barra-progresso">
+
+        <div class="progresso etapa3"></div>
+
+    </div>
+
+    <h2>Etapa 3 de 5</h2>
+
+    <h3>Como será o serviço?</h3>
+
+    <p class="texto-etapa">
+
+        Agora queremos entender como será a rotina da babá e quais atividades
+        ela deverá realizar durante o período contratado.
+
+    </p>
+
+    <form class="form-contato">
+
+        <h3>Período da contratação</h3>
+
+        <div class="linha-form">
+
+            <input type="date" required>
+
+            <select required>
+
+                <option selected disabled>Período</option>
+
+                <option>Manhã</option>
+
+                <option>Tarde</option>
+
+                <option>Noite</option>
+
+                <option>Integral</option>
+
+            </select>
+
+        </div>
+
+        <div class="linha-form">
+
+            <select required>
+
+                <option selected disabled>Duração da contratação</option>
+
+                <option>Um único dia</option>
+
+                <option>Uma semana</option>
+
+                <option>Um mês</option>
+
+                <option>Contrato fixo</option>
+
+            </select>
+
+            <input type="text"
+                placeholder="Horário aproximado (Ex.: 07h às 18h)">
+
+        </div>
+
+        <h3>Dias necessários</h3>
+
+        <div class="dias">
+
+            <label><input type="checkbox"> Segunda-feira</label>
+
+            <label><input type="checkbox"> Terça-feira</label>
+
+            <label><input type="checkbox"> Quarta-feira</label>
+
+            <label><input type="checkbox"> Quinta-feira</label>
+
+            <label><input type="checkbox"> Sexta-feira</label>
+
+            <label><input type="checkbox"> Sábado</label>
+
+            <label><input type="checkbox"> Domingo</label>
+
+        </div>
+
+        <hr>
+
+        <h3>Quais atividades espera da profissional?</h3>
+
+        <div class="dias">
+
+            <label><input type="checkbox"> Cuidados com bebês</label>
+
+            <label><input type="checkbox"> Preparar refeições</label>
+
+            <label><input type="checkbox"> Dar banho</label>
+
+            <label><input type="checkbox"> Troca de fraldas</label>
+
+            <label><input type="checkbox"> Colocar para dormir</label>
+
+            <label><input type="checkbox"> Buscar na escola</label>
+
+            <label><input type="checkbox"> Levar à escola</label>
+
+            <label><input type="checkbox"> Auxiliar nas tarefas escolares</label>
+
+            <label><input type="checkbox"> Atividades educativas</label>
+
+            <label><input type="checkbox"> Passeios supervisionados</label>
+
+            <label><input type="checkbox"> Organização dos brinquedos</label>
+
+            <label><input type="checkbox"> Organização do quarto da criança</label>
+
+            <label><input type="checkbox"> Lavar mamadeiras</label>
+
+            <label><input type="checkbox"> Preparar mamadeiras</label>
+
+            <label><input type="checkbox"> Acompanhar consultas médicas</label>
+
+            <label><input type="checkbox"> Dormir na residência</label>
+
+        </div>
+
+        <hr>
+
+        <h3>Existe alguma regra importante da casa?</h3>
+
+        <textarea rows="5"
+            placeholder="Exemplo: tempo de tela limitado, alimentação específica, rotina de estudos, horários, religião, costumes da família ou outras informações importantes."></textarea>
+
+        <h3>Informações adicionais</h3>
+
+        <textarea rows="6"
+            placeholder="Escreva qualquer informação que possa ajudar nossa equipe a encontrar a profissional ideal para sua família."></textarea>
+
+        <div class="linha-form">
+
+            <button type="button" class="btn-voltar">
+
+                ← Voltar
+
+            </button>
+
+            <button type="button" class="btn-contratar">
+
+                Próxima etapa →
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- ================= ETAPA 4 ================= -->
+
+<div class="etapa">
+
+    <div class="barra-progresso">
+
+        <div class="progresso etapa4"></div>
+
+    </div>
+
+    <h2>Etapa 4 de 5</h2>
+
+    <h3>Escolha da profissional</h3>
+
+    <p class="texto-etapa">
+
+        Você já escolheu uma babá? Informe abaixo qual profissional deseja contratar.
+        Caso ela não esteja disponível, nossa equipe poderá indicar outra profissional
+        com características semelhantes, se você desejar.
+
+    </p>
+
+    <form class="form-contato">
+
+        <label><strong>Babá desejada</strong></label>
+
+        <select required>
+
+            <option selected disabled>Selecione uma profissional</option>
+
+            <option>Ana Laura</option>
+
+            <option>Mariany Ruas</option>
+
+            <option>Julia Penedo</option>
+
+            <option>Heloisa Inácio</option>
+
+            <option>Juliane Santana</option>
+
+            <option>Caroline Aparecida</option>
+
+            <option>Lorena Costa</option>
+
+            <option>Letícia Mendes</option>
+
+            <option>Camila Santos</option>
+
+            <option>Cátia Fernandes</option>
+
+            <option>Angelica Camargo</option>
+
+            <option>Sonia Ribeiro</option>
+
+        </select>
+
+        <hr>
+
+        <h3>Se a profissional não estiver disponível...</h3>
+
+        <label class="aceite">
+
+            <input type="radio" name="substituta">
+
+            Aceito que a Happy Baby indique outra profissional com perfil semelhante.
+
+        </label>
+
+        <label class="aceite">
+
+            <input type="radio" name="substituta">
+
+            Prefiro aguardar a disponibilidade da profissional escolhida.
+
+        </label>
+
+        <hr>
+
+        <h3>Como conheceu a Happy Baby?</h3>
+
+        <select>
+
+            <option selected disabled>Selecione</option>
+
+            <option>Instagram</option>
+
+            <option>Facebook</option>
+
+            <option>Google</option>
+
+            <option>Indicação</option>
+
+            <option>Escola</option>
+
+            <option>Outro</option>
+
+        </select>
+
+        <hr>
+
+        <h3>Deseja receber novidades da Happy Baby?</h3>
+
+        <label class="aceite">
+
+            <input type="checkbox">
+
+            Quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
+
+        </label>
+
+        <hr>
+
+        <h3>Observações finais</h3>
+
+        <textarea rows="7"
+
+        placeholder="Existe alguma informação importante que nossa equipe deve saber antes de analisar sua solicitação?"></textarea>
+
+        <div class="linha-form">
+
+            <button type="button" class="btn-voltar">
+
+                ← Voltar
+
+            </button>
+
+            <button type="button" class="btn-contratar">
+
+                Próxima etapa →
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+<!-- ================= ETAPA 5 ================= -->
+
+<div class="etapa">
+
+    <div class="barra-progresso">
+        <div class="progresso etapa5"></div>
+    </div>
+
+    <h2>Etapa 5 de 5</h2>
+
+    <h3>Confira sua solicitação</h3>
+
+    <p class="texto-etapa">
+
+        Estamos quase terminando!
+
+        Antes de enviar sua solicitação para análise da equipe Happy Baby,
+        confira as informações abaixo.
+
+    </p>
+
+    <!-- ================= RESUMO DA BABÁ ================= -->
+
+    <div class="resumo-baba">
+
+        <h2>Profissional escolhida</h2>
+
+        <div class="card-resumo">
+
+            <img src="imgs/AnaLaura.jpeg" alt="Ana Laura">
+
+            <div class="dados-resumo">
+
+                <h3>Ana Laura</h3>
+
+                <p>📍 São Carlos - SP</p>
+
+                <p>⭐⭐⭐⭐⭐ (18 avaliações)</p>
+
+                <p>💰 R$30/hora</p>
+
+                <p>🍼 4 anos de experiência</p>
+
+                <p>✔ Primeiros Socorros</p>
+
+                <p>✔ Recreação Infantil</p>
+
+                <p>✔ Disponível para contratação</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= RESUMO DA SOLICITAÇÃO ================= -->
+
+    <div class="resumo-solicitacao">
+
+        <h2>Resumo da solicitação</h2>
+
+        <ul>
+
+            <li><strong>Responsável:</strong> João da Silva</li>
+
+            <li><strong>Cidade:</strong> Araraquara - SP</li>
+
+            <li><strong>Crianças:</strong> 2</li>
+
+            <li><strong>Idades:</strong> 3 e 7 anos</li>
+
+            <li><strong>Período:</strong> Integral</li>
+
+            <li><strong>Dias:</strong> Segunda a Sexta</li>
+
+            <li><strong>Início previsto:</strong> 10/09/2026</li>
+
+        </ul>
+
+    </div>
+
+    <!-- ================= TERMOS ================= -->
+
+    <div class="termos">
+
+        <h2>Declarações</h2>
+
+        <label class="aceite">
+
+            <input type="checkbox" required>
+
+            Confirmo que todas as informações fornecidas são verdadeiras.
+
+        </label>
+
+        <label class="aceite">
+
+            <input type="checkbox" required>
+
+            Estou ciente de que o contato com a profissional somente acontecerá após análise da equipe Happy Baby.
+
+        </label>
+
+        <label class="aceite">
+
+            <input type="checkbox" required>
+
+            Autorizo a Happy Baby a utilizar meus dados exclusivamente para este processo de contratação.
+
+        </label>
+
+        <label class="aceite">
+
+            <input type="checkbox" required>
+
+            Li e concordo com os Termos de Uso e Política de Privacidade.
+
+        </label>
+
+    </div>
+
+    <!-- ================= BOTÕES ================= -->
+
+    <div class="linha-form">
+
+        <button type="button" class="btn-voltar">
+
+            ← Voltar
+
+        </button>
+
+        <button type="submit" class="btn-contratar">
+
+            Enviar solicitação
+
+        </button>
+
+    </div>
+
+</div>
+<!-- ================= MENSAGEM DE SUCESSO ================= -->
+
+<section class="cadastro-sucesso">
+
+    <div class="sucesso-box">
+
+        <h1>🎉 Solicitação enviada com sucesso!</h1>
+
+        <p>
+
+            Recebemos sua solicitação e ela já foi encaminhada para análise da equipe da <strong>Happy Baby</strong>.
+
+        </p>
+
+        <p>
+
+            Agora iremos conferir todas as informações fornecidas, verificar a disponibilidade da profissional escolhida e analisar se ela atende às necessidades da sua família.
+
+        </p>
+
+        <p>
+
+            Caso seja necessário complementar alguma informação, entraremos em contato utilizando os dados informados no cadastro.
+
+        </p>
+
+        <p>
+
+            <strong>O prazo médio para retorno é de até 2 dias úteis.</strong>
+
+        </p>
+
+        <p>
+
+            Agradecemos pela confiança em nosso trabalho.
+
+            Nossa missão é proporcionar uma contratação segura, transparente e humanizada para famílias e profissionais.
+
+        </p>
+
+        <a href="index.html" class="btn-contratar">
+
+            Voltar para a página inicial
+
+        </a>
+
+    </div>
+
+</section>
