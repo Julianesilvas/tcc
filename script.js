@@ -304,7 +304,7 @@ function finalizarContratacao() {
 
     const sucesso = document.getElementById("sucesso");
     if (sucesso) {
-        sucesso.style.display = "block";
+        sucesso.style.display = "flex";
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -318,5 +318,158 @@ document.addEventListener("DOMContentLoaded", () => {
     const sucesso = document.getElementById("sucesso");
     if (sucesso) {
         sucesso.style.display = "none";
+    }
+});
+
+// ================================================
+//  QUERO SER BABÁ — cadastro em 4 etapas
+// ================================================
+
+let etapaAtualBaba = 1;
+const totalEtapasBaba = 4;
+
+function mostrarEtapaBaba(numero) {
+    document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
+        etapa.style.display = "none";
+    });
+
+    const etapa = document.getElementById("etapaB" + numero);
+    if (etapa) {
+        etapa.style.display = "block";
+    }
+
+    document.querySelectorAll(".progresso.etapaB1, .progresso.etapaB2, .progresso.etapaB3, .progresso.etapaB4")
+        .forEach(barra => barra.classList.remove("ativa"));
+
+    etapaAtualBaba = numero;
+
+    if (numero === 4) {
+        preencherResumoBaba();
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function irProximaEtapaBaba() {
+    const etapa = document.getElementById("etapaB" + etapaAtualBaba);
+    const camposObrigatorios = etapa.querySelectorAll("[required]");
+
+    for (const campo of camposObrigatorios) {
+        if (!campo.checkValidity()) {
+            campo.reportValidity();
+            return;
+        }
+    }
+
+    if (etapaAtualBaba < totalEtapasBaba) {
+        mostrarEtapaBaba(etapaAtualBaba + 1);
+    }
+}
+
+function voltarEtapaBaba() {
+    if (etapaAtualBaba > 1) {
+        mostrarEtapaBaba(etapaAtualBaba - 1);
+    }
+}
+
+// ===== Mostra o nome do(s) arquivo(s) escolhido(s) em um input file =====
+function mostrarNomeArquivo(inputId, spanId) {
+    const input = document.getElementById(inputId);
+    const span = document.getElementById(spanId);
+
+    if (input.files.length === 0) {
+        span.textContent = "Nenhum arquivo selecionado";
+        span.classList.remove("arquivo-ok");
+        return;
+    }
+
+    if (input.files.length === 1) {
+        span.textContent = "✔ " + input.files[0].name;
+    } else {
+        span.textContent = "✔ " + input.files.length + " arquivos selecionados";
+    }
+    span.classList.add("arquivo-ok");
+}
+
+// ===== Máscara de CPF (000.000.000-00) =====
+function aplicarMascaraCPF(input) {
+    let valor = input.value.replace(/\D/g, "").slice(0, 11);
+
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    input.value = valor;
+}
+
+// ===== Monta o resumo da Etapa 4 =====
+function preencherResumoBaba() {
+
+    const nome = document.getElementById("nomeBaba").value;
+    const cpf = document.getElementById("cpfBaba").value;
+    const cidade = document.getElementById("cidadeBaba").value;
+    const estado = document.getElementById("estadoBaba").value;
+    const experiencia = document.getElementById("experienciaBaba").value;
+    const valorHora = document.getElementById("valorHoraBaba").value;
+    const periodo = document.getElementById("periodoBaba").value;
+
+    const cursosMarcados = Array.from(
+        document.querySelectorAll('input[name="cursoBaba"]:checked')
+    ).map(chk => chk.value);
+
+    const diasMarcados = Array.from(
+        document.querySelectorAll('input[name="diaDisponivelBaba"]:checked')
+    ).map(chk => chk.value);
+    document.getElementById("resumoNomeBaba2").textContent = nome || "-";
+    document.getElementById("resumoCpfBaba").textContent = cpf || "-";
+    document.getElementById("resumoCidadeBaba2").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
+    document.getElementById("resumoExperienciaBaba2").textContent = experiencia || "-";
+    document.getElementById("resumoValorBaba").textContent = valorHora ? `R$ ${valorHora}/hora` : "-";
+    document.getElementById("resumoCursosBaba").textContent = cursosMarcados.length ? cursosMarcados.join(", ") : "-";
+    document.getElementById("resumoDiasBaba").textContent = diasMarcados.length ? diasMarcados.join(", ") : "-";
+    document.getElementById("resumoPeriodoBaba").textContent = periodo || "-";
+
+    // --- Status dos documentos ---
+    const documentos = [
+        { input: "arquivoRG", resumo: "resumoDocRG" },
+        { input: "arquivoAntecedentes", resumo: "resumoDocAntecedentes" },
+        { input: "arquivoCertificados", resumo: "resumoDocCertificados" },
+        { input: "arquivoComprovante", resumo: "resumoDocComprovante" },
+        { input: "arquivoFoto", resumo: "resumoDocFoto" }
+    ];
+
+    documentos.forEach(doc => {
+        const input = document.getElementById(doc.input);
+        const resumo = document.getElementById(doc.resumo);
+        resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
+    });
+}
+
+function finalizarCadastroBaba() {
+    document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
+        etapa.style.display = "none";
+    });
+
+    const sucesso = document.getElementById("sucessoBaba");
+    if (sucesso) {
+        sucesso.style.display = "flex";
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// Inicializa: mostra só a etapa 1, esconde sucesso, liga a máscara de CPF
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("etapaB1")) {
+        mostrarEtapaBaba(1);
+    }
+    const sucessoBaba = document.getElementById("sucessoBaba");
+    if (sucessoBaba) {
+        sucessoBaba.style.display = "none";
+    }
+
+    const campoCpf = document.getElementById("cpfBaba");
+    if (campoCpf) {
+        campoCpf.addEventListener("input", () => aplicarMascaraCPF(campoCpf));
     }
 });

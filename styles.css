@@ -1078,3 +1078,70 @@ hr {
         padding: 36px 24px;
     }
 }
+/* ================================================
+   QUERO SER BABÁ — barra de progresso (4 etapas)
+   ================================================ */
+
+.progresso.etapaB1 { width: 25%; }
+.progresso.etapaB2 { width: 50%; }
+.progresso.etapaB3 { width: 75%; }
+.progresso.etapaB4 { width: 100%; }
+
+/* ===== ÁREA DE UPLOAD DE DOCUMENTOS ===== */
+
+.upload-item {
+    background: #faf8f4;
+    border: 2px dashed #d8cbb8;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-item:hover {
+    border-color: var(--marrom);
+}
+
+.upload-item label {
+    color: var(--marrom-escuro);
+    font-size: 15px;
+}
+
+.upload-item input[type="file"] {
+    font-family: var(--fonte-corpo);
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+
+.upload-item input[type="file"]::file-selector-button {
+    background: var(--marrom);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: background 0.2s;
+}
+
+.upload-item input[type="file"]::file-selector-button:hover {
+    background: var(--marrom-escuro);
+}
+
+.nome-arquivo {
+    font-size: 13px;
+    color: var(--texto-suave);
+    font-style: italic;
+}
+
+.nome-arquivo.arquivo-ok {
+    color: #3a7d3a;
+    font-weight: 700;
+    font-style: normal;
+}

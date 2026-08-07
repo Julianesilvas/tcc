@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quero ser Babá | Happy Baby</title>
+    <meta name="description" content="Cadastre-se como babá na Happy Baby.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<header>
+    <img src="imgs/logo.png" alt="Happy Baby Logo" class="logo">
+</header>
+
+<nav>
+    <a href="index.html" class="nav-btn">Início</a>
+    <a href="baba.html" class="nav-btn">Babás</a>
+    <a href="contato.html" class="nav-btn">Contato</a>
+</nav>
+
+<main>
+
+<section class="pagina-contratar">
+
+    <div class="banner-contato">
+        <h1>Cadastre-se como babá</h1>
+        <p>
+            Faça parte da equipe Happy Baby. Suas informações e documentos serão
+            analisados pela nossa equipe para garantir mais segurança para as
+            famílias e para você.
+        </p>
+    </div>
+
+    <!-- ETAPA 1 -->
+    <div class="etapa" id="etapaB1">
+
+        <div class="barra-progresso">
+            <div class="progresso etapaB1"></div>
+        </div>
+
+        <h2>Etapa 1 de 4</h2>
+        <h3>Dados pessoais</h3>
+
+        <form class="form-contato">
+
+            <div class="linha-form">
+                <input type="text" id="nomeBaba" placeholder="Nome completo" required>
+                <input type="text" id="cpfBaba" placeholder="CPF" maxlength="14" required>
+            </div>
+
+            <div class="linha-form">
+                <input type="date" id="nascimentoBaba" required>
+                <input type="tel" id="telefoneBaba" placeholder="Telefone / WhatsApp" required>
+            </div>
+
+            <div class="linha-form">
+                <input type="email" id="emailBaba" placeholder="E-mail" required>
+                <input type="text" id="cidadeBaba" placeholder="Cidade" required>
+            </div>
+
+            <div class="linha-form">
+                <input type="text" id="estadoBaba" placeholder="Estado" required>
+                <input type="text" id="enderecoBaba" placeholder="Endereço" required>
+            </div>
+
+            <div class="linha-form">
+                <input type="text" id="cepBaba" placeholder="CEP">
+            </div>
+
+            <label class="aceite">
+                <input type="checkbox" required>
+                Confirmo que todas as informações acima são verdadeiras.
+            </label>
+
+            <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">
+                Próxima etapa →
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- ETAPA 2 -->
+    <div class="etapa" id="etapaB2">
+
+        <div class="barra-progresso">
+            <div class="progresso etapaB2"></div>
+        </div>
+
+        <h2>Etapa 2 de 4</h2>
+        <h3>Experiência e disponibilidade</h3>
+
+        <form class="form-contato">
+
+            <div class="linha-form">
+                <select id="experienciaBaba" required>
+                    <option selected disabled>Tempo de experiência</option>
+                    <option>Menos de 1 ano</option>
+                    <option>1 a 2 anos</option>
+                    <option>3 a 5 anos</option>
+                    <option>6 a 10 anos</option>
+                    <option>Mais de 10 anos</option>
+                </select>
+
+                <input type="text" id="valorHoraBaba" placeholder="Valor pretendido por hora (R$)" required>
+            </div>
+
+            <h3>Faixas etárias que atende</h3>
+            <div class="dias">
+                <label><input type="checkbox" name="faixaEtaria" value="Recém-nascido"> Recém-nascido</label>
+                <label><input type="checkbox" name="faixaEtaria" value="0 a 2 anos"> 0 a 2 anos</label>
+                <label><input type="checkbox" name="faixaEtaria" value="3 a 5 anos"> 3 a 5 anos</label>
+                <label><input type="checkbox" name="faixaEtaria" value="6 a 10 anos"> 6 a 10 anos</label>
+                <label><input type="checkbox" name="faixaEtaria" value="Acima de 10 anos"> Acima de 10 anos</label>
+            </div>
+
+            <h3>Cursos e certificações que possui</h3>
+            <div class="dias">
+                <label><input type="checkbox" name="cursoBaba" value="Primeiros Socorros"> Primeiros Socorros</label>
+                <label><input type="checkbox" name="cursoBaba" value="Recreação Infantil"> Recreação Infantil</label>
+                <label><input type="checkbox" name="cursoBaba" value="Pedagogia"> Pedagogia</label>
+                <label><input type="checkbox" name="cursoBaba" value="Enfermagem"> Enfermagem</label>
+                <label><input type="checkbox" name="cursoBaba" value="Cuidados com bebês"> Cuidados com bebês</label>
+                <label><input type="checkbox" name="cursoBaba" value="Outro"> Outro</label>
+            </div>
+
+            <h3>Dias disponíveis</h3>
+            <div class="dias">
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Segunda"> Segunda-feira</label>
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Terça"> Terça-feira</label>
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Quarta"> Quarta-feira</label>
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Quinta"> Quinta-feira</label>
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Sexta"> Sexta-feira</label>
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Sábado"> Sábado</label>
+                <label><input type="checkbox" name="diaDisponivelBaba" value="Domingo"> Domingo</label>
+            </div>
+
+            <select id="periodoBaba" required>
+                <option selected disabled>Período disponível</option>
+                <option>Manhã</option>
+                <option>Tarde</option>
+                <option>Noite</option>
+                <option>Integral</option>
+            </select>
+
+            <textarea id="sobreBaba" rows="5"
+                placeholder="Conte um pouco sobre você e sua experiência com crianças."></textarea>
+            
+            <textarea id="estiloTrabalhoBaba" rows="5"
+                placeholder="Como você gosta de trabalhar? Conte sobre sua rotina, como se comunica com a família, como lida com imprevistos e o que valoriza no dia a dia com as crianças."></textarea>
+           
+            <div class="linha-form">
+                <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">Próxima etapa →</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ETAPA 3 -->
+    <div class="etapa" id="etapaB3">
+
+        <div class="barra-progresso">
+            <div class="progresso etapaB3"></div>
+        </div>
+
+        <h2>Etapa 3 de 4</h2>
+        <h3>Documentos</h3>
+
+        <p class="texto-etapa">
+            Para garantir mais segurança para as famílias, pedimos que você anexe os
+            documentos abaixo. Eles serão analisados pela nossa equipe antes da
+            aprovação do seu cadastro.
+        </p>
+
+        <form class="form-contato">
+
+            <div class="upload-item">
+                <label for="arquivoRG"><strong>RG e CPF</strong> (foto ou PDF)</label>
+                <input type="file" id="arquivoRG" accept=".pdf,.jpg,.jpeg,.png"
+                    onchange="mostrarNomeArquivo('arquivoRG','nomeArquivoRG')" required>
+                <span class="nome-arquivo" id="nomeArquivoRG">Nenhum arquivo selecionado</span>
+            </div>
+
+            <div class="upload-item">
+                <label for="arquivoAntecedentes"><strong>Certidão de antecedentes criminais</strong></label>
+                <input type="file" id="arquivoAntecedentes" accept=".pdf,.jpg,.jpeg,.png"
+                    onchange="mostrarNomeArquivo('arquivoAntecedentes','nomeArquivoAntecedentes')" required>
+                <span class="nome-arquivo" id="nomeArquivoAntecedentes">Nenhum arquivo selecionado</span>
+            </div>
+
+            <div class="upload-item">
+                <label for="arquivoCertificados"><strong>Certificados de cursos</strong> (primeiros socorros, recreação, etc.)</label>
+                <input type="file" id="arquivoCertificados" accept=".pdf,.jpg,.jpeg,.png" multiple
+                    onchange="mostrarNomeArquivo('arquivoCertificados','nomeArquivoCertificados')">
+                <span class="nome-arquivo" id="nomeArquivoCertificados">Nenhum arquivo selecionado</span>
+            </div>
+
+            <div class="upload-item">
+                <label for="arquivoComprovante"><strong>Comprovante de residência</strong></label>
+                <input type="file" id="arquivoComprovante" accept=".pdf,.jpg,.jpeg,.png"
+                    onchange="mostrarNomeArquivo('arquivoComprovante','nomeArquivoComprovante')" required>
+                <span class="nome-arquivo" id="nomeArquivoComprovante">Nenhum arquivo selecionado</span>
+            </div>
+
+            <div class="upload-item">
+                <label for="arquivoFoto"><strong>Foto de perfil</strong></label>
+                <input type="file" id="arquivoFoto" accept=".jpg,.jpeg,.png"
+                    onchange="mostrarNomeArquivo('arquivoFoto','nomeArquivoFoto')" required>
+                <span class="nome-arquivo" id="nomeArquivoFoto">Nenhum arquivo selecionado</span>
+            </div>
+
+            <div class="linha-form">
+                <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">Próxima etapa →</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ETAPA 4 -->
+    <div class="etapa" id="etapaB4">
+
+        <div class="barra-progresso">
+            <div class="progresso etapaB4"></div>
+        </div>
+
+        <h2>Etapa 4 de 4</h2>
+        <h3>Confira seu cadastro</h3>
+
+        <p class="texto-etapa">
+            Revise as informações antes de enviar seu cadastro para análise da equipe Happy Baby.
+        </p>
+
+        <div class="resumo-solicitacao">
+            <h2>Seus dados</h2>
+            <ul>
+                <li><strong>Nome:</strong> <span id="resumoNomeBaba2"></span></li>
+                <li><strong>CPF:</strong> <span id="resumoCpfBaba"></span></li>
+                <li><strong>Cidade:</strong> <span id="resumoCidadeBaba2"></span></li>
+                <li><strong>Experiência:</strong> <span id="resumoExperienciaBaba2"></span></li>
+                <li><strong>Valor por hora:</strong> <span id="resumoValorBaba"></span></li>
+                <li><strong>Cursos:</strong> <span id="resumoCursosBaba"></span></li>
+                <li><strong>Dias disponíveis:</strong> <span id="resumoDiasBaba"></span></li>
+                <li><strong>Período:</strong> <span id="resumoPeriodoBaba"></span></li>
+            </ul>
+        </div>
+
+        <div class="resumo-solicitacao">
+            <h2>Documentos anexados</h2>
+            <ul>
+                <li><strong>RG/CPF:</strong> <span id="resumoDocRG"></span></li>
+                <li><strong>Antecedentes criminais:</strong> <span id="resumoDocAntecedentes"></span></li>
+                <li><strong>Certificados:</strong> <span id="resumoDocCertificados"></span></li>
+                <li><strong>Comprovante de residência:</strong> <span id="resumoDocComprovante"></span></li>
+                <li><strong>Foto de perfil:</strong> <span id="resumoDocFoto"></span></li>
+            </ul>
+        </div>
+
+        <div class="termos">
+            <h2>Declarações</h2>
+
+            <label class="aceite">
+                <input type="checkbox" required>
+                Confirmo que todas as informações e documentos fornecidos são verdadeiros.
+            </label>
+
+            <label class="aceite">
+                <input type="checkbox" required>
+                Estou ciente de que meu cadastro somente será ativado após a análise
+                e verificação dos documentos pela equipe Happy Baby.
+            </label>
+
+            <label class="aceite">
+                <input type="checkbox" required>
+                Autorizo a Happy Baby a utilizar meus dados e documentos exclusivamente
+                para fins de verificação e intermediação de contratações.
+            </label>
+
+            <label class="aceite">
+                <input type="checkbox" required>
+                Li e concordo com os Termos de Uso e Política de Privacidade.
+            </label>
+        </div>
+
+        <div class="linha-form">
+            <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
+            <button type="button" class="btn-contratar" onclick="finalizarCadastroBaba()">Enviar cadastro</button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MENSAGEM DE SUCESSO -->
+<section class="cadastro-sucesso" id="sucessoBaba">
+
+    <div class="sucesso-box">
+
+        <h1>Cadastro enviado com sucesso!</h1>
+
+        <p>
+            Recebemos seu cadastro e seus documentos, que já foram encaminhados
+            para análise da equipe da <strong>Happy Baby</strong>.
+        </p>
+
+        <p>
+            Vamos conferir suas informações, verificar seus documentos (RG, CPF,
+            antecedentes criminais e certificados) e validar seu perfil antes da
+            ativação do cadastro.
+        </p>
+
+        <p>
+            <strong>O prazo médio para retorno é de até 5 dias úteis.</strong>
+        </p>
+
+        <p>
+            Agradecemos por querer fazer parte da equipe Happy Baby.
+        </p>
+
+        <a href="index.html" class="btn-contratar">Voltar para a página inicial</a>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    <p>© 2026 Happy Baby</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
