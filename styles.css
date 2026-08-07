@@ -1145,3 +1145,216 @@ hr {
     font-weight: 700;
     font-style: normal;
 }
+ /* ================================================
+   PÁGINA DE CONTATO E "COMO FUNCIONA"
+   ================================================ */
+
+/* ===== BANNER DO TOPO ===== */
+/* Título grande e centralizado, mesma linguagem visual do hero da home */
+
+.banner-contato {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.banner-contato h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 38px;
+    color: var(--marrom-escuro);
+    margin-bottom: 16px;
+    line-height: 1.25;
+}
+
+.banner-contato p {
+    font-size: 17px;
+    color: var(--texto-suave);
+    line-height: 1.7;
+}
+
+/* ===== "QUEM SOMOS" E "COMO FUNCIONA" — bloco de texto ===== */
+/* Vira um card branco com sombra, texto espaçado, igual ao resto do site */
+
+.sobre-happy,
+.funciona,
+.seguranca,
+.proximos-passos {
+    max-width: 900px;
+    margin: 0 auto 50px;
+}
+
+.sobre-happy {
+    background: var(--bege-card);
+    padding: 40px 50px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.sobre-happy h2,
+.funciona h2,
+.seguranca h2,
+.proximos-passos h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--marrom-escuro);
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.sobre-happy p {
+    color: var(--texto-suave);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+.sobre-happy p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== "COMO FUNCIONA" — cards numerados em grid ===== */
+
+.cards-funciona {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.card-funciona {
+    background: var(--bege-card);
+    padding: 28px 24px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card-funciona:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 35px rgba(90,70,51,0.16);
+}
+
+.card-funciona h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 17px;
+    color: var(--marrom-escuro);
+    margin-bottom: 12px;
+}
+
+.card-funciona p {
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ===== SEGURANÇA — lista de itens com check estilizado ===== */
+
+.seguranca {
+    background: var(--bege-card);
+    padding: 40px 50px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.seguranca > p {
+    text-align: center;
+    color: var(--texto-suave);
+    margin-bottom: 28px;
+    font-size: 15px;
+}
+
+.lista-seguranca {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+}
+
+.lista-seguranca div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f4eee8;
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: var(--marrom-escuro);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lista-seguranca div::before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    background: var(--marrom);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ===== "COMO DESEJA CONTINUAR" — cards de ação ===== */
+
+.proximos-passos > p {
+    text-align: center;
+    color: var(--texto-suave);
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.cards-acoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.acao {
+    background: var(--bege-card);
+    padding: 32px 28px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.acao h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 19px;
+    color: var(--marrom-escuro);
+    margin-bottom: 12px;
+}
+
+.acao p {
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    flex: 1;
+}
+
+/* ===== CORREÇÃO GERAL: botão .btn-contratar quando usado como link <a> ===== */
+/* Sem isso, ele herda o sublinhado padrão de link e fica "apertado" */
+
+a.btn-contratar {
+    text-decoration: none;
+    display: inline-block;
+    width: auto;
+    padding: 13px 30px;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 600px) {
+    .sobre-happy,
+    .seguranca {
+        padding: 28px 24px;
+    }
+
+    .banner-contato h1 {
+        font-size: 28px;
+    }
+}
