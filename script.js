@@ -85,6 +85,107 @@ function voltarBabas() {
 let etapaAtual = 1;
 const totalEtapas = 5;
 
+// "Banco de dados" das babás (site estático, sem back-end).
+// Se as fotos das babás estiverem em outra pasta, ajuste os caminhos abaixo.
+const bancoBabas = {
+    "Ana Laura": {
+        foto: "imgs/AnaLaura.jpeg",
+        cidade: "São Carlos - SP",
+        avaliacoes: 18,
+        preco: "R$ 30/hora",
+        experiencia: "4 anos de experiência",
+        destaques: ["Primeiros Socorros", "Recreação Infantil"]
+    },
+    "Mariany Ruas": {
+        foto: "imgs/Mariany.jpeg",
+        cidade: "Belo Horizonte - MG",
+        avaliacoes: 13,
+        preco: "R$ 35/hora",
+        experiencia: "3 anos de experiência",
+        destaques: []
+    },
+    "Julia Penedo": {
+        foto: "imgs/Julia.jpeg",
+        cidade: "Rio Branco - AC",
+        avaliacoes: 21,
+        preco: "R$ 40/hora",
+        experiencia: "6 anos de experiência",
+        destaques: []
+    },
+    "Heloisa Inácio": {
+        foto: "imgs/Heloisa.jpeg",
+        cidade: "São Gonçalo - RJ",
+        avaliacoes: 29,
+        preco: "R$ 45/hora",
+        experiencia: "8 anos de experiência",
+        destaques: []
+    },
+    "Juliane Santana": {
+        foto: "imgs/Juliane.jpeg",
+        cidade: "Feira de Santana - BA",
+        avaliacoes: 34,
+        preco: "R$ 42/hora",
+        experiencia: "7 anos de experiência",
+        destaques: []
+    },
+    "Caroline Aparecida": {
+        foto: "imgs/Carol.jpeg",
+        cidade: "Porto Alegre - RS",
+        avaliacoes: 47,
+        preco: "R$ 48/hora",
+        experiencia: "10 anos de experiência",
+        destaques: []
+    },
+    "Lorena Costa": {
+        foto: "imgs/Lorena.jpeg",
+        cidade: "Macapá - AP",
+        avaliacoes: 17,
+        preco: "R$ 32/hora",
+        experiencia: "2 anos de experiência",
+        destaques: []
+    },
+    "Letícia Mendes": {
+        foto: "imgs/Leticia.jpeg",
+        cidade: "Araraquara - SP",
+        avaliacoes: 9,
+        preco: "R$ 28/hora",
+        experiencia: "1 ano de experiência",
+        destaques: []
+    },
+    "Camila Santos": {
+        foto: "imgs/Camila.jpeg",
+        cidade: "Angra dos Reis - RJ",
+        avaliacoes: null,
+        preco: "Sob consulta",
+        experiencia: "1 ano e 7 meses de experiência",
+        destaques: []
+    },
+    "Cátia Fernandes": {
+        foto: "imgs/Cátia.jpeg",
+        cidade: "Tiradentes - MG",
+        avaliacoes: null,
+        preco: "Sob consulta",
+        experiencia: "7 anos de experiência",
+        destaques: []
+    },
+    "Angelica Camargo": {
+        foto: "imgs/Angelica.jpeg",
+        cidade: "Gramado - RS",
+        avaliacoes: null,
+        preco: "Sob consulta",
+        experiencia: "3 anos de experiência",
+        destaques: []
+    },
+    "Sonia Ribeiro": {
+        foto: "imgs/Sonia.jpeg",
+        cidade: "São Paulo - SP",
+        avaliacoes: null,
+        preco: "Sob consulta",
+        experiencia: "4 anos de experiência",
+        destaques: []
+    }
+};
+
 function mostrarEtapa(numero) {
     // Esconde todas as etapas
     document.querySelectorAll(".etapa").forEach(etapa => {
@@ -97,7 +198,7 @@ function mostrarEtapa(numero) {
         etapa.style.display = "block";
     }
 
-    // Atualiza a barra de progresso (vamos estilizar no próximo passo)
+    // Atualiza a barra de progresso
     document.querySelectorAll(".progresso").forEach(barra => {
         barra.classList.remove("ativa");
     });
@@ -108,7 +209,11 @@ function mostrarEtapa(numero) {
 
     etapaAtual = numero;
 
-    // Sobe a página pro topo ao trocar de etapa
+    // Se chegou na etapa 5, monta o resumo com os dados preenchidos
+    if (numero === 5) {
+        preencherResumo();
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -116,18 +221,15 @@ function irProximaEtapa() {
     const etapa = document.getElementById("etapa" + etapaAtual);
     const camposObrigatorios = etapa.querySelectorAll("[required]");
 
-    // Verifica se todos os campos obrigatórios da etapa atual estão preenchidos
     for (const campo of camposObrigatorios) {
         if (!campo.checkValidity()) {
-            campo.reportValidity(); // mostra a mensagem padrão do navegador
-            return; // impede de avançar
+            campo.reportValidity();
+            return;
         }
     }
 
     if (etapaAtual < totalEtapas) {
         mostrarEtapa(etapaAtual + 1);
-    } else {
-        finalizarContratacao();
     }
 }
 
@@ -135,6 +237,77 @@ function voltarEtapa() {
     if (etapaAtual > 1) {
         mostrarEtapa(etapaAtual - 1);
     }
+}
+
+// ===== Monta o resumo da Etapa 5 com os dados reais preenchidos =====
+function preencherResumo() {
+
+    // --- Dados da babá escolhida ---
+    const nomeBaba = document.getElementById("selectBaba").value;
+    const dadosBaba = bancoBabas[nomeBaba];
+
+    if (dadosBaba) {
+        document.getElementById("resumoFotoBaba").src = dadosBaba.foto;
+        document.getElementById("resumoFotoBaba").alt = nomeBaba;
+        document.getElementById("resumoNomeBaba").textContent = nomeBaba;
+        document.getElementById("resumoCidadeBaba").textContent = dadosBaba.cidade;
+        document.getElementById("resumoPrecoBaba").textContent = dadosBaba.preco;
+        document.getElementById("resumoExperienciaBaba").textContent = dadosBaba.experiencia;
+
+        document.getElementById("resumoAvaliacaoBaba").textContent =
+            dadosBaba.avaliacoes ? dadosBaba.avaliacoes + " avaliações" : "Nova na plataforma";
+
+        const listaDestaques = document.getElementById("resumoDestaquesBaba");
+        listaDestaques.innerHTML = "";
+        dadosBaba.destaques.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            listaDestaques.appendChild(li);
+        });
+    }
+
+    // --- Dados preenchidos pelo responsável ---
+    const nome = document.getElementById("nomeResponsavel").value;
+    const cidade = document.getElementById("cidadeResponsavel").value;
+    const estado = document.getElementById("estadoResponsavel").value;
+    const qtdCriancas = document.getElementById("qtdCriancas").value;
+    const idades = document.getElementById("idadesCriancas").value;
+    const dataInicio = document.getElementById("dataInicio").value;
+    const periodo = document.getElementById("periodoContratacao").value;
+    const duracao = document.getElementById("duracaoContratacao").value;
+
+    const diasMarcados = Array.from(
+        document.querySelectorAll('input[name="diaSemana"]:checked')
+    ).map(chk => chk.value);
+
+    // Formata a data de dd/mm/aaaa
+    let dataFormatada = "-";
+    if (dataInicio) {
+        const [ano, mes, dia] = dataInicio.split("-");
+        dataFormatada = `${dia}/${mes}/${ano}`;
+    }
+
+    document.getElementById("resumoResponsavel").textContent = nome || "-";
+    document.getElementById("resumoCidade").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
+    document.getElementById("resumoCriancas").textContent = qtdCriancas || "-";
+    document.getElementById("resumoIdades").textContent = idades || "-";
+    document.getElementById("resumoPeriodo").textContent = periodo || "-";
+    document.getElementById("resumoDuracao").textContent = duracao || "-";
+    document.getElementById("resumoDias").textContent = diasMarcados.length ? diasMarcados.join(", ") : "-";
+    document.getElementById("resumoInicio").textContent = dataFormatada;
+}
+
+function finalizarContratacao() {
+    document.querySelectorAll(".etapa").forEach(etapa => {
+        etapa.style.display = "none";
+    });
+
+    const sucesso = document.getElementById("sucesso");
+    if (sucesso) {
+        sucesso.style.display = "block";
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Inicializa mostrando só a etapa 1 e escondendo a tela de sucesso

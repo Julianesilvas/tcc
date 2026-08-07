@@ -92,6 +92,7 @@ Nenhum contato é realizado diretamente entre a família e a babá antes dessa a
 <div class="linha-form">
 
 <input type="text"
+id="nomeResponsavel"
 placeholder="Nome completo"
 required>
 
@@ -119,6 +120,7 @@ placeholder="E-mail"
 required>
 
 <input type="text"
+id="cidadeResponsavel"
 placeholder="Cidade"
 required>
 
@@ -127,6 +129,7 @@ required>
 <div class="linha-form">
 
 <input type="text"
+id="estadoResponsavel"
 placeholder="Estado"
 required>
 
@@ -187,13 +190,15 @@ Próxima etapa →
         <div class="linha-form">
 
             <input type="number"
-                placeholder="Quantidade de crianças"
-                min="1"
-                required>
+               id="qtdCriancas"
+               placeholder="Quantidade de crianças"
+               min="1"
+               required>
 
-            <input type="text"
-                placeholder="Idade(s)"
-                required>
+           <input type="text"
+    id="idadesCriancas"
+    placeholder="Idade(s)"
+    required>
 
         </div>
 
@@ -325,11 +330,9 @@ Próxima etapa →
 
         <div class="linha-form">
 
-            <input type="date" required>
+            <input type="date" id="dataInicio" required>
 
-            <select required>
-
-                <option selected disabled>Período</option>
+                <select id="periodoContratacao" required>
 
                 <option>Manhã</option>
 
@@ -345,7 +348,7 @@ Próxima etapa →
 
         <div class="linha-form">
 
-            <select required>
+            <select id="duracaoContratacao" required>
 
                 <option selected disabled>Duração da contratação</option>
 
@@ -368,19 +371,13 @@ Próxima etapa →
 
         <div class="dias">
 
-            <label><input type="checkbox"> Segunda-feira</label>
-
-            <label><input type="checkbox"> Terça-feira</label>
-
-            <label><input type="checkbox"> Quarta-feira</label>
-
-            <label><input type="checkbox"> Quinta-feira</label>
-
-            <label><input type="checkbox"> Sexta-feira</label>
-
-            <label><input type="checkbox"> Sábado</label>
-
-            <label><input type="checkbox"> Domingo</label>
+            <label><input type="checkbox" name="diaSemana" value="Segunda"> Segunda-feira</label>
+            <label><input type="checkbox" name="diaSemana" value="Terça"> Terça-feira</label>
+            <label><input type="checkbox" name="diaSemana" value="Quarta"> Quarta-feira</label>
+            <label><input type="checkbox" name="diaSemana" value="Quinta"> Quinta-feira</label>
+            <label><input type="checkbox" name="diaSemana" value="Sexta"> Sexta-feira</label>
+            <label><input type="checkbox" name="diaSemana" value="Sábado"> Sábado</label>
+            <label><input type="checkbox" name="diaSemana" value="Domingo"> Domingo</label>
 
         </div>
 
@@ -477,7 +474,7 @@ Próxima etapa →
 
         <label><strong>Babá desejada</strong></label>
 
-        <select required>
+        <select id="selectBaba" required>
 
             <option selected disabled>Selecione uma profissional</option>
 
@@ -609,62 +606,59 @@ Próxima etapa →
 
     <div class="resumo-baba">
 
-        <h2>Profissional escolhida</h2>
+    <h2>Profissional escolhida</h2>
 
-        <div class="card-resumo">
+    <div class="card-resumo">
 
-            <img src="imgs/AnaLaura.jpeg" alt="Ana Laura">
+        <img id="resumoFotoBaba" src="" alt="Foto da profissional">
 
-            <div class="dados-resumo">
+        <div class="dados-resumo">
 
-                <h3>Ana Laura</h3>
+            <h3 id="resumoNomeBaba"></h3>
 
-                <p>📍 São Carlos - SP</p>
+            <p id="resumoCidadeBaba"></p>
 
-                <p>⭐⭐⭐⭐⭐ (18 avaliações)</p>
+            <p id="resumoAvaliacaoBaba"></p>
 
-                <p>💰 R$30/hora</p>
+            <p id="resumoPrecoBaba"></p>
 
-                <p>🍼 4 anos de experiência</p>
+            <p id="resumoExperienciaBaba"></p>
 
-                <p>✔ Primeiros Socorros</p>
-
-                <p>✔ Recreação Infantil</p>
-
-                <p>✔ Disponível para contratação</p>
-
-            </div>
+            <ul id="resumoDestaquesBaba" class="lista-destaques"></ul>
 
         </div>
 
     </div>
 
+</div>
+
     <!-- ================= RESUMO DA SOLICITAÇÃO ================= -->
 
-    <div class="resumo-solicitacao">
+   <div class="resumo-solicitacao">
 
-        <h2>Resumo da solicitação</h2>
+    <h2>Resumo da solicitação</h2>
 
-        <ul>
+    <ul>
 
-            <li><strong>Responsável:</strong> João da Silva</li>
+        <li><strong>Responsável:</strong> <span id="resumoResponsavel"></span></li>
 
-            <li><strong>Cidade:</strong> Araraquara - SP</li>
+        <li><strong>Cidade:</strong> <span id="resumoCidade"></span></li>
 
-            <li><strong>Crianças:</strong> 2</li>
+        <li><strong>Crianças:</strong> <span id="resumoCriancas"></span></li>
 
-            <li><strong>Idades:</strong> 3 e 7 anos</li>
+        <li><strong>Idades:</strong> <span id="resumoIdades"></span></li>
 
-            <li><strong>Período:</strong> Integral</li>
+        <li><strong>Período:</strong> <span id="resumoPeriodo"></span></li>
 
-            <li><strong>Dias:</strong> Segunda a Sexta</li>
+        <li><strong>Duração da contratação:</strong> <span id="resumoDuracao"></span></li>
 
-            <li><strong>Início previsto:</strong> 10/09/2026</li>
+        <li><strong>Dias:</strong> <span id="resumoDias"></span></li>
 
-        </ul>
+        <li><strong>Início previsto:</strong> <span id="resumoInicio"></span></li>
 
-    </div>
+    </ul>
 
+</div>
     <!-- ================= TERMOS ================= -->
 
     <div class="termos">
@@ -713,9 +707,9 @@ Próxima etapa →
         ← Voltar
         </button>
 
-        <button type="submit" class="btn-contratar">
+        <button type="button" class="btn-contratar" onclick="finalizarContratacao()">
 
-            Enviar solicitação
+    Enviar solicitação
 
         </button>
 
