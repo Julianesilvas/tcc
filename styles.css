@@ -1358,3 +1358,109 @@ a.btn-contratar {
         font-size: 28px;
     }
 }
+
+/* ================================================
+   AJUSTES GERAIS — fonte e fundo do site inteiro
+   ================================================ */
+
+body {
+    font-size: 17px;
+    background-color: var(--bege);
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(166,136,93,0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(166,136,93,0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(109,66,14,0.06) 0%, transparent 45%),
+        radial-gradient(circle at 10% 85%, rgba(166,136,93,0.07) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+li {
+    font-size: 15px;
+}
+
+h1 { font-size: 2.4rem; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.2rem; }
+
+/* ================================================
+   CALENDÁRIO DE DISPONIBILIDADE (perfil da babá)
+   ================================================ */
+
+.disponibilidade h3 {
+    color: var(--marrom-escuro);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.tabela-calendario {
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+
+.tabela-calendario th {
+    background: var(--marrom);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 4px;
+    border-radius: 8px;
+}
+
+.tabela-calendario td:first-child {
+    text-align: left;
+    font-weight: 700;
+    color: var(--marrom-escuro);
+    font-size: 13px;
+    padding-left: 6px;
+}
+
+.tabela-calendario td {
+    background: #f4eee8;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 10px 4px;
+    color: var(--marrom-escuro);
+}
+
+/* ================================================
+   "MINHA EXPERIÊNCIA" E "CURSOS" — listas em chips
+   ================================================ */
+
+.perfil-direita section ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.perfil-direita section ul li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f4eee8;
+    color: var(--marrom-escuro);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 9px 16px;
+    border-radius: 50px;
+}
+
+.perfil-direita section ul li::before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background: var(--marrom);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
