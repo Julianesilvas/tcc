@@ -456,121 +456,376 @@ footer {
 }
 
 /* ==========================================
-   HERO ESTILO SITLY
+   HERO DA HOME — identidade Happy Baby
 ========================================== */
 
-.hero-novo {
-    background: #ffdfba;
-    padding: 70px 5%;
+.hero-home {
+    padding: 60px 5% 80px;
     overflow: hidden;
 }
 
-.hero-conteudo {
-    max-width: 1300px;
+.hero-home-conteudo {
+    max-width: 1200px;
     margin: auto;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 60px;
+    gap: 70px;
 }
 
-.hero-texto {
+.hero-home-texto {
     flex: 1;
+    min-width: 320px;
 }
 
-.hero-texto h1 {
-    font-size: 4rem;
-    line-height: 1.05;
-    font-weight: 900;
-    color: #3a2812;
-    margin-bottom: 25px;
-    text-transform: uppercase;
+.hero-home-texto h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 3rem;
+    line-height: 1.15;
+    color: var(--marrom-escuro);
+    margin: 18px 0 20px;
 }
 
-.hero-texto h1 span {
-    background: #6d420e;
-    padding: 0 8px;
-    border-radius: 6px;
+.hero-home-texto .destaque {
+    color: var(--marrom);
 }
 
-.hero-texto ul {
+.hero-home-texto .subtitulo {
+    max-width: 480px;
+    margin-bottom: 26px;
+}
+
+.hero-home-lista {
     list-style: none;
-    margin-bottom: 35px;
+    margin-bottom: 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.hero-texto ul li {
+.hero-home-lista li {
     position: relative;
-    padding-left: 28px;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    color: #514137;
+    padding-left: 30px;
+    font-size: 15px;
+    color: var(--texto-suave);
+    font-weight: 600;
 }
 
-.hero-texto ul li::before {
-    content: "•";
+.hero-home-lista li::before {
+    content: "✓";
     position: absolute;
     left: 0;
-    color: #1f2c3d;
-    font-size: 1.5rem;
-}
-
-.btn-hero {
-    display: inline-block;
-    background: #50310d;
+    top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--marrom);
     color: white;
-    text-decoration: none;
-    padding: 18px 35px;
-    border-radius: 18px;
+    border-radius: 50%;
+    font-size: 11px;
     font-weight: 700;
-    font-size: 1.1rem;
-    transition: 0.3s;
 }
 
-.btn-hero:hover {
+.hero-home-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.botao-secundario {
+    display: inline-block;
+    background: transparent;
+    color: var(--marrom-escuro);
+    border: 2px solid var(--marrom);
+    padding: 13px 30px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+}
+
+.botao-secundario:hover {
+    background: var(--marrom);
+    color: white;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(75, 70, 61, 0.373);
 }
 
-.hero-imagem {
+.hero-home-imagem {
     flex: 1;
+    min-width: 320px;
+    position: relative;
     display: flex;
     justify-content: center;
 }
 
-.hero-imagem img {
+.hero-home-imagem img {
     width: 100%;
-    max-width: 700px;
-    height: 500px;
+    max-width: 560px;
+    height: 480px;
     object-fit: cover;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
 
-    border-radius: 80px;
+.hero-badge-flutuante {
+    position: absolute;
+    left: -20px;
+    bottom: 30px;
+    background: var(--bege-card);
+    padding: 18px 22px;
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    animation: subir 0.7s ease both;
+}
 
-    box-shadow: 0 15px 40px rgba(27, 26, 26, 0.15);
+.hero-badge-flutuante strong {
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--marrom);
+}
+
+.hero-badge-flutuante span {
+    font-size: 12px;
+    color: var(--texto-suave);
+    max-width: 140px;
+    margin-top: 4px;
 }
 
 @media (max-width: 900px) {
 
-    .hero-conteudo {
+    .hero-home-conteudo {
         flex-direction: column;
         text-align: center;
     }
 
-    .hero-texto h1 {
-        font-size: 2.8rem;
+    .hero-home-texto h1 {
+        font-size: 2.2rem;
     }
 
-    .hero-texto ul li {
-        padding-left: 0;
+    .hero-home-lista li {
+        text-align: left;
     }
 
-    .hero-texto ul li::before {
-        display: none;
+    .hero-home-botoes {
+        justify-content: center;
     }
 
-    .hero-imagem img {
-        height: auto;
-        border-radius: 40px;
+    .hero-home-imagem img {
+        height: 320px;
+    }
+
+    .hero-badge-flutuante {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -24px;
+    }
+}
+
+/* ==========================================
+   BENEFÍCIOS
+========================================== */
+
+.beneficios {
+    max-width: 1100px;
+    margin: 0 auto 70px;
+}
+
+.grid-beneficios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+}
+
+.beneficio-card {
+    background: var(--bege-card);
+    padding: 30px 24px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.beneficio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 35px rgba(90,70,51,0.16);
+}
+
+.beneficio-icone {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 14px;
+}
+
+.beneficio-card h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 17px;
+    color: var(--marrom-escuro);
+    margin-bottom: 10px;
+}
+
+.beneficio-card p {
+    font-size: 14px;
+    color: var(--texto-suave);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   SEÇÃO ZIGUEZAGUE — fotos grandes + texto
+========================================== */
+
+.zigzag-secao {
+    max-width: 1150px;
+    margin: 0 auto 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.zigzag-item {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.zigzag-inverso {
+    flex-direction: row-reverse;
+}
+
+.zigzag-imagem {
+    flex: 1;
+    min-width: 300px;
+}
+
+.zigzag-imagem img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.zigzag-texto {
+    flex: 1;
+    min-width: 300px;
+}
+
+.zigzag-texto h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--marrom-escuro);
+    margin-bottom: 16px;
+}
+
+.zigzag-texto p {
+    color: var(--texto-suave);
+    margin-bottom: 20px;
+}
+
+.link-saiba-mais {
+    display: inline-block;
+    color: var(--marrom);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.link-saiba-mais:hover {
+    color: var(--marrom-escuro);
+    transform: translateX(4px);
+}
+
+.link-saiba-mais-central {
+    display: block;
+    text-align: center;
+    margin-top: 34px;
+}
+
+@media (max-width: 800px) {
+    .zigzag-item,
+    .zigzag-inverso {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .zigzag-imagem img {
+        height: 260px;
+    }
+}
+
+/* ==========================================
+   COMO FUNCIONA (RESUMO NA HOME)
+========================================== */
+
+.funciona-resumo {
+    max-width: 1100px;
+    margin: 0 auto 70px;
+}
+
+/* ==========================================
+   CTA FINAL DA HOME
+========================================== */
+
+.cta-home {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    background: var(--bege-card);
+    padding: 50px 40px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    text-align: center;
+}
+
+.cta-home h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 28px;
+    color: var(--marrom-escuro);
+    margin-bottom: 12px;
+}
+
+.cta-home > p {
+    color: var(--texto-suave);
+    margin-bottom: 30px;
+}
+
+.cta-home-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+}
+
+.cta-home-botoes .btn-contratar {
+    width: auto;
+    padding: 13px 28px;
+}
+
+.btn-contratar-alt {
+    background: transparent;
+    border: 2px solid var(--marrom);
+    color: var(--marrom-escuro);
+    box-shadow: none;
+}
+
+.btn-contratar-alt:hover {
+    background: var(--marrom);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .hero-home-texto h1 {
+        font-size: 1.9rem;
+    }
+
+    .cta-home {
+        padding: 36px 24px;
     }
 }
 /* ===== NOVO PERFIL ===== */
