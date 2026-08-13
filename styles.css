@@ -2066,3 +2066,127 @@ h3 { font-size: 1.2rem; }
     font-weight: 700;
     margin: 4px 0 16px;
 }
+
+/* ================================================
+   LOGIN SIMULADO — botões no menu e modal
+   ================================================ */
+
+.area-conta {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.conta-btn {
+    background: transparent;
+    border: 1.5px solid var(--marrom);
+    color: var(--marrom-escuro);
+    padding: 7px 16px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.conta-btn:hover {
+    background: #f4eee8;
+}
+
+.conta-btn-cadastro {
+    background: var(--marrom);
+    color: white;
+    border-color: var(--marrom);
+}
+
+.conta-btn-cadastro:hover {
+    background: var(--marrom-escuro);
+}
+
+.conta-saudacao {
+    color: var(--marrom-escuro);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ===== MODAL DE LOGIN / CADASTRO ===== */
+
+.modal-conta-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(58,40,18,0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-conta-caixa {
+    background: var(--bege-card);
+    border-radius: var(--raio);
+    padding: 40px;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+    box-shadow: var(--sombra);
+    animation: subir 0.3s ease both;
+}
+
+.modal-conta-fechar {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--texto-suave);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-conta-form h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--marrom-escuro);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-conta-form input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: var(--fonte-corpo);
+}
+
+.modal-conta-form .btn-contratar {
+    width: 100%;
+}
+
+.modal-conta-erro {
+    color: #b23b3b;
+    font-size: 13px;
+    margin: -6px 0 12px;
+    min-height: 16px;
+}
+
+.modal-conta-troca {
+    text-align: center;
+    font-size: 13px;
+    color: var(--texto-suave);
+    margin-top: 16px;
+}
+
+.modal-conta-troca a {
+    color: var(--marrom);
+    font-weight: 700;
+    text-decoration: none;
+}

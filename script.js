@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    criarAreaConta();
+
 });
 
 
@@ -521,3 +523,173 @@ document.addEventListener("DOMContentLoaded", () => {
         campoCpf.addEventListener("input", () => aplicarMascaraCPF(campoCpf));
     }
 });
+
+// ================================================
+//  LOGIN SIMULADO (sem banco de dados — usa localStorage)
+// ================================================
+
+function obterUsuarios() {
+    return JSON.parse(localStorage.getItem("happyBabyUsuarios") || "[]");
+}
+
+function salvarUsuarios(lista) {
+    localStorage.setItem("happyBabyUsuarios", JSON.stringify(lista));
+}
+
+function obterUsuarioLogado() {
+    const dados = localStorage.getItem("happyBabyUsuarioLogado");
+    return dados ? JSON.parse(dados) : null;
+}
+
+// Cria a área de "Entrar / Cadastre-se" dentro do <nav>
+function criarAreaConta() {
+    const nav = document.querySelector("nav");
+    if (!nav || document.getElementById("areaConta")) return;
+
+    const area = document.createElement("div");
+    area.id = "areaConta";
+    area.className = "area-conta";
+    nav.appendChild(area);
+
+    atualizarAreaConta();
+}
+
+// Atualiza os botões conforme o usuário está logado ou não
+function atualizarAreaConta() {
+    const area = document.getElementById("areaConta");
+    if (!area) return;
+
+    const usuario = obterUsuarioLogado();
+
+    if (usuario) {
+        area.innerHTML = `
+            <span class="conta-saudacao">Olá, ${usuario.nome.split(" ")[0]}</span>
+            <button type="button" class="conta-btn conta-btn-sair" onclick="fazerLogout()">Sair</button>
+        `;
+    } else {
+        area.innerHTML = `
+            <button type="button" class="conta-btn" onclick="abrirModalConta('entrar')">Entrar</button>
+            <button type="button" class="conta-btn conta-btn-cadastro" onclick="abrirModalConta('cadastro')">Cadastre-se</button>
+        `;
+    }
+}
+
+// Cria o modal (só uma vez) e injeta no final do <body>
+function criarModalConta() {
+    if (document.getElementById("modalConta")) return;
+
+    const modal = document.createElement("div");
+    modal.id = "modalConta";
+    modal.className = "modal-conta-overlay";
+    modal.style.display = "none";
+
+    modal.innerHTML = `
+        <div class="modal-conta-caixa">
+
+            <button type="button" class="modal-conta-fechar" onclick="fecharModalConta()">×</button>
+
+            <div id="formEntrar" class="modal-conta-form">
+                <h2>Entrar</h2>
+                <input type="email" id="loginEmail" placeholder="E-mail" required>
+                <input type="password" id="loginSenha" placeholder="Senha" required>
+                <p class="modal-conta-erro" id="erroLogin"></p>
+                <button type="button" class="btn-contratar" onclick="fazerLogin()">Entrar</button>
+                <p class="modal-conta-troca">
+                    Não tem conta? <a href="#" onclick="alternarModoConta('cadastro'); return false;">Cadastre-se</a>
+                </p>
+            </div>
+
+            <div id="formCadastro" class="modal-conta-form" style="display:none;">
+                <h2>Criar conta</h2>
+                <input type="text" id="cadastroNome" placeholder="Nome completo" required>
+                <input type="email" id="cadastroEmail" placeholder="E-mail" required>
+                <input type="password" id="cadastroSenha" placeholder="Senha" required>
+                <p class="modal-conta-erro" id="erroCadastro"></p>
+                <button type="button" class="btn-contratar" onclick="fazerCadastro()">Criar conta</button>
+                <p class="modal-conta-troca">
+                    Já tem conta? <a href="#" onclick="alternarModoConta('entrar'); return false;">Entrar</a>
+                </p>
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Fecha ao clicar fora da caixinha
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) fecharModalConta();
+    });
+}
+
+function abrirModalConta(modo) {
+    criarModalConta();
+    document.getElementById("modalConta").style.display = "flex";
+    alternarModoConta(modo);
+}
+
+function fecharModalConta() {
+    const modal = document.getElementById("modalConta");
+    if (modal) modal.style.display = "none";
+}
+
+function alternarModoConta(modo) {
+    document.getElementById("formEntrar").style.display = modo === "entrar" ? "block" : "none";
+    document.getElementById("formCadastro").style.display = modo === "cadastro" ? "block" : "none";
+    document.getElementById("erroLogin").textContent = "";
+    document.getElementById("erroCadastro").textContent = "";
+}
+
+function fazerLogin() {
+    const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+    const senha = document.getElementById("loginSenha").value;
+    const erro = document.getElementById("erroLogin");
+
+    if (!email || !senha) {
+        erro.textContent = "Preencha e-mail e senha.";
+        return;
+    }
+
+    const usuarios = obterUsuarios();
+    const encontrado = usuarios.find(u => u.email === email && u.senha === senha);
+
+    if (!encontrado) {
+        erro.textContent = "E-mail ou senha incorretos.";
+        return;
+    }
+
+    localStorage.setItem("happyBabyUsuarioLogado", JSON.stringify({ nome: encontrado.nome, email: encontrado.email }));
+    fecharModalConta();
+    atualizarAreaConta();
+}
+
+function fazerCadastro() {
+    const nome = document.getElementById("cadastroNome").value.trim();
+    const email = document.getElementById("cadastroEmail").value.trim().toLowerCase();
+    const senha = document.getElementById("cadastroSenha").value;
+    const erro = document.getElementById("erroCadastro");
+
+    if (!nome || !email || !senha) {
+        erro.textContent = "Preencha todos os campos.";
+        return;
+    }
+
+    const usuarios = obterUsuarios();
+
+    if (usuarios.some(u => u.email === email)) {
+        erro.textContent = "Já existe uma conta com esse e-mail.";
+        return;
+    }
+
+    usuarios.push({ nome, email, senha });
+    salvarUsuarios(usuarios);
+
+    localStorage.setItem("happyBabyUsuarioLogado", JSON.stringify({ nome, email }));
+    fecharModalConta();
+    atualizarAreaConta();
+}
+
+function fazerLogout() {
+    localStorage.removeItem("happyBabyUsuarioLogado");
+    atualizarAreaConta();
+}
