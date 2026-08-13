@@ -228,6 +228,13 @@ function irProximaEtapa() {
         }
     }
 
+    // Checagem extra: na Etapa 4, precisa ter escolhido uma babá no grid
+    if (etapaAtual === 4 && !document.getElementById("selectBaba").value) {
+        document.getElementById("avisoSelecaoBaba").style.display = "block";
+        document.getElementById("gridSelecaoBaba").scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+    }
+
     if (etapaAtual < totalEtapas) {
         mostrarEtapa(etapaAtual + 1);
     }
@@ -237,6 +244,46 @@ function voltarEtapa() {
     if (etapaAtual > 1) {
         mostrarEtapa(etapaAtual - 1);
     }
+}
+
+// ===== Gera os cards de seleção da babá (Etapa 4) =====
+function renderizarGridBabas() {
+    const grid = document.getElementById("gridSelecaoBaba");
+    if (!grid) return; // só roda na contratar.html
+
+    grid.innerHTML = "";
+
+    Object.keys(bancoBabas).forEach(nome => {
+        const dados = bancoBabas[nome];
+
+        const card = document.createElement("div");
+        card.className = "card-selecao-baba";
+        card.setAttribute("data-nome", nome);
+
+        card.innerHTML = `
+            <img src="${dados.foto}" alt="${nome}">
+            <div class="card-selecao-info">
+                <h4>${nome}</h4>
+                <p>${dados.cidade}</p>
+                <p>${dados.preco}</p>
+            </div>
+            <span class="selo-selecionada">✓</span>
+        `;
+
+        card.addEventListener("click", () => selecionarBaba(nome));
+        grid.appendChild(card);
+    });
+}
+
+// ===== Marca a babá escolhida =====
+function selecionarBaba(nome) {
+    document.getElementById("selectBaba").value = nome;
+
+    document.querySelectorAll(".card-selecao-baba").forEach(card => {
+        card.classList.toggle("selecionada", card.getAttribute("data-nome") === nome);
+    });
+
+    document.getElementById("avisoSelecaoBaba").style.display = "none";
 }
 
 // ===== Monta o resumo da Etapa 5 com os dados reais preenchidos =====
@@ -319,6 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sucesso) {
         sucesso.style.display = "none";
     }
+    renderizarGridBabas();
 });
 
 // ================================================
