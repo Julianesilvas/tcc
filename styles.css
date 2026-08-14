@@ -2083,35 +2083,40 @@ h3 { font-size: 1.2rem; }
 
 .conta-btn {
     background: transparent;
-    border: 1.5px solid var(--marrom);
-    color: var(--marrom-escuro);
+    border: 1.5px solid rgba(255,255,255,0.8);
+    color: white;
     padding: 7px 16px;
     border-radius: 50px;
     font-family: var(--fonte-corpo);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
 }
 
 .conta-btn:hover {
-    background: #f4eee8;
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
 }
 
 .conta-btn-cadastro {
-    background: var(--marrom);
-    color: white;
-    border-color: var(--marrom);
+    background: white;
+    color: var(--marrom-escuro);
+    border-color: white;
 }
 
 .conta-btn-cadastro:hover {
-    background: var(--marrom-escuro);
+    background: var(--bege);
+    transform: translateY(-2px);
 }
 
 .conta-saudacao {
-    color: var(--marrom-escuro);
-    font-size: 13px;
+    color: white;
+    font-family: var(--fonte-titulo);
+    font-size: 16px;
     font-weight: 700;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
 /* ===== MODAL DE LOGIN / CADASTRO ===== */
