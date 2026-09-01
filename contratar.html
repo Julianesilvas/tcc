@@ -173,7 +173,6 @@ Próxima etapa →
 </form>
 
 </div>
-
 <!-- ================= ETAPA 2 ================= -->
 
 <div class="etapa" id="etapa2">
@@ -197,24 +196,18 @@ Próxima etapa →
 
     <form class="form-contato">
 
-        <h3>Quantidade de crianças</h3>
-
         <div class="linha-form">
 
             <input type="number"
                id="qtdCriancas"
                placeholder="Quantidade de crianças"
                min="1"
-               max="10"
-               onchange="gerarCamposCriancas()"
                required>
 
         </div>
 
         <!-- Container dinâmico para dados das crianças -->
         <div id="containerCriancas"></div>
-
-        <h3>Informações gerais</h3>
 
         <div class="linha-form">
 
@@ -240,22 +233,24 @@ Próxima etapa →
 
                 <option value="não">Não</option>
 
-                <option value="sim">Sim - descrever abaixo</option>
+                <option value="sim">Sim</option>
 
             </select>
 
         </div>
 
         <textarea rows="5"
-            id="cuidadosEspeciaisDesc"
-            placeholder="Se sim, descreva os cuidados especiais necessários (medicamentos, alergias severas, condições de saúde, etc.)"></textarea>
+            id="alergiasInfo"
+            placeholder="Possui alguma alergia? (Descreva qual é)"></textarea>
 
         <textarea rows="5"
-            id="personalidadeCrianca"
+            id="medicamentosInfo"
+            placeholder="Utiliza medicamentos? (Quais e por qual motivo)"></textarea>
+
+        <textarea rows="5"
             placeholder="Conte um pouco sobre a personalidade da criança. Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
 
         <textarea rows="5"
-            id="rotinaCrianca"
             placeholder="Descreva a rotina da criança (alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes)."></textarea>
 
         <h3>Atividades que a criança gosta</h3>
@@ -311,7 +306,6 @@ Próxima etapa →
     </form>
 
 </div>
-
 <!-- ================= ETAPA 3 ================= -->
 
 <div class="etapa" id="etapa3">
@@ -470,7 +464,6 @@ Próxima etapa →
     </form>
 
 </div>
-
 <!-- ================= ETAPA 4 ================= -->
 
 <div class="etapa" id="etapa4">
@@ -513,7 +506,7 @@ Próxima etapa →
 
         <label class="aceite">
 
-            <input type="radio" name="substituta" value="sim">
+            <input type="radio" name="substituta">
 
             Aceito que a Happy Baby indique outra profissional com perfil semelhante.
 
@@ -521,17 +514,59 @@ Próxima etapa →
 
         <label class="aceite">
 
-            <input type="radio" name="substituta" value="não">
+            <input type="radio" name="substituta">
 
-            Prefiro aguardar a disponibilidade dessa profissional específica.
+            Prefiro aguardar a disponibilidade da profissional escolhida.
 
         </label>
+
+        <hr>
+
+        <h3>Como conheceu a Happy Baby?</h3>
+
+        <select id="comoConheceu">
+
+            <option selected disabled>Selecione</option>
+
+            <option>Instagram</option>
+
+            <option>Facebook</option>
+
+            <option>Google</option>
+
+            <option>Indicação</option>
+
+            <option>Escola</option>
+
+            <option>Outro</option>
+
+        </select>
+
+        <hr>
+
+        <h3>Deseja receber novidades da Happy Baby?</h3>
+
+        <label class="aceite">
+
+            <input type="checkbox" id="aceitoNewsletter">
+
+            Quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
+
+        </label>
+
+        <hr>
+
+        <h3>Observações finais</h3>
+
+        <textarea rows="7"
+        id="observacoesFinal"
+        placeholder="Existe alguma informação importante que nossa equipe deve saber antes de analisar sua solicitação?"></textarea>
 
         <label class="aceite">
 
             <input type="checkbox" id="aceitoInfo4" required>
 
-            Confirmo que escolhi corretamente a profissional desejada.
+            Confirmo que as informações sobre a escolha da profissional estão corretas.
 
         </label>
 
@@ -550,158 +585,218 @@ Próxima etapa →
     </form>
 
 </div>
-
 <!-- ================= ETAPA 5 ================= -->
 
 <div class="etapa" id="etapa5">
 
     <div class="barra-progresso">
-
         <div class="progresso etapa5"></div>
-
     </div>
 
     <h2>Etapa 5 de 5</h2>
 
-    <h3>Confira seu cadastro</h3>
+    <h3>Confira sua solicitação</h3>
 
     <p class="texto-etapa">
-        Revise as informações antes de enviar sua solicitação. Clique no lápis ao lado de qualquer item para editar diretamente aquela seção.
+
+        Estamos quase terminando!
+
+        Antes de enviar sua solicitação para análise da equipe Happy Baby,
+        confira as informações abaixo. Clique no ícone de edição para corrigir qualquer informação.
+
     </p>
 
-    <!-- RESUMO RESPONSÁVEL -->
-    <div class="resumo-solicitacao">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2>Dados do responsável</h2>
-            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✎</button>
+    <!-- ================= RESUMO DA BABÁ ================= -->
+
+    <div class="resumo-baba">
+
+    <h2>Profissional escolhida</h2>
+
+    <div class="card-resumo">
+
+        <img id="resumoFotoBaba" src="" alt="Foto da profissional">
+
+        <div class="dados-resumo">
+
+            <h3 id="resumoNomeBaba"></h3>
+
+            <p id="resumoCidadeBaba"></p>
+
+            <p id="resumoAvaliacaoBaba"></p>
+
+            <p id="resumoPrecoBaba"></p>
+
+            <p id="resumoExperienciaBaba"></p>
+
+            <ul id="resumoDestaquesBaba" class="lista-destaques"></ul>
+
         </div>
-        <ul style="list-style: none;">
-            <li><strong>Nome:</strong> <span id="resumoNomeResp"></span></li>
-            <li><strong>CPF:</strong> <span id="resumoCpfResp"></span></li>
-            <li><strong>Telefone:</strong> <span id="resumoTelResp"></span></li>
-            <li><strong>Cidade:</strong> <span id="resumoCidadeResp"></span></li>
-        </ul>
+
     </div>
 
-    <!-- RESUMO CRIANÇAS -->
-    <div class="resumo-solicitacao">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2>Sobre as crianças</h2>
-            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar informações das crianças">✎</button>
+</div>
+
+    <!-- ================= RESUMO DA SOLICITAÇÃO ================= -->
+
+   <div class="resumo-solicitacao">
+
+    <h2>Resumo da solicitação</h2>
+
+    <div class="resumo-item-grupo">
+        <div class="resumo-item">
+            <strong>Responsável:</strong> <span id="resumoResponsavel"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✏️</button>
         </div>
-        <ul style="list-style: none;">
-            <li><strong>Quantidade:</strong> <span id="resumoQtdCri"></span></li>
-            <li><strong>Faixa etária geral:</strong> <span id="resumoFaixaEt"></span></li>
-            <li><strong>Cuidados especiais:</strong> <span id="resumoCuidEsp"></span></li>
-        </ul>
+
+        <div class="resumo-item">
+            <strong>Cidade:</strong> <span id="resumoCidade"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✏️</button>
+        </div>
+
+        <div class="resumo-item">
+            <strong>Crianças:</strong> <span id="resumoCriancas"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar dados das crianças">✏️</button>
+        </div>
+
+        <div class="resumo-item">
+            <strong>Idades:</strong> <span id="resumoIdades"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar dados das crianças">✏️</button>
+        </div>
+
+        <div class="resumo-item">
+            <strong>Período:</strong> <span id="resumoPeriodo"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
+
+        <div class="resumo-item">
+            <strong>Duração da contratação:</strong> <span id="resumoDuracao"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
+
+        <div class="resumo-item">
+            <strong>Dias:</strong> <span id="resumoDias"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
+
+        <div class="resumo-item">
+            <strong>Início previsto:</strong> <span id="resumoInicio"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
     </div>
 
-    <!-- RESUMO SERVIÇO -->
-    <div class="resumo-solicitacao">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2>Informações do serviço</h2>
-            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar informações do serviço">✎</button>
-        </div>
-        <ul style="list-style: none;">
-            <li><strong>Período:</strong> <span id="resumoPeriod"></span></li>
-            <li><strong>Duração:</strong> <span id="resumoDur"></span></li>
-            <li><strong>Dias necessários:</strong> <span id="resumoDiasNec"></span></li>
-        </ul>
-    </div>
+</div>
 
-    <!-- RESUMO BABÁ ESCOLHIDA -->
-    <div class="resumo-solicitacao">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2>Profissional escolhida</h2>
-            <button type="button" class="btn-edit" onclick="editarEtapa(4)" title="Editar escolha de profissional">✎</button>
-        </div>
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <img id="resumoFotoBaba" src="" alt="Foto da babá" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px;">
-            <div>
-                <p><strong>Nome:</strong> <span id="resumoNomeBaba"></span></p>
-                <p><strong>Cidade:</strong> <span id="resumoCidadeBaba"></span></p>
-                <p><strong>Preço/hora:</strong> <span id="resumoPrecoBaba"></span></p>
-            </div>
-        </div>
-    </div>
+    <!-- ================= TERMOS ================= -->
 
-    <!-- TERMOS E POLÍTICAS -->
     <div class="termos">
-        <h2>Termos e Políticas</h2>
-        
+
+        <h2>Declarações e Política de Privacidade</h2>
+
         <label class="aceite">
-            <input type="checkbox" id="aceitoTermos1" required>
-            Confirmo que todas as informações fornecidas são verdadeiras e completas.
+
+            <input type="checkbox" id="aceitoInfoFinal" required>
+
+            Confirmo que todas as informações fornecidas são verdadeiras.
+
         </label>
 
         <label class="aceite">
-            <input type="checkbox" id="aceitoTermos2" required>
-            Li e concordo com os <a href="#" target="_blank">Termos de Uso</a>.
+
+            <input type="checkbox" id="aceitoAnalise" required>
+
+            Estou ciente de que o contato com a profissional somente acontecerá após análise da equipe Happy Baby.
+
         </label>
 
         <label class="aceite">
-            <input type="checkbox" id="aceitoTermos3" required>
-            Li e concordo com a <a href="#" target="_blank">Política de Privacidade</a>.
+
+            <input type="checkbox" id="aceitoDados" required>
+
+            Autorizo a Happy Baby a utilizar meus dados exclusivamente para este processo de contratação.
+
         </label>
 
         <label class="aceite">
-            <input type="checkbox" id="aceitoTermos4" required>
-            Autorizo a Happy Baby a entrar em contato pelos dados fornecidos para análise da minha solicitação.
+
+            <input type="checkbox" id="aceitoTermos" required>
+
+            Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a>.
+
         </label>
+
     </div>
+
+    <!-- ================= BOTÕES ================= -->
 
     <div class="linha-form">
+
         <button type="button" class="btn-voltar" onclick="voltarEtapa()">
         ← Voltar
         </button>
 
         <button type="button" class="btn-contratar" onclick="finalizarContratacao()">
-        Enviar solicitação
+
+    Enviar solicitação
+
         </button>
+
     </div>
 
 </div>
+<!-- ================= MENSAGEM DE SUCESSO ================= -->
 
-<!-- MENSAGEM DE SUCESSO -->
 <section class="cadastro-sucesso" id="sucesso">
 
     <div class="sucesso-box">
 
-        <h1>Solicitação enviada com sucesso! 🎉</h1>
+        <h1>Solicitação enviada com sucesso!</h1>
 
         <p>
-            Recebemos sua solicitação e analisaremos cuidadosamente todas as suas informações.
+
+            Recebemos sua solicitação e ela já foi encaminhada para análise da equipe da <strong>Happy Baby</strong>.
+
         </p>
 
         <p>
-            Nossa equipe entrará em contato com você em breve para confirmar a disponibilidade
-            da profissional escolhida e dar continuidade ao processo.
+
+            Agora iremos conferir todas as informações fornecidas, verificar a disponibilidade da profissional escolhida e analisar se ela atende às necessidades da sua família.
+
         </p>
 
         <p>
-            <strong>Prazo médio de retorno: 2 a 3 dias úteis.</strong>
+
+            Caso seja necessário complementar alguma informação, entraremos em contato utilizando os dados informados no cadastro.
+
         </p>
 
         <p>
-            Agradecemos por confiar na Happy Baby para cuidar do seu filho!
+
+            <strong>O prazo médio para retorno é de até 2 dias úteis.</strong>
+
         </p>
 
-        <a href="index.html" class="btn-contratar">Voltar para a página inicial</a>
+        <p>
+
+            Agradecemos pela confiança em nosso trabalho.
+            Nossa missão é proporcionar uma contratação segura, transparente e humanizada para famílias e profissionais.
+
+        </p>
+
+        <a href="index.html" class="btn-contratar">
+
+            Voltar à página inicial
+
+        </a>
 
     </div>
 
 </section>
-
-</section>
-
 </main>
 
-<footer>
-    <p>© 2026 Happy Baby</p>
-</footer>
+    <footer>
+        <p>© 2026 Happy Baby</p>
+    </footer>
 
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
-
 </html>
