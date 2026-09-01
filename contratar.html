@@ -96,7 +96,9 @@ placeholder="Nome completo"
 required>
 
 <input type="text"
+id="cpfResponsavel"
 placeholder="CPF"
+maxlength="14"
 required>
 
 </div>
@@ -104,9 +106,11 @@ required>
 <div class="linha-form">
 
 <input type="date"
+id="dataNascimento"
 required>
 
 <input type="tel"
+id="telefoneCelular"
 placeholder="Telefone / WhatsApp"
 required>
 
@@ -115,6 +119,7 @@ required>
 <div class="linha-form">
 
 <input type="email"
+id="emailResponsavel"
 placeholder="E-mail"
 required>
 
@@ -133,6 +138,7 @@ placeholder="Estado"
 required>
 
 <input type="text"
+id="endereco"
 placeholder="Endereço"
 required>
 
@@ -141,16 +147,20 @@ required>
 <div class="linha-form">
 
 <input type="text"
-placeholder="CEP">
+id="cepResponsavel"
+placeholder="CEP"
+maxlength="9"
+required>
 
 <input type="text"
+id="profissao"
 placeholder="Profissão">
 
 </div>
 
 <label class="aceite">
 
-<input type="checkbox" required>
+<input type="checkbox" id="aceitoInfo1" required>
 
 Confirmo que todas as informações acima são verdadeiras.
 
@@ -175,7 +185,7 @@ Próxima etapa →
 
     <h2>Etapa 2 de 5</h2>
 
-    <h3>Sobre a criança</h3>
+    <h3>Sobre as crianças</h3>
 
     <p class="texto-etapa">
 
@@ -194,18 +204,16 @@ Próxima etapa →
                min="1"
                required>
 
-           <input type="text"
-    id="idadesCriancas"
-    placeholder="Idade(s)"
-    required>
-
         </div>
+
+        <!-- Container dinâmico para dados das crianças -->
+        <div id="containerCriancas"></div>
 
         <div class="linha-form">
 
-            <select required>
+            <select id="faixaEtaria" required>
 
-                <option selected disabled>Faixa etária</option>
+                <option selected disabled>Faixa etária geral</option>
 
                 <option>Recém-nascido</option>
 
@@ -219,37 +227,25 @@ Próxima etapa →
 
             </select>
 
-            <select required>
+            <select id="cuidadosEspeciais" required>
 
                 <option selected disabled>Necessita de cuidados especiais?</option>
 
-                <option>Não</option>
+                <option value="não">Não</option>
 
-                <option>Sim</option>
+                <option value="sim">Sim</option>
 
             </select>
 
         </div>
 
-        <div class="linha-form">
+        <textarea rows="5"
+            id="alergiasInfo"
+            placeholder="Possui alguma alergia? (Descreva qual é)"></textarea>
 
-            <input type="text"
-                placeholder="Possui alguma alergia?">
-
-            <input type="text"
-                placeholder="Utiliza medicamentos?">
-
-        </div>
-
-        <div class="linha-form">
-
-            <input type="text"
-                placeholder="Horário que costuma acordar">
-
-            <input type="text"
-                placeholder="Horário que costuma dormir">
-
-        </div>
+        <textarea rows="5"
+            id="medicamentosInfo"
+            placeholder="Utiliza medicamentos? (Quais e por qual motivo)"></textarea>
 
         <textarea rows="5"
             placeholder="Conte um pouco sobre a personalidade da criança. Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
@@ -261,31 +257,39 @@ Próxima etapa →
 
         <div class="dias">
 
-            <label><input type="checkbox"> Brincadeiras</label>
+            <label><input type="checkbox" name="atividade"> Brincadeiras</label>
 
-            <label><input type="checkbox"> Desenhar</label>
+            <label><input type="checkbox" name="atividade"> Desenhar</label>
 
-            <label><input type="checkbox"> Pintar</label>
+            <label><input type="checkbox" name="atividade"> Pintar</label>
 
-            <label><input type="checkbox"> Ler livros</label>
+            <label><input type="checkbox" name="atividade"> Ler livros</label>
 
-            <label><input type="checkbox"> Música</label>
+            <label><input type="checkbox" name="atividade"> Música</label>
 
-            <label><input type="checkbox"> Dançar</label>
+            <label><input type="checkbox" name="atividade"> Dançar</label>
 
-            <label><input type="checkbox"> Passear</label>
+            <label><input type="checkbox" name="atividade"> Passear</label>
 
-            <label><input type="checkbox"> Parque</label>
+            <label><input type="checkbox" name="atividade"> Parque</label>
 
-            <label><input type="checkbox"> Jogos educativos</label>
+            <label><input type="checkbox" name="atividade"> Jogos educativos</label>
 
-            <label><input type="checkbox"> Assistir desenhos</label>
+            <label><input type="checkbox" name="atividade"> Assistir desenhos</label>
 
-            <label><input type="checkbox"> Esportes</label>
+            <label><input type="checkbox" name="atividade"> Esportes</label>
 
-            <label><input type="checkbox"> Outras</label>
+            <label><input type="checkbox" name="atividade"> Outras</label>
 
         </div>
+
+        <label class="aceite">
+
+            <input type="checkbox" id="aceitoInfo2" required>
+
+            Confirmo que as informações sobre as crianças estão corretas.
+
+        </label>
 
         <div class="linha-form">
 
@@ -333,6 +337,8 @@ Próxima etapa →
 
                 <select id="periodoContratacao" required>
 
+                <option selected disabled>Período</option>
+
                 <option>Manhã</option>
 
                 <option>Tarde</option>
@@ -362,6 +368,7 @@ Próxima etapa →
             </select>
 
             <input type="text"
+                id="horarioAproximado"
                 placeholder="Horário aproximado (Ex.: 07h às 18h)">
 
         </div>
@@ -386,37 +393,37 @@ Próxima etapa →
 
         <div class="dias">
 
-            <label><input type="checkbox"> Cuidados com bebês</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Cuidados com bebês</label>
 
-            <label><input type="checkbox"> Preparar refeições</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Preparar refeições</label>
 
-            <label><input type="checkbox"> Dar banho</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Dar banho</label>
 
-            <label><input type="checkbox"> Troca de fraldas</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Troca de fraldas</label>
 
-            <label><input type="checkbox"> Colocar para dormir</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Colocar para dormir</label>
 
-            <label><input type="checkbox"> Buscar na escola</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Buscar na escola</label>
 
-            <label><input type="checkbox"> Levar à escola</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Levar à escola</label>
 
-            <label><input type="checkbox"> Auxiliar nas tarefas escolares</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Auxiliar nas tarefas escolares</label>
 
-            <label><input type="checkbox"> Atividades educativas</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Atividades educativas</label>
 
-            <label><input type="checkbox"> Passeios supervisionados</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Passeios supervisionados</label>
 
-            <label><input type="checkbox"> Organização dos brinquedos</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Organização dos brinquedos</label>
 
-            <label><input type="checkbox"> Organização do quarto da criança</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Organização do quarto da criança</label>
 
-            <label><input type="checkbox"> Lavar mamadeiras</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Lavar mamadeiras</label>
 
-            <label><input type="checkbox"> Preparar mamadeiras</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Preparar mamadeiras</label>
 
-            <label><input type="checkbox"> Acompanhar consultas médicas</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Acompanhar consultas médicas</label>
 
-            <label><input type="checkbox"> Dormir na residência</label>
+            <label><input type="checkbox" name="atividadeProfissional"> Dormir na residência</label>
 
         </div>
 
@@ -425,12 +432,22 @@ Próxima etapa →
         <h3>Existe alguma regra importante da casa?</h3>
 
         <textarea rows="5"
+            id="regrasImportantes"
             placeholder="Exemplo: tempo de tela limitado, alimentação específica, rotina de estudos, horários, religião, costumes da família ou outras informações importantes."></textarea>
 
         <h3>Informações adicionais</h3>
 
         <textarea rows="6"
+            id="infoAdicionais"
             placeholder="Escreva qualquer informação que possa ajudar nossa equipe a encontrar a profissional ideal para sua família."></textarea>
+
+        <label class="aceite">
+
+            <input type="checkbox" id="aceitoInfo3" required>
+
+            Confirmo que as informações sobre o serviço estão corretas.
+
+        </label>
 
         <div class="linha-form">
 
@@ -507,7 +524,7 @@ Próxima etapa →
 
         <h3>Como conheceu a Happy Baby?</h3>
 
-        <select>
+        <select id="comoConheceu">
 
             <option selected disabled>Selecione</option>
 
@@ -531,7 +548,7 @@ Próxima etapa →
 
         <label class="aceite">
 
-            <input type="checkbox">
+            <input type="checkbox" id="aceitoNewsletter">
 
             Quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
 
@@ -542,8 +559,16 @@ Próxima etapa →
         <h3>Observações finais</h3>
 
         <textarea rows="7"
-
+        id="observacoesFinal"
         placeholder="Existe alguma informação importante que nossa equipe deve saber antes de analisar sua solicitação?"></textarea>
+
+        <label class="aceite">
+
+            <input type="checkbox" id="aceitoInfo4" required>
+
+            Confirmo que as informações sobre a escolha da profissional estão corretas.
+
+        </label>
 
         <div class="linha-form">
 
@@ -577,7 +602,7 @@ Próxima etapa →
         Estamos quase terminando!
 
         Antes de enviar sua solicitação para análise da equipe Happy Baby,
-        confira as informações abaixo.
+        confira as informações abaixo. Clique no ícone de edição para corrigir qualquer informação.
 
     </p>
 
@@ -617,36 +642,59 @@ Próxima etapa →
 
     <h2>Resumo da solicitação</h2>
 
-    <ul>
+    <div class="resumo-item-grupo">
+        <div class="resumo-item">
+            <strong>Responsável:</strong> <span id="resumoResponsavel"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✏️</button>
+        </div>
 
-        <li><strong>Responsável:</strong> <span id="resumoResponsavel"></span></li>
+        <div class="resumo-item">
+            <strong>Cidade:</strong> <span id="resumoCidade"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✏️</button>
+        </div>
 
-        <li><strong>Cidade:</strong> <span id="resumoCidade"></span></li>
+        <div class="resumo-item">
+            <strong>Crianças:</strong> <span id="resumoCriancas"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar dados das crianças">✏️</button>
+        </div>
 
-        <li><strong>Crianças:</strong> <span id="resumoCriancas"></span></li>
+        <div class="resumo-item">
+            <strong>Idades:</strong> <span id="resumoIdades"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar dados das crianças">✏️</button>
+        </div>
 
-        <li><strong>Idades:</strong> <span id="resumoIdades"></span></li>
+        <div class="resumo-item">
+            <strong>Período:</strong> <span id="resumoPeriodo"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
 
-        <li><strong>Período:</strong> <span id="resumoPeriodo"></span></li>
+        <div class="resumo-item">
+            <strong>Duração da contratação:</strong> <span id="resumoDuracao"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
 
-        <li><strong>Duração da contratação:</strong> <span id="resumoDuracao"></span></li>
+        <div class="resumo-item">
+            <strong>Dias:</strong> <span id="resumoDias"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
 
-        <li><strong>Dias:</strong> <span id="resumoDias"></span></li>
-
-        <li><strong>Início previsto:</strong> <span id="resumoInicio"></span></li>
-
-    </ul>
+        <div class="resumo-item">
+            <strong>Início previsto:</strong> <span id="resumoInicio"></span>
+            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        </div>
+    </div>
 
 </div>
+
     <!-- ================= TERMOS ================= -->
 
     <div class="termos">
 
-        <h2>Declarações</h2>
+        <h2>Declarações e Política de Privacidade</h2>
 
         <label class="aceite">
 
-            <input type="checkbox" required>
+            <input type="checkbox" id="aceitoInfoFinal" required>
 
             Confirmo que todas as informações fornecidas são verdadeiras.
 
@@ -654,7 +702,7 @@ Próxima etapa →
 
         <label class="aceite">
 
-            <input type="checkbox" required>
+            <input type="checkbox" id="aceitoAnalise" required>
 
             Estou ciente de que o contato com a profissional somente acontecerá após análise da equipe Happy Baby.
 
@@ -662,7 +710,7 @@ Próxima etapa →
 
         <label class="aceite">
 
-            <input type="checkbox" required>
+            <input type="checkbox" id="aceitoDados" required>
 
             Autorizo a Happy Baby a utilizar meus dados exclusivamente para este processo de contratação.
 
@@ -670,9 +718,9 @@ Próxima etapa →
 
         <label class="aceite">
 
-            <input type="checkbox" required>
+            <input type="checkbox" id="aceitoTermos" required>
 
-            Li e concordo com os Termos de Uso e Política de Privacidade.
+            Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a>.
 
         </label>
 
@@ -730,7 +778,6 @@ Próxima etapa →
         <p>
 
             Agradecemos pela confiança em nosso trabalho.
-
             Nossa missão é proporcionar uma contratação segura, transparente e humanizada para famílias e profissionais.
 
         </p>
