@@ -248,6 +248,10 @@ function voltarEtapa() {
     }
 }
 
+function editarEtapa(numero) {
+    mostrarEtapa(numero);
+}
+
 // ===== Gera os cards de seleção da babá (Etapa 4) =====
 function renderizarGridBabas() {
     const grid = document.getElementById("gridSelecaoBaba");
@@ -372,11 +376,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ================================================
-//  QUERO SER BABÁ — cadastro em 4 etapas
+//  QUERO SER BABÁ — cadastro em 5 etapas
 // ================================================
 
 let etapaAtualBaba = 1;
-const totalEtapasBaba = 4;
+const totalEtapasBaba = 5;
 
 function mostrarEtapaBaba(numero) {
     document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
@@ -422,6 +426,10 @@ function voltarEtapaBaba() {
     }
 }
 
+function editarEtapaBaba(numero) {
+    mostrarEtapaBaba(numero);
+}
+
 // ===== Mostra o nome do(s) arquivo(s) escolhido(s) em um input file =====
 function mostrarNomeArquivo(inputId, spanId) {
     const input = document.getElementById(inputId);
@@ -452,6 +460,13 @@ function aplicarMascaraCPF(input) {
     input.value = valor;
 }
 
+// ===== Máscara de CEP (00000-000) =====
+function aplicarMascaraCEP(input) {
+    let valor = input.value.replace(/\D/g, "").slice(0, 8);
+    valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+    input.value = valor;
+}
+
 // ===== Monta o resumo da Etapa 4 =====
 function preencherResumoBaba() {
 
@@ -461,28 +476,31 @@ function preencherResumoBaba() {
     const estado = document.getElementById("estadoBaba").value;
     const experiencia = document.getElementById("experienciaBaba").value;
     const valorHora = document.getElementById("valorHoraBaba").value;
-    const periodo = document.getElementById("periodoBaba").value;
 
     const cursosMarcados = Array.from(
         document.querySelectorAll('input[name="cursoBaba"]:checked')
     ).map(chk => chk.value);
 
-    const diasMarcados = Array.from(
-        document.querySelectorAll('input[name="diaDisponivelBaba"]:checked')
-    ).map(chk => chk.value);
+    const diasPeriodos = [];
+    document.querySelectorAll('input[type="checkbox"][name*="_"]').forEach(checkbox => {
+        if (checkbox.checked) {
+            diasPeriodos.push(checkbox.name.replace(/_/g, ' '));
+        }
+    });
+
     document.getElementById("resumoNomeBaba2").textContent = nome || "-";
     document.getElementById("resumoCpfBaba").textContent = cpf || "-";
     document.getElementById("resumoCidadeBaba2").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
     document.getElementById("resumoExperienciaBaba2").textContent = experiencia || "-";
     document.getElementById("resumoValorBaba").textContent = valorHora ? `R$ ${valorHora}/hora` : "-";
     document.getElementById("resumoCursosBaba").textContent = cursosMarcados.length ? cursosMarcados.join(", ") : "-";
-    document.getElementById("resumoDiasBaba").textContent = diasMarcados.length ? diasMarcados.join(", ") : "-";
-    document.getElementById("resumoPeriodoBaba").textContent = periodo || "-";
+    document.getElementById("resumoDiasBaba").textContent = diasPeriodos.length ? diasPeriodos.join(", ") : "-";
 
     // --- Status dos documentos ---
     const documentos = [
         { input: "arquivoRG", resumo: "resumoDocRG" },
-        { input: "arquivoAntecedentes", resumo: "resumoDocAntecedentes" },
+        { input: "arquivoAntecedenteEstadual", resumo: "resumoDocAntecedenteEst" },
+        { input: "arquivoAntecedenteFedera", resumo: "resumoDocAntecedenteF" },
         { input: "arquivoCertificados", resumo: "resumoDocCertificados" },
         { input: "arquivoComprovante", resumo: "resumoDocComprovante" },
         { input: "arquivoFoto", resumo: "resumoDocFoto" }
@@ -491,7 +509,9 @@ function preencherResumoBaba() {
     documentos.forEach(doc => {
         const input = document.getElementById(doc.input);
         const resumo = document.getElementById(doc.resumo);
-        resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
+        if (input && resumo) {
+            resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
+        }
     });
 }
 
@@ -508,7 +528,7 @@ function finalizarCadastroBaba() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Inicializa: mostra só a etapa 1, esconde sucesso, liga a máscara de CPF
+// Inicializa: mostra só a etapa 1, esconde sucesso, liga a máscara de CPF e CEP
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("etapaB1")) {
         mostrarEtapaBaba(1);
@@ -521,6 +541,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const campoCpf = document.getElementById("cpfBaba");
     if (campoCpf) {
         campoCpf.addEventListener("input", () => aplicarMascaraCPF(campoCpf));
+    }
+
+    const campoCep = document.getElementById("cepBaba");
+    if (campoCep) {
+        campoCep.addEventListener("input", () => aplicarMascaraCEP(campoCep));
+    }
+
+    // Máscara para CPF do responsável em contratar.html
+    const campoCpfResp = document.getElementById("cpfResponsavel");
+    if (campoCpfResp) {
+        campoCpfResp.addEventListener("input", () => aplicarMascaraCPF(campoCpfResp));
+    }
+
+    const campoCepResp = document.getElementById("cepResponsavel");
+    if (campoCepResp) {
+        campoCepResp.addEventListener("input", () => aplicarMascaraCEP(campoCepResp));
     }
 });
 
@@ -692,4 +728,23 @@ function fazerCadastro() {
 function fazerLogout() {
     localStorage.removeItem("happyBabyUsuarioLogado");
     atualizarAreaConta();
+}
+
+// ===== Filtro de babás por cidade =====
+function filtrarBabas() {
+    const input = document.getElementById("buscaCidade");
+    const filtro = input.value.toUpperCase();
+    const babas = document.querySelectorAll(".baba");
+
+    babas.forEach(baba => {
+        const nome = baba.querySelector("h3").textContent;
+        const cidade = baba.querySelector("p").textContent;
+        const texto = nome + " " + cidade;
+
+        if (texto.toUpperCase().indexOf(filtro) > -1) {
+            baba.style.display = "";
+        } else {
+            baba.style.display = "none";
+        }
+    });
 }
