@@ -45,7 +45,7 @@
             <div class="progresso etapaB1"></div>
         </div>
 
-        <h2>Etapa 1 de 4</h2>
+        <h2>Etapa 1 de 5</h2>
         <h3>Dados pessoais</h3>
 
         <form class="form-contato">
@@ -71,11 +71,11 @@
             </div>
 
             <div class="linha-form">
-                <input type="text" id="cepBaba" placeholder="CEP">
+                <input type="text" id="cepBaba" placeholder="CEP" maxlength="9" required>
             </div>
 
             <label class="aceite">
-                <input type="checkbox" required>
+                <input type="checkbox" id="aceitoEtapaB1" required>
                 Confirmo que todas as informações acima são verdadeiras.
             </label>
 
@@ -94,7 +94,7 @@
             <div class="progresso etapaB2"></div>
         </div>
 
-        <h2>Etapa 2 de 4</h2>
+        <h2>Etapa 2 de 5</h2>
         <h3>Experiência e disponibilidade</h3>
 
         <form class="form-contato">
@@ -131,31 +131,73 @@
                 <label><input type="checkbox" name="cursoBaba" value="Outro"> Outro</label>
             </div>
 
-            <h3>Dias disponíveis</h3>
-            <div class="dias">
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Segunda"> Segunda-feira</label>
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Terça"> Terça-feira</label>
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Quarta"> Quarta-feira</label>
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Quinta"> Quinta-feira</label>
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Sexta"> Sexta-feira</label>
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Sábado"> Sábado</label>
-                <label><input type="checkbox" name="diaDisponivelBaba" value="Domingo"> Domingo</label>
+            <h3>Dias e períodos disponíveis</h3>
+            <p class="texto-etapa">Selecione todos os dias e períodos em que você está disponível:</p>
+            
+            <div class="calendario-disponibilidade">
+                <table class="tabela-disponibilidade">
+                    <tr>
+                        <th>Dia da Semana</th>
+                        <th>Manhã</th>
+                        <th>Tarde</th>
+                        <th>Noite</th>
+                    </tr>
+                    <tr>
+                        <td>Segunda-feira</td>
+                        <td><input type="checkbox" name="segunda_manha" value="segunda_manha"></td>
+                        <td><input type="checkbox" name="segunda_tarde" value="segunda_tarde"></td>
+                        <td><input type="checkbox" name="segunda_noite" value="segunda_noite"></td>
+                    </tr>
+                    <tr>
+                        <td>Terça-feira</td>
+                        <td><input type="checkbox" name="terca_manha" value="terca_manha"></td>
+                        <td><input type="checkbox" name="terca_tarde" value="terca_tarde"></td>
+                        <td><input type="checkbox" name="terca_noite" value="terca_noite"></td>
+                    </tr>
+                    <tr>
+                        <td>Quarta-feira</td>
+                        <td><input type="checkbox" name="quarta_manha" value="quarta_manha"></td>
+                        <td><input type="checkbox" name="quarta_tarde" value="quarta_tarde"></td>
+                        <td><input type="checkbox" name="quarta_noite" value="quarta_noite"></td>
+                    </tr>
+                    <tr>
+                        <td>Quinta-feira</td>
+                        <td><input type="checkbox" name="quinta_manha" value="quinta_manha"></td>
+                        <td><input type="checkbox" name="quinta_tarde" value="quinta_tarde"></td>
+                        <td><input type="checkbox" name="quinta_noite" value="quinta_noite"></td>
+                    </tr>
+                    <tr>
+                        <td>Sexta-feira</td>
+                        <td><input type="checkbox" name="sexta_manha" value="sexta_manha"></td>
+                        <td><input type="checkbox" name="sexta_tarde" value="sexta_tarde"></td>
+                        <td><input type="checkbox" name="sexta_noite" value="sexta_noite"></td>
+                    </tr>
+                    <tr>
+                        <td>Sábado</td>
+                        <td><input type="checkbox" name="sabado_manha" value="sabado_manha"></td>
+                        <td><input type="checkbox" name="sabado_tarde" value="sabado_tarde"></td>
+                        <td><input type="checkbox" name="sabado_noite" value="sabado_noite"></td>
+                    </tr>
+                    <tr>
+                        <td>Domingo</td>
+                        <td><input type="checkbox" name="domingo_manha" value="domingo_manha"></td>
+                        <td><input type="checkbox" name="domingo_tarde" value="domingo_tarde"></td>
+                        <td><input type="checkbox" name="domingo_noite" value="domingo_noite"></td>
+                    </tr>
+                </table>
             </div>
-
-            <select id="periodoBaba" required>
-                <option selected disabled>Período disponível</option>
-                <option>Manhã</option>
-                <option>Tarde</option>
-                <option>Noite</option>
-                <option>Integral</option>
-            </select>
 
             <textarea id="sobreBaba" rows="5"
                 placeholder="Conte um pouco sobre você e sua experiência com crianças."></textarea>
             
             <textarea id="estiloTrabalhoBaba" rows="5"
                 placeholder="Como você gosta de trabalhar? Conte sobre sua rotina, como se comunica com a família, como lida com imprevistos e o que valoriza no dia a dia com as crianças."></textarea>
-           
+
+            <label class="aceite">
+                <input type="checkbox" id="aceitoEtapaB2" required>
+                Confirmo que as informações sobre experiência estão corretas.
+            </label>
+            
             <div class="linha-form">
                 <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
                 <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">Próxima etapa →</button>
@@ -172,7 +214,7 @@
             <div class="progresso etapaB3"></div>
         </div>
 
-        <h2>Etapa 3 de 4</h2>
+        <h2>Etapa 3 de 5</h2>
         <h3>Documentos</h3>
 
         <p class="texto-etapa">
@@ -191,10 +233,17 @@
             </div>
 
             <div class="upload-item">
-                <label for="arquivoAntecedentes"><strong>Certidão de antecedentes criminais</strong></label>
-                <input type="file" id="arquivoAntecedentes" accept=".pdf,.jpg,.jpeg,.png"
-                    onchange="mostrarNomeArquivo('arquivoAntecedentes','nomeArquivoAntecedentes')" required>
-                <span class="nome-arquivo" id="nomeArquivoAntecedentes">Nenhum arquivo selecionado</span>
+                <label for="arquivoAntecedenteEstadual"><strong>Certidão de Antecedentes Criminais - Estadual</strong> (PDF)</label>
+                <input type="file" id="arquivoAntecedenteEstadual" accept=".pdf"
+                    onchange="mostrarNomeArquivo('arquivoAntecedenteEstadual','nomeArquivoAntecedenteEst')" required>
+                <span class="nome-arquivo" id="nomeArquivoAntecedenteEst">Nenhum arquivo selecionado</span>
+            </div>
+
+            <div class="upload-item">
+                <label for="arquivoAntecedenteFedera"><strong>Certidão de Antecedentes Criminais - Federal</strong> (PDF)</label>
+                <input type="file" id="arquivoAntecedenteFedera" accept=".pdf"
+                    onchange="mostrarNomeArquivo('arquivoAntecedenteFedera','nomeArquivoAntecedenteF')" required>
+                <span class="nome-arquivo" id="nomeArquivoAntecedenteF">Nenhum arquivo selecionado</span>
             </div>
 
             <div class="upload-item">
@@ -218,6 +267,11 @@
                 <span class="nome-arquivo" id="nomeArquivoFoto">Nenhum arquivo selecionado</span>
             </div>
 
+            <label class="aceite">
+                <input type="checkbox" id="aceitoEtapaB3" required>
+                Confirmo que todos os documentos foram anexados corretamente.
+            </label>
+
             <div class="linha-form">
                 <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
                 <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">Próxima etapa →</button>
@@ -234,61 +288,101 @@
             <div class="progresso etapaB4"></div>
         </div>
 
-        <h2>Etapa 4 de 4</h2>
+        <h2>Etapa 4 de 5</h2>
         <h3>Confira seu cadastro</h3>
 
         <p class="texto-etapa">
             Revise as informações antes de enviar seu cadastro para análise da equipe Happy Baby.
+            Clique no ícone de edição para corrigir qualquer informação.
         </p>
 
         <div class="resumo-solicitacao">
             <h2>Seus dados</h2>
-            <ul>
-                <li><strong>Nome:</strong> <span id="resumoNomeBaba2"></span></li>
-                <li><strong>CPF:</strong> <span id="resumoCpfBaba"></span></li>
-                <li><strong>Cidade:</strong> <span id="resumoCidadeBaba2"></span></li>
-                <li><strong>Experiência:</strong> <span id="resumoExperienciaBaba2"></span></li>
-                <li><strong>Valor por hora:</strong> <span id="resumoValorBaba"></span></li>
-                <li><strong>Cursos:</strong> <span id="resumoCursosBaba"></span></li>
-                <li><strong>Dias disponíveis:</strong> <span id="resumoDiasBaba"></span></li>
-                <li><strong>Período:</strong> <span id="resumoPeriodoBaba"></span></li>
-            </ul>
+            <div class="resumo-item-grupo">
+                <div class="resumo-item">
+                    <strong>Nome:</strong> <span id="resumoNomeBaba2"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(1)" title="Editar dados pessoais">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>CPF:</strong> <span id="resumoCpfBaba"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(1)" title="Editar dados pessoais">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Cidade:</strong> <span id="resumoCidadeBaba2"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(1)" title="Editar dados pessoais">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Experiência:</strong> <span id="resumoExperienciaBaba2"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar experiência">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Valor por hora:</strong> <span id="resumoValorBaba"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar experiência">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Cursos:</strong> <span id="resumoCursosBaba"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar experiência">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Dias e períodos disponíveis:</strong> <span id="resumoDiasBaba"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar disponibilidade">✏️</button>
+                </div>
+            </div>
         </div>
 
         <div class="resumo-solicitacao">
             <h2>Documentos anexados</h2>
-            <ul>
-                <li><strong>RG/CPF:</strong> <span id="resumoDocRG"></span></li>
-                <li><strong>Antecedentes criminais:</strong> <span id="resumoDocAntecedentes"></span></li>
-                <li><strong>Certificados:</strong> <span id="resumoDocCertificados"></span></li>
-                <li><strong>Comprovante de residência:</strong> <span id="resumoDocComprovante"></span></li>
-                <li><strong>Foto de perfil:</strong> <span id="resumoDocFoto"></span></li>
-            </ul>
+            <div class="resumo-item-grupo">
+                <div class="resumo-item">
+                    <strong>RG/CPF:</strong> <span id="resumoDocRG"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Antecedentes Criminais - Estadual:</strong> <span id="resumoDocAntecedenteEst"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Antecedentes Criminais - Federal:</strong> <span id="resumoDocAntecedenteF"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Certificados:</strong> <span id="resumoDocCertificados"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Comprovante de residência:</strong> <span id="resumoDocComprovante"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+                </div>
+                <div class="resumo-item">
+                    <strong>Foto de perfil:</strong> <span id="resumoDocFoto"></span>
+                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+                </div>
+            </div>
         </div>
 
         <div class="termos">
-            <h2>Declarações</h2>
+            <h2>Declarações e Política de Privacidade</h2>
 
             <label class="aceite">
-                <input type="checkbox" required>
+                <input type="checkbox" id="aceitoConfirmaB4" required>
                 Confirmo que todas as informações e documentos fornecidos são verdadeiros.
             </label>
 
             <label class="aceite">
-                <input type="checkbox" required>
+                <input type="checkbox" id="aceitoAnaliseB4" required>
                 Estou ciente de que meu cadastro somente será ativado após a análise
                 e verificação dos documentos pela equipe Happy Baby.
             </label>
 
             <label class="aceite">
-                <input type="checkbox" required>
+                <input type="checkbox" id="aceitoDadosB4" required>
                 Autorizo a Happy Baby a utilizar meus dados e documentos exclusivamente
                 para fins de verificação e intermediação de contratações.
             </label>
 
             <label class="aceite">
-                <input type="checkbox" required>
-                Li e concordo com os Termos de Uso e Política de Privacidade.
+                <input type="checkbox" id="aceitoTermosB4" required>
+                Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a>.
             </label>
         </div>
 
