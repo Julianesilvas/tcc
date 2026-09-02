@@ -72,678 +72,669 @@ Nenhum contato é realizado diretamente entre a família e a babá antes dessa a
 
 </div>
 
-<!-- ETAPA 1 -->
-
-<div class="etapa" id="etapa1">
-
-<div class="barra-progresso">
-
-<div class="progresso etapa1"></div>
-
-</div>
-
-<h2>Etapa 1 de 5</h2>
-
-<h3>Dados do responsável</h3>
-
-<form class="form-contato">
-
-<div class="linha-form">
-
-<input type="text"
-id="nomeResponsavel"
-placeholder="Nome completo"
-required>
-
-<input type="text"
-id="cpfResponsavel"
-placeholder="CPF"
-maxlength="14"
-required>
-
-</div>
-
-<div class="linha-form">
-
-<input type="date"
-id="dataNascimento"
-required>
-
-<input type="tel"
-id="telefoneCelular"
-placeholder="Telefone / WhatsApp"
-required>
-
-</div>
-
-<div class="linha-form">
-
-<input type="email"
-id="emailResponsavel"
-placeholder="E-mail"
-required>
-
-<input type="text"
-id="cidadeResponsavel"
-placeholder="Cidade"
-required>
-
-</div>
-
-<div class="linha-form">
-
-<input type="text"
-id="estadoResponsavel"
-placeholder="Estado"
-required>
-
-<input type="text"
-id="endereco"
-placeholder="Endereço"
-required>
-
-</div>
-
-<div class="linha-form">
-
-<input type="text"
-id="cepResponsavel"
-placeholder="CEP"
-maxlength="9"
-required>
-
-<input type="text"
-id="profissao"
-placeholder="Profissão">
-
-</div>
-
-<label class="aceite">
-
-<input type="checkbox" id="aceitoInfo1" required>
-
-Confirmo que todas as informações acima são verdadeiras.
-
-</label>
-
-<button type="button" class="btn-contratar" onclick="irProximaEtapa()">
-Próxima etapa →
-</button>
-
-</form>
-
-</div>
-<!-- ================= ETAPA 2 ================= -->
-
-<div class="etapa" id="etapa2">
-
+<div class="progresso-perguntas">
     <div class="barra-progresso">
-
-        <div class="progresso etapa2"></div>
-
+        <div class="progresso" id="barraProgressoContratar"></div>
     </div>
+    <span class="progresso-texto" id="progressoTextoContratar"></span>
+</div>
 
-    <h2>Etapa 2 de 5</h2>
+<div class="wizard-perguntas">
 
-    <h3>Sobre as crianças</h3>
+<div class="etapa pergunta" id="pergunta1">
 
-    <p class="texto-etapa">
+    <h2 class="pergunta-titulo">Qual é o seu nome completo?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
 
-        Essas informações nos ajudam a encontrar uma profissional que se adapte
-        à rotina e às necessidades da sua família.
-
-    </p>
-
-    <form class="form-contato">
-
-        <div class="linha-form">
-
-            <input type="number"
-               id="qtdCriancas"
-               placeholder="Quantidade de crianças"
-               min="1"
-               required>
-
+        <div class="pergunta-campo">
+            <input type="text" id="nomeResponsavel" placeholder="Nome completo" required>
         </div>
 
-        <!-- Container dinâmico para dados das crianças -->
-        <div id="containerCriancas"></div>
+    <div class="linha-form pergunta-botoes">
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta2">
+
+    <h2 class="pergunta-titulo">Qual é o seu CPF?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="text" id="cpfResponsavel" placeholder="CPF" maxlength="14" oninput="aplicarMascaraCPF(this)" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta3">
+
+    <h2 class="pergunta-titulo">Qual é a sua data de nascimento?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="date" id="nascimentoResponsavel" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta4">
+
+    <h2 class="pergunta-titulo">Qual o melhor telefone / WhatsApp para contato?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="tel" id="telefoneResponsavel" placeholder="Telefone / WhatsApp" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta5">
+
+    <h2 class="pergunta-titulo">Qual é o seu e-mail?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="email" id="emailResponsavel" placeholder="E-mail" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta6">
+
+    <h2 class="pergunta-titulo">Qual é o seu endereço completo?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
 
         <div class="linha-form">
+            <input type="text" id="cidadeResponsavel" placeholder="Cidade" required>
+            <input type="text" id="estadoResponsavel" placeholder="Estado" required>
+        </div>
+        <div class="linha-form">
+            <input type="text" id="enderecoResponsavel" placeholder="Endereço" required>
+            <input type="text" id="cepResponsavel" placeholder="CEP (opcional)">
+        </div>
 
-            <select id="faixaEtaria" required>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
 
-                <option selected disabled>Faixa etária geral</option>
+</div>
 
+<div class="etapa pergunta" id="pergunta7">
+
+    <h2 class="pergunta-titulo">Qual é a sua profissão?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="text" id="profissaoResponsavel" placeholder="Profissão (opcional)">
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta8">
+
+    <h2 class="pergunta-titulo">Quantas crianças precisam de cuidado?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="number" id="qtdCriancas" placeholder="Quantidade de crianças" min="1" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta9">
+
+    <h2 class="pergunta-titulo">Qual a idade de cada criança?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="text" id="idadesCriancas" placeholder="Idade(s)" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta10">
+
+    <h2 class="pergunta-titulo">Qual a faixa etária?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <select id="faixaEtariaCrianca" required>
+                <option selected disabled>Faixa etária</option>
                 <option>Recém-nascido</option>
-
                 <option>0 a 2 anos</option>
-
                 <option>3 a 5 anos</option>
-
                 <option>6 a 10 anos</option>
-
                 <option>Acima de 10 anos</option>
-
             </select>
-
-            <select id="cuidadosEspeciais" required>
-
-                <option selected disabled>Necessita de cuidados especiais?</option>
-
-                <option value="não">Não</option>
-
-                <option value="sim">Sim</option>
-
-            </select>
-
         </div>
 
-        <textarea rows="5"
-            id="alergiasInfo"
-            placeholder="Possui alguma alergia? (Descreva qual é)"></textarea>
-
-        <textarea rows="5"
-            id="medicamentosInfo"
-            placeholder="Utiliza medicamentos? (Quais e por qual motivo)"></textarea>
-
-        <textarea rows="5"
-            placeholder="Conte um pouco sobre a personalidade da criança. Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
-
-        <textarea rows="5"
-            placeholder="Descreva a rotina da criança (alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes)."></textarea>
-
-        <h3>Atividades que a criança gosta</h3>
-
-        <div class="dias">
-
-            <label><input type="checkbox" name="atividade"> Brincadeiras</label>
-
-            <label><input type="checkbox" name="atividade"> Desenhar</label>
-
-            <label><input type="checkbox" name="atividade"> Pintar</label>
-
-            <label><input type="checkbox" name="atividade"> Ler livros</label>
-
-            <label><input type="checkbox" name="atividade"> Música</label>
-
-            <label><input type="checkbox" name="atividade"> Dançar</label>
-
-            <label><input type="checkbox" name="atividade"> Passear</label>
-
-            <label><input type="checkbox" name="atividade"> Parque</label>
-
-            <label><input type="checkbox" name="atividade"> Jogos educativos</label>
-
-            <label><input type="checkbox" name="atividade"> Assistir desenhos</label>
-
-            <label><input type="checkbox" name="atividade"> Esportes</label>
-
-            <label><input type="checkbox" name="atividade"> Outras</label>
-
-        </div>
-
-        <label class="aceite">
-
-            <input type="checkbox" id="aceitoInfo2" required>
-
-            Confirmo que as informações sobre as crianças estão corretas.
-
-        </label>
-
-        <div class="linha-form">
-
-            <button type="button" class="btn-voltar" onclick="voltarEtapa()">
-            ← Voltar
-            </button>
-
-            <button type="button" class="btn-contratar" onclick="irProximaEtapa()">
-            Próxima etapa →
-            </button>
-
-        </div>
-
-    </form>
-
-</div>
-<!-- ================= ETAPA 3 ================= -->
-
-<div class="etapa" id="etapa3">
-
-    <div class="barra-progresso">
-
-        <div class="progresso etapa3"></div>
-
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
     </div>
 
-    <h2>Etapa 3 de 5</h2>
+</div>
 
-    <h3>Como será o serviço?</h3>
+<div class="etapa pergunta" id="pergunta11">
 
-    <p class="texto-etapa">
+    <h2 class="pergunta-titulo">A criança necessita de cuidados especiais?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
 
-        Agora queremos entender como será a rotina da babá e quais atividades
-        ela deverá realizar durante o período contratado.
-
-    </p>
-
-    <form class="form-contato">
-
-        <h3>Período da contratação</h3>
-
-        <div class="linha-form">
-
-            <input type="date" id="dataInicio" required>
-
-                <select id="periodoContratacao" required>
-
-                <option selected disabled>Período</option>
-
-                <option>Manhã</option>
-
-                <option>Tarde</option>
-
-                <option>Noite</option>
-
-                <option>Integral</option>
-
+        <div class="pergunta-campo">
+            <select id="cuidadosEspeciais" required>
+                <option selected disabled>Necessita de cuidados especiais?</option>
+                <option>Não</option>
+                <option>Sim</option>
             </select>
-
         </div>
 
-        <div class="linha-form">
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
 
-            <select id="duracaoContratacao" required>
+</div>
 
-                <option selected disabled>Duração da contratação</option>
+<div class="etapa pergunta" id="pergunta12">
 
-                <option>Um único dia</option>
+    <h2 class="pergunta-titulo">A criança possui alguma alergia?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
 
-                <option>Uma semana</option>
-
-                <option>Um mês</option>
-
-                <option>Contrato fixo</option>
-
-            </select>
-
-            <input type="text"
-                id="horarioAproximado"
-                placeholder="Horário aproximado (Ex.: 07h às 18h)">
-
+        <div class="pergunta-campo">
+            <input type="text" id="alergiaCrianca" placeholder="Alergias (opcional)">
         </div>
 
-        <h3>Dias necessários</h3>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta13">
+
+    <h2 class="pergunta-titulo">A criança utiliza algum medicamento?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="text" id="medicamentosCrianca" placeholder="Medicamentos (opcional)">
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta14">
+
+    <h2 class="pergunta-titulo">Qual a rotina de sono da criança?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="linha-form">
+            <input type="text" id="horarioAcordar" placeholder="Horário que costuma acordar (opcional)">
+            <input type="text" id="horarioDormir" placeholder="Horário que costuma dormir (opcional)">
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta15">
+
+    <h2 class="pergunta-titulo">Conte um pouco sobre a personalidade da criança.
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <textarea id="personalidadeCrianca" rows="6" placeholder="Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta16">
+
+    <h2 class="pergunta-titulo">Como é a rotina da criança?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <textarea id="rotinaCrianca" rows="6" placeholder="Alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes."></textarea>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta17">
+
+    <h2 class="pergunta-titulo">De quais atividades a criança gosta?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
 
         <div class="dias">
+            <label><input type="checkbox" name="atividadeCrianca" value="Brincadeiras"> Brincadeiras</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Desenhar"> Desenhar</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Pintar"> Pintar</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Ler livros"> Ler livros</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Música"> Música</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Dançar"> Dançar</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Passear"> Passear</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Parque"> Parque</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Jogos educativos"> Jogos educativos</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Assistir desenhos"> Assistir desenhos</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Esportes"> Esportes</label>
+            <label><input type="checkbox" name="atividadeCrianca" value="Outras"> Outras</label>
+        </div>
 
-            <label><input type="checkbox" name="diaSemana" value="Segunda"> Segunda-feira</label>
-            <label><input type="checkbox" name="diaSemana" value="Terça"> Terça-feira</label>
-            <label><input type="checkbox" name="diaSemana" value="Quarta"> Quarta-feira</label>
-            <label><input type="checkbox" name="diaSemana" value="Quinta"> Quinta-feira</label>
-            <label><input type="checkbox" name="diaSemana" value="Sexta"> Sexta-feira</label>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta18">
+
+    <h2 class="pergunta-titulo">Quando você gostaria que o serviço começasse?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="date" id="dataInicio" required>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta19">
+
+    <h2 class="pergunta-titulo">Qual período do dia?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <select id="periodoContratacao" required>
+                <option>Manhã</option>
+                <option>Tarde</option>
+                <option>Noite</option>
+                <option>Integral</option>
+            </select>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta20">
+
+    <h2 class="pergunta-titulo">Qual a duração da contratação?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <select id="duracaoContratacao" required>
+                <option selected disabled>Duração da contratação</option>
+                <option>Um único dia</option>
+                <option>Uma semana</option>
+                <option>Um mês</option>
+                <option>Contrato fixo</option>
+            </select>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta21">
+
+    <h2 class="pergunta-titulo">Qual o horário aproximado do serviço?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <input type="text" id="horarioAproximado" placeholder="Ex.: 07h às 18h (opcional)">
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta22">
+
+    <h2 class="pergunta-titulo">Quais dias da semana você precisa da babá?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="dias">
+            <label><input type="checkbox" name="diaSemana" value="Segunda"> Segunda</label>
+            <label><input type="checkbox" name="diaSemana" value="Terça"> Terça</label>
+            <label><input type="checkbox" name="diaSemana" value="Quarta"> Quarta</label>
+            <label><input type="checkbox" name="diaSemana" value="Quinta"> Quinta</label>
+            <label><input type="checkbox" name="diaSemana" value="Sexta"> Sexta</label>
             <label><input type="checkbox" name="diaSemana" value="Sábado"> Sábado</label>
             <label><input type="checkbox" name="diaSemana" value="Domingo"> Domingo</label>
-
         </div>
 
-        <hr>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
 
-        <h3>Quais atividades espera da profissional?</h3>
+</div>
+
+<div class="etapa pergunta" id="pergunta23">
+
+    <h2 class="pergunta-titulo">Quais atividades você espera da profissional?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
 
         <div class="dias">
-
-            <label><input type="checkbox" name="atividadeProfissional"> Cuidados com bebês</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Preparar refeições</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Dar banho</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Troca de fraldas</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Colocar para dormir</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Buscar na escola</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Levar à escola</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Auxiliar nas tarefas escolares</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Atividades educativas</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Passeios supervisionados</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Organização dos brinquedos</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Organização do quarto da criança</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Lavar mamadeiras</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Preparar mamadeiras</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Acompanhar consultas médicas</label>
-
-            <label><input type="checkbox" name="atividadeProfissional"> Dormir na residência</label>
-
+            <label><input type="checkbox" name="atividadeEsperada" value="Cuidados com bebês"> Cuidados com bebês</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Preparar refeições"> Preparar refeições</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Dar banho"> Dar banho</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Troca de fraldas"> Troca de fraldas</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Colocar para dormir"> Colocar para dormir</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Buscar na escola"> Buscar na escola</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Levar à escola"> Levar à escola</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Auxiliar nas tarefas escolares"> Auxiliar nas tarefas escolares</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Atividades educativas"> Atividades educativas</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Passeios supervisionados"> Passeios supervisionados</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Organização dos brinquedos"> Organização dos brinquedos</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Organização do quarto da criança"> Organização do quarto da criança</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Lavar mamadeiras"> Lavar mamadeiras</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Preparar mamadeiras"> Preparar mamadeiras</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Acompanhar consultas médicas"> Acompanhar consultas médicas</label>
+            <label><input type="checkbox" name="atividadeEsperada" value="Dormir na residência"> Dormir na residência</label>
         </div>
 
-        <hr>
-
-        <h3>Existe alguma regra importante da casa?</h3>
-
-        <textarea rows="5"
-            id="regrasImportantes"
-            placeholder="Exemplo: tempo de tela limitado, alimentação específica, rotina de estudos, horários, religião, costumes da família ou outras informações importantes."></textarea>
-
-        <h3>Informações adicionais</h3>
-
-        <textarea rows="6"
-            id="infoAdicionais"
-            placeholder="Escreva qualquer informação que possa ajudar nossa equipe a encontrar a profissional ideal para sua família."></textarea>
-
-        <label class="aceite">
-
-            <input type="checkbox" id="aceitoInfo3" required>
-
-            Confirmo que as informações sobre o serviço estão corretas.
-
-        </label>
-
-        <div class="linha-form">
-
-            <button type="button" class="btn-voltar" onclick="voltarEtapa()">
-            ← Voltar
-            </button>
-
-            <button type="button" class="btn-contratar" onclick="irProximaEtapa()">
-            Próxima etapa →
-            </button>
-
-        </div>
-
-    </form>
-
-</div>
-<!-- ================= ETAPA 4 ================= -->
-
-<div class="etapa" id="etapa4">
-
-    <div class="barra-progresso">
-
-        <div class="progresso etapa4"></div>
-
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
     </div>
 
-    <h2>Etapa 4 de 5</h2>
+</div>
 
-    <h3>Escolha da profissional</h3>
+<div class="etapa pergunta" id="pergunta24">
 
-    <p class="texto-etapa">
+    <h2 class="pergunta-titulo">Existe alguma regra importante da casa?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
 
-        Você já escolheu uma babá? Informe abaixo qual profissional deseja contratar.
-        Caso ela não esteja disponível, nossa equipe poderá indicar outra profissional
-        com características semelhantes, se você desejar.
+        <div class="pergunta-campo">
+            <textarea id="regraCasa" rows="6" placeholder="Exemplo: tempo de tela limitado, alimentação específica, rotina de estudos, horários, religião, costumes da família ou outras informações importantes."></textarea>
+        </div>
 
-    </p>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
 
-    <form class="form-contato">
+</div>
 
-       <label><strong>Babá desejada</strong></label>
+<div class="etapa pergunta" id="pergunta25">
 
-<p class="texto-etapa">Clique na foto da profissional que você deseja contratar.</p>
+    <h2 class="pergunta-titulo">Deseja adicionar alguma informação sobre o serviço?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
 
-<div class="grid-selecao-baba" id="gridSelecaoBaba"></div>
+        <div class="pergunta-campo">
+            <textarea id="informacoesAdicionaisServico" rows="6" placeholder="Escreva qualquer informação que possa ajudar nossa equipe a encontrar a profissional ideal para sua família."></textarea>
+        </div>
 
-<p class="aviso-selecao" id="avisoSelecaoBaba" style="display:none;">
-    Selecione uma profissional para continuar.
-</p>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
 
-<input type="hidden" id="selectBaba">
+</div>
 
-        <hr>
+<div class="etapa pergunta" id="pergunta26">
 
-        <h3>Se a profissional não estiver disponível...</h3>
+    <h2 class="pergunta-titulo">Qual profissional você deseja contratar?
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+    </h2>
+
+        <p class="texto-etapa">Clique na foto da profissional que você deseja contratar.</p>
+        <div class="grid-selecao-baba" id="gridSelecaoBaba"></div>
+        <p class="aviso-selecao" id="avisoSelecaoBaba" style="display:none;">Selecione uma profissional para continuar.</p>
+        <input type="hidden" id="selectBaba">
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta27">
+
+    <h2 class="pergunta-titulo">Se a profissional não estiver disponível...
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
 
         <label class="aceite">
-
-            <input type="radio" name="substituta">
-
+            <input type="radio" name="substituta" value="Aceito que a Happy Baby indique outra profissional com perfil semelhante.">
             Aceito que a Happy Baby indique outra profissional com perfil semelhante.
-
         </label>
-
         <label class="aceite">
-
-            <input type="radio" name="substituta">
-
+            <input type="radio" name="substituta" value="Prefiro aguardar a disponibilidade da profissional escolhida.">
             Prefiro aguardar a disponibilidade da profissional escolhida.
-
         </label>
 
-        <hr>
-
-        <h3>Como conheceu a Happy Baby?</h3>
-
-        <select id="comoConheceu">
-
-            <option selected disabled>Selecione</option>
-
-            <option>Instagram</option>
-
-            <option>Facebook</option>
-
-            <option>Google</option>
-
-            <option>Indicação</option>
-
-            <option>Escola</option>
-
-            <option>Outro</option>
-
-        </select>
-
-        <hr>
-
-        <h3>Deseja receber novidades da Happy Baby?</h3>
-
-        <label class="aceite">
-
-            <input type="checkbox" id="aceitoNewsletter">
-
-            Quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
-
-        </label>
-
-        <hr>
-
-        <h3>Observações finais</h3>
-
-        <textarea rows="7"
-        id="observacoesFinal"
-        placeholder="Existe alguma informação importante que nossa equipe deve saber antes de analisar sua solicitação?"></textarea>
-
-        <label class="aceite">
-
-            <input type="checkbox" id="aceitoInfo4" required>
-
-            Confirmo que as informações sobre a escolha da profissional estão corretas.
-
-        </label>
-
-        <div class="linha-form">
-
-            <button type="button" class="btn-voltar" onclick="voltarEtapa()">
-            ← Voltar
-            </button>
-
-            <button type="button" class="btn-contratar" onclick="irProximaEtapa()">
-            Próxima etapa →
-            </button>
-
-        </div>
-
-    </form>
-
-</div>
-<!-- ================= ETAPA 5 ================= -->
-
-<div class="etapa" id="etapa5">
-
-    <div class="barra-progresso">
-        <div class="progresso etapa5"></div>
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
     </div>
 
-    <h2>Etapa 5 de 5</h2>
+</div>
 
-    <h3>Confira sua solicitação</h3>
+<div class="etapa pergunta" id="pergunta28">
+
+    <h2 class="pergunta-titulo">Como você conheceu a Happy Baby?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <select id="comoConheceu">
+                <option selected disabled>Selecione</option>
+                <option>Instagram</option>
+                <option>Facebook</option>
+                <option>Google</option>
+                <option>Indicação</option>
+                <option>Escola</option>
+                <option>Outro</option>
+            </select>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta29">
+
+    <h2 class="pergunta-titulo">Deseja receber novidades da Happy Baby?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <label class="aceite">
+            <input type="checkbox" id="receberNovidades">
+            Quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
+        </label>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta30">
+
+    <h2 class="pergunta-titulo">Existe alguma informação importante que devemos saber?
+        <span class="tag-pergunta tag-opcional">Opcional</span>
+    </h2>
+
+        <div class="pergunta-campo">
+            <textarea id="observacoesFinais" rows="6" placeholder="Existe alguma informação importante que nossa equipe deve saber antes de analisar sua solicitação? (opcional)"></textarea>
+        </div>
+
+    <div class="linha-form pergunta-botoes">
+            <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="proximaPergunta()">Continuar →</button>
+    </div>
+
+</div>
+
+<div class="etapa pergunta" id="pergunta31">
+
+    <h2 class="pergunta-titulo">Confira sua solicitação</h2>
 
     <p class="texto-etapa">
-
-        Estamos quase terminando!
-
-        Antes de enviar sua solicitação para análise da equipe Happy Baby,
-        confira as informações abaixo. Clique no ícone de edição para corrigir qualquer informação.
-
+        Estamos quase terminando! Antes de enviar sua solicitação para análise
+        da equipe Happy Baby, confira as informações abaixo.
     </p>
-
-    <!-- ================= RESUMO DA BABÁ ================= -->
 
     <div class="resumo-baba">
-
-    <h2>Profissional escolhida</h2>
-
-    <div class="card-resumo">
-
-        <img id="resumoFotoBaba" src="" alt="Foto da profissional">
-
-        <div class="dados-resumo">
-
-            <h3 id="resumoNomeBaba"></h3>
-
-            <p id="resumoCidadeBaba"></p>
-
-            <p id="resumoAvaliacaoBaba"></p>
-
-            <p id="resumoPrecoBaba"></p>
-
-            <p id="resumoExperienciaBaba"></p>
-
-            <ul id="resumoDestaquesBaba" class="lista-destaques"></ul>
-
-        </div>
-
-    </div>
-
-</div>
-
-    <!-- ================= RESUMO DA SOLICITAÇÃO ================= -->
-
-   <div class="resumo-solicitacao">
-
-    <h2>Resumo da solicitação</h2>
-
-    <div class="resumo-item-grupo">
-        <div class="resumo-item">
-            <strong>Responsável:</strong> <span id="resumoResponsavel"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Cidade:</strong> <span id="resumoCidade"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(1)" title="Editar dados do responsável">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Crianças:</strong> <span id="resumoCriancas"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar dados das crianças">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Idades:</strong> <span id="resumoIdades"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(2)" title="Editar dados das crianças">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Período:</strong> <span id="resumoPeriodo"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Duração da contratação:</strong> <span id="resumoDuracao"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Dias:</strong> <span id="resumoDias"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
-        </div>
-
-        <div class="resumo-item">
-            <strong>Início previsto:</strong> <span id="resumoInicio"></span>
-            <button type="button" class="btn-edit" onclick="editarEtapa(3)" title="Editar período do serviço">✏️</button>
+        <h2>Profissional escolhida</h2>
+        <div class="card-resumo">
+            <img id="resumoFotoBaba" src="" alt="Foto da profissional">
+            <div class="dados-resumo">
+                <h3 id="resumoNomeBaba"></h3>
+                <p id="resumoCidadeBaba"></p>
+                <p id="resumoAvaliacaoBaba"></p>
+                <p id="resumoPrecoBaba"></p>
+                <p id="resumoExperienciaBaba"></p>
+                <ul id="resumoDestaquesBaba" class="lista-destaques"></ul>
+            </div>
         </div>
     </div>
 
-</div>
-
-    <!-- ================= TERMOS ================= -->
+    <div class="resumo-solicitacao">
+        <h2>Resumo da solicitação</h2>
+        <ul>
+            <li><strong>Responsável:</strong> <span id="resumoResponsavel"></span></li>
+            <li><strong>Cidade:</strong> <span id="resumoCidade"></span></li>
+            <li><strong>Crianças:</strong> <span id="resumoCriancas"></span></li>
+            <li><strong>Idades:</strong> <span id="resumoIdades"></span></li>
+            <li><strong>Período:</strong> <span id="resumoPeriodo"></span></li>
+            <li><strong>Duração da contratação:</strong> <span id="resumoDuracao"></span></li>
+            <li><strong>Dias:</strong> <span id="resumoDias"></span></li>
+            <li><strong>Início previsto:</strong> <span id="resumoInicio"></span></li>
+        </ul>
+    </div>
 
     <div class="termos">
-
-        <h2>Declarações e Política de Privacidade</h2>
+        <h2>Declarações</h2>
 
         <label class="aceite">
-
-            <input type="checkbox" id="aceitoInfoFinal" required>
-
+            <input type="checkbox" required>
             Confirmo que todas as informações fornecidas são verdadeiras.
-
         </label>
 
         <label class="aceite">
-
-            <input type="checkbox" id="aceitoAnalise" required>
-
+            <input type="checkbox" required>
             Estou ciente de que o contato com a profissional somente acontecerá após análise da equipe Happy Baby.
-
         </label>
 
         <label class="aceite">
-
-            <input type="checkbox" id="aceitoDados" required>
-
+            <input type="checkbox" required>
             Autorizo a Happy Baby a utilizar meus dados exclusivamente para este processo de contratação.
-
         </label>
 
         <label class="aceite">
-
-            <input type="checkbox" id="aceitoTermos" required>
-
-            Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a>.
-
+            <input type="checkbox" required>
+            Li e concordo com os Termos de Uso e Política de Privacidade.
         </label>
-
     </div>
 
-    <!-- ================= BOTÕES ================= -->
-
-    <div class="linha-form">
-
-        <button type="button" class="btn-voltar" onclick="voltarEtapa()">
-        ← Voltar
-        </button>
-
-        <button type="button" class="btn-contratar" onclick="finalizarContratacao()">
-
-    Enviar solicitação
-
-        </button>
-
+    <div class="linha-form pergunta-botoes">
+        <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
+        <button type="button" class="btn-contratar" onclick="finalizarContratacao()">Enviar solicitação</button>
     </div>
 
 </div>
-<!-- ================= MENSAGEM DE SUCESSO ================= -->
+
+</div>
 
 <section class="cadastro-sucesso" id="sucesso">
 
@@ -778,6 +769,7 @@ Próxima etapa →
         <p>
 
             Agradecemos pela confiança em nosso trabalho.
+
             Nossa missão é proporcionar uma contratação segura, transparente e humanizada para famílias e profissionais.
 
         </p>
@@ -791,6 +783,9 @@ Próxima etapa →
     </div>
 
 </section>
+
+</section>
+
 </main>
 
     <footer>
