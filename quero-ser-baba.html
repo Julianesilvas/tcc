@@ -32,87 +32,149 @@
     <div class="banner-contato">
         <h1>Cadastre-se como babá</h1>
         <p>
-            Faça parte da equipe Happy Baby. Suas informações e documentos serão
-            analisados pela nossa equipe para garantir mais segurança para as
-            famílias e para você.
+            Vamos fazer isso com calma: uma pergunta por vez.
+            Suas informações e documentos serão analisados pela nossa equipe
+            para garantir mais segurança para as famílias e para você.
         </p>
     </div>
 
-    <!-- ETAPA 1 -->
-    <div class="etapa" id="etapaB1">
-
+    <div class="progresso-perguntas">
         <div class="barra-progresso">
-            <div class="progresso etapaB1"></div>
+            <div class="progresso" id="barraProgressoBaba"></div>
         </div>
-
-        <h2>Etapa 1 de 5</h2>
-        <h3>Dados pessoais</h3>
-
-        <form class="form-contato">
-
-            <div class="linha-form">
-                <input type="text" id="nomeBaba" placeholder="Nome completo" required>
-                <input type="text" id="cpfBaba" placeholder="CPF" maxlength="14" required>
-            </div>
-
-            <div class="linha-form">
-                <input type="date" id="nascimentoBaba" required>
-                <input type="tel" id="telefoneBaba" placeholder="Telefone / WhatsApp" required>
-            </div>
-
-            <div class="linha-form">
-                <input type="email" id="emailBaba" placeholder="E-mail" required>
-                <input type="text" id="cidadeBaba" placeholder="Cidade" required>
-            </div>
-
-            <div class="linha-form">
-                <input type="text" id="estadoBaba" placeholder="Estado" required>
-                <input type="text" id="enderecoBaba" placeholder="Endereço" required>
-            </div>
-
-            <div class="linha-form">
-                <input type="text" id="cepBaba" placeholder="CEP" maxlength="9" required>
-            </div>
-
-            <label class="aceite">
-                <input type="checkbox" id="aceitoEtapaB1" required>
-                Confirmo que todas as informações acima são verdadeiras.
-            </label>
-
-            <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">
-                Próxima etapa →
-            </button>
-
-        </form>
-
+        <span class="progresso-texto" id="progressoTextoBaba"></span>
     </div>
 
-    <!-- ETAPA 2 -->
-    <div class="etapa" id="etapaB2">
+    <div class="wizard-perguntas" id="wizardBaba">
 
-        <div class="barra-progresso">
-            <div class="progresso etapaB2"></div>
+        <!-- 1 -->
+        <div class="etapa pergunta" id="perguntaBaba1">
+            <h2 class="pergunta-titulo">Qual é o seu nome completo?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
+                <input type="text" id="nomeBaba" placeholder="Nome completo" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
         </div>
 
-        <h2>Etapa 2 de 5</h2>
-        <h3>Experiência e disponibilidade</h3>
+        <!-- 2 -->
+        <div class="etapa pergunta" id="perguntaBaba2">
+            <h2 class="pergunta-titulo">Qual é o seu CPF?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
+                <input type="text" id="cpfBaba" placeholder="000.000.000-00" maxlength="14" oninput="aplicarMascaraCPF(this)" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
-        <form class="form-contato">
+        <!-- 3 -->
+        <div class="etapa pergunta" id="perguntaBaba3">
+            <h2 class="pergunta-titulo">Qual é a sua data de nascimento?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
+                <input type="date" id="nascimentoBaba" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
+        <!-- 4 -->
+        <div class="etapa pergunta" id="perguntaBaba4">
+            <h2 class="pergunta-titulo">Qual o melhor telefone / WhatsApp para contato?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
+                <input type="tel" id="telefoneBaba" placeholder="(00) 00000-0000" maxlength="15" oninput="aplicarMascaraTelefone(this)" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="etapa pergunta" id="perguntaBaba5">
+            <h2 class="pergunta-titulo">Qual o seu e-mail?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
+                <input type="email" id="emailBaba" placeholder="E-mail" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- 6 — ENDEREÇO AGRUPADO -->
+        <div class="etapa pergunta" id="perguntaBaba6">
+            <h2 class="pergunta-titulo">Onde você mora?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
             <div class="linha-form">
+                <input type="text" id="cidadeBaba" placeholder="Cidade" required>
+                <input type="text" id="estadoBaba" placeholder="Estado" required>
+            </div>
+            <div class="linha-form">
+                <input type="text" id="enderecoBaba" placeholder="Endereço" required>
+                <input type="text" id="cepBaba" placeholder="CEP" maxlength="9" oninput="aplicarMascaraCEP(this)" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="etapa pergunta" id="perguntaBaba7">
+            <h2 class="pergunta-titulo">Há quanto tempo você trabalha como babá?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
                 <select id="experienciaBaba" required>
-                    <option selected disabled>Tempo de experiência</option>
+                    <option selected disabled value="">Selecione</option>
                     <option>Menos de 1 ano</option>
                     <option>1 a 2 anos</option>
                     <option>3 a 5 anos</option>
                     <option>6 a 10 anos</option>
                     <option>Mais de 10 anos</option>
                 </select>
-
-                <input type="text" id="valorHoraBaba" placeholder="Valor pretendido por hora (R$)" required>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
-            <h3>Faixas etárias que atende</h3>
+        <!-- 8 -->
+        <div class="etapa pergunta" id="perguntaBaba8">
+            <h2 class="pergunta-titulo">Qual o valor pretendido por hora?
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
+            <div class="pergunta-campo">
+                <input type="text" id="valorHoraBaba" placeholder="Valor em R$" required>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="etapa pergunta" id="perguntaBaba9">
+            <h2 class="pergunta-titulo">Quais faixas etárias você atende?
+                <span class="tag-pergunta tag-opcional">Opcional</span>
+            </h2>
             <div class="dias">
                 <label><input type="checkbox" name="faixaEtaria" value="Recém-nascido"> Recém-nascido</label>
                 <label><input type="checkbox" name="faixaEtaria" value="0 a 2 anos"> 0 a 2 anos</label>
@@ -120,8 +182,17 @@
                 <label><input type="checkbox" name="faixaEtaria" value="6 a 10 anos"> 6 a 10 anos</label>
                 <label><input type="checkbox" name="faixaEtaria" value="Acima de 10 anos"> Acima de 10 anos</label>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
-            <h3>Cursos e certificações que possui</h3>
+        <!-- 10 -->
+        <div class="etapa pergunta" id="perguntaBaba10">
+            <h2 class="pergunta-titulo">Quais cursos e certificações você possui?
+                <span class="tag-pergunta tag-opcional">Opcional</span>
+            </h2>
             <div class="dias">
                 <label><input type="checkbox" name="cursoBaba" value="Primeiros Socorros"> Primeiros Socorros</label>
                 <label><input type="checkbox" name="cursoBaba" value="Recreação Infantil"> Recreação Infantil</label>
@@ -130,10 +201,19 @@
                 <label><input type="checkbox" name="cursoBaba" value="Cuidados com bebês"> Cuidados com bebês</label>
                 <label><input type="checkbox" name="cursoBaba" value="Outro"> Outro</label>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
-            <h3>Dias e períodos disponíveis</h3>
-            <p class="texto-etapa">Selecione todos os dias e períodos em que você está disponível:</p>
-            
+        <!-- 11 — CALENDÁRIO DE DISPONIBILIDADE -->
+        <div class="etapa pergunta" id="perguntaBaba11">
+            <h2 class="pergunta-titulo">Quais dias e períodos você tem disponibilidade?
+                <span class="tag-pergunta tag-opcional">Opcional</span>
+            </h2>
+            <p class="texto-etapa">Marque todos os dias e períodos em que você está disponível.</p>
+
             <div class="calendario-disponibilidade">
                 <table class="tabela-disponibilidade">
                     <tr>
@@ -187,208 +267,247 @@
                 </table>
             </div>
 
-            <textarea id="sobreBaba" rows="5"
-                placeholder="Conte um pouco sobre você e sua experiência com crianças."></textarea>
-            
-            <textarea id="estiloTrabalhoBaba" rows="5"
-                placeholder="Como você gosta de trabalhar? Conte sobre sua rotina, como se comunica com a família, como lida com imprevistos e o que valoriza no dia a dia com as crianças."></textarea>
-
-            <label class="aceite">
-                <input type="checkbox" id="aceitoEtapaB2" required>
-                Confirmo que as informações sobre experiência estão corretas.
-            </label>
-            
-            <div class="linha-form">
-                <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
-                <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">Próxima etapa →</button>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
             </div>
-
-        </form>
-
-    </div>
-
-    <!-- ETAPA 3 -->
-    <div class="etapa" id="etapaB3">
-
-        <div class="barra-progresso">
-            <div class="progresso etapaB3"></div>
         </div>
 
-        <h2>Etapa 3 de 5</h2>
-        <h3>Documentos</h3>
+        <!-- 12 -->
+        <div class="etapa pergunta" id="perguntaBaba12">
+            <h2 class="pergunta-titulo">Conte um pouco sobre você e sua experiência com crianças.
+                <span class="tag-pergunta tag-opcional">Opcional</span>
+            </h2>
+            <div class="pergunta-campo">
+                <textarea id="sobreBaba" rows="6" placeholder="Escreva aqui..."></textarea>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
-        <p class="texto-etapa">
-            Para garantir mais segurança para as famílias, pedimos que você anexe os
-            documentos abaixo. Eles serão analisados pela nossa equipe antes da
-            aprovação do seu cadastro.
-        </p>
+        <!-- 13 -->
+        <div class="etapa pergunta" id="perguntaBaba13">
+            <h2 class="pergunta-titulo">Como você gosta de trabalhar?
+                <span class="tag-pergunta tag-opcional">Opcional</span>
+            </h2>
+            <p class="texto-etapa">Conte sobre sua rotina, como se comunica com a família e como lida com imprevistos.</p>
+            <div class="pergunta-campo">
+                <textarea id="estiloTrabalhoBaba" rows="6" placeholder="Escreva aqui..."></textarea>
+            </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
-        <form class="form-contato">
-
+        <!-- 14 -->
+        <div class="etapa pergunta" id="perguntaBaba14">
+            <h2 class="pergunta-titulo">Envie uma foto ou PDF do seu RG e CPF.
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
             <div class="upload-item">
-                <label for="arquivoRG"><strong>RG e CPF</strong> (foto ou PDF)</label>
                 <input type="file" id="arquivoRG" accept=".pdf,.jpg,.jpeg,.png"
                     onchange="mostrarNomeArquivo('arquivoRG','nomeArquivoRG')" required>
                 <span class="nome-arquivo" id="nomeArquivoRG">Nenhum arquivo selecionado</span>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
+        <!-- 15 -->
+        <div class="etapa pergunta" id="perguntaBaba15">
+            <h2 class="pergunta-titulo">Envie sua Certidão de Antecedentes Criminais — Estadual.
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
             <div class="upload-item">
-                <label for="arquivoAntecedenteEstadual"><strong>Certidão de Antecedentes Criminais - Estadual</strong> (PDF)</label>
                 <input type="file" id="arquivoAntecedenteEstadual" accept=".pdf"
                     onchange="mostrarNomeArquivo('arquivoAntecedenteEstadual','nomeArquivoAntecedenteEst')" required>
                 <span class="nome-arquivo" id="nomeArquivoAntecedenteEst">Nenhum arquivo selecionado</span>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
+        <!-- 16 -->
+        <div class="etapa pergunta" id="perguntaBaba16">
+            <h2 class="pergunta-titulo">Envie sua Certidão de Antecedentes Criminais — Federal.
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
             <div class="upload-item">
-                <label for="arquivoAntecedenteFedera"><strong>Certidão de Antecedentes Criminais - Federal</strong> (PDF)</label>
-                <input type="file" id="arquivoAntecedenteFedera" accept=".pdf"
-                    onchange="mostrarNomeArquivo('arquivoAntecedenteFedera','nomeArquivoAntecedenteF')" required>
+                <input type="file" id="arquivoAntecedenteFederal" accept=".pdf"
+                    onchange="mostrarNomeArquivo('arquivoAntecedenteFederal','nomeArquivoAntecedenteF')" required>
                 <span class="nome-arquivo" id="nomeArquivoAntecedenteF">Nenhum arquivo selecionado</span>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
+        <!-- 17 -->
+        <div class="etapa pergunta" id="perguntaBaba17">
+            <h2 class="pergunta-titulo">Tem certificados de cursos? Envie aqui.
+                <span class="tag-pergunta tag-opcional">Opcional</span>
+            </h2>
+            <p class="texto-etapa">Primeiros socorros, recreação infantil, e outros que você tenha.</p>
             <div class="upload-item">
-                <label for="arquivoCertificados"><strong>Certificados de cursos</strong> (primeiros socorros, recreação, etc.)</label>
                 <input type="file" id="arquivoCertificados" accept=".pdf,.jpg,.jpeg,.png" multiple
                     onchange="mostrarNomeArquivo('arquivoCertificados','nomeArquivoCertificados')">
                 <span class="nome-arquivo" id="nomeArquivoCertificados">Nenhum arquivo selecionado</span>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
+        <!-- 18 -->
+        <div class="etapa pergunta" id="perguntaBaba18">
+            <h2 class="pergunta-titulo">Envie um comprovante de residência.
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
             <div class="upload-item">
-                <label for="arquivoComprovante"><strong>Comprovante de residência</strong></label>
                 <input type="file" id="arquivoComprovante" accept=".pdf,.jpg,.jpeg,.png"
                     onchange="mostrarNomeArquivo('arquivoComprovante','nomeArquivoComprovante')" required>
                 <span class="nome-arquivo" id="nomeArquivoComprovante">Nenhum arquivo selecionado</span>
             </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
+            </div>
+        </div>
 
+        <!-- 19 -->
+        <div class="etapa pergunta" id="perguntaBaba19">
+            <h2 class="pergunta-titulo">Envie uma foto de perfil.
+                <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
+            </h2>
             <div class="upload-item">
-                <label for="arquivoFoto"><strong>Foto de perfil</strong></label>
                 <input type="file" id="arquivoFoto" accept=".jpg,.jpeg,.png"
                     onchange="mostrarNomeArquivo('arquivoFoto','nomeArquivoFoto')" required>
                 <span class="nome-arquivo" id="nomeArquivoFoto">Nenhum arquivo selecionado</span>
             </div>
-
-            <label class="aceite">
-                <input type="checkbox" id="aceitoEtapaB3" required>
-                Confirmo que todos os documentos foram anexados corretamente.
-            </label>
-
-            <div class="linha-form">
-                <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
-                <button type="button" class="btn-contratar" onclick="irProximaEtapaBaba()">Próxima etapa →</button>
-            </div>
-
-        </form>
-
-    </div>
-
-    <!-- ETAPA 4 -->
-    <div class="etapa" id="etapaB4">
-
-        <div class="barra-progresso">
-            <div class="progresso etapaB4"></div>
-        </div>
-
-        <h2>Etapa 4 de 5</h2>
-        <h3>Confira seu cadastro</h3>
-
-        <p class="texto-etapa">
-            Revise as informações antes de enviar seu cadastro para análise da equipe Happy Baby.
-            Clique no ícone de edição para corrigir qualquer informação.
-        </p>
-
-        <div class="resumo-solicitacao">
-            <h2>Seus dados</h2>
-            <div class="resumo-item-grupo">
-                <div class="resumo-item">
-                    <strong>Nome:</strong> <span id="resumoNomeBaba2"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(1)" title="Editar dados pessoais">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>CPF:</strong> <span id="resumoCpfBaba"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(1)" title="Editar dados pessoais">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Cidade:</strong> <span id="resumoCidadeBaba2"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(1)" title="Editar dados pessoais">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Experiência:</strong> <span id="resumoExperienciaBaba2"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar experiência">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Valor por hora:</strong> <span id="resumoValorBaba"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar experiência">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Cursos:</strong> <span id="resumoCursosBaba"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar experiência">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Dias e períodos disponíveis:</strong> <span id="resumoDiasBaba"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(2)" title="Editar disponibilidade">✏️</button>
-                </div>
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
             </div>
         </div>
 
-        <div class="resumo-solicitacao">
-            <h2>Documentos anexados</h2>
-            <div class="resumo-item-grupo">
-                <div class="resumo-item">
-                    <strong>RG/CPF:</strong> <span id="resumoDocRG"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Antecedentes Criminais - Estadual:</strong> <span id="resumoDocAntecedenteEst"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Antecedentes Criminais - Federal:</strong> <span id="resumoDocAntecedenteF"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Certificados:</strong> <span id="resumoDocCertificados"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Comprovante de residência:</strong> <span id="resumoDocComprovante"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
-                </div>
-                <div class="resumo-item">
-                    <strong>Foto de perfil:</strong> <span id="resumoDocFoto"></span>
-                    <button type="button" class="btn-edit" onclick="editarEtapaBaba(3)" title="Editar documentos">✏️</button>
+        <!-- 20 — REVISÃO FINAL -->
+        <div class="etapa pergunta" id="perguntaBaba20">
+
+            <h2 class="pergunta-titulo">Confira seu cadastro</h2>
+
+            <p class="texto-etapa">
+                Revise as informações antes de enviar. Clique no lápis ao lado
+                de qualquer campo pra corrigir — você volta direto pra cá depois.
+            </p>
+
+            <div class="resumo-solicitacao">
+                <h2>Seus dados</h2>
+                <div class="resumo-item-grupo">
+                    <div class="resumo-item">
+                        <strong>Nome:</strong> <span id="resumoNomeBaba2"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(1)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>CPF:</strong> <span id="resumoCpfBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(2)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Cidade:</strong> <span id="resumoCidadeBaba2"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(6)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Experiência:</strong> <span id="resumoExperienciaBaba2"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(7)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Valor por hora:</strong> <span id="resumoValorBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(8)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Cursos:</strong> <span id="resumoCursosBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(10)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Dias e períodos disponíveis:</strong> <span id="resumoDiasBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(11)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Período:</strong> <span id="resumoPeriodoBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(11)" title="Editar">✎</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="termos">
-            <h2>Declarações e Política de Privacidade</h2>
+            <div class="resumo-solicitacao">
+                <h2>Documentos anexados</h2>
+                <div class="resumo-item-grupo">
+                    <div class="resumo-item">
+                        <strong>RG/CPF:</strong> <span id="resumoDocRG"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(14)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Antecedentes — Estadual:</strong> <span id="resumoDocAntecedenteEst"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(15)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Antecedentes — Federal:</strong> <span id="resumoDocAntecedenteF"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(16)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Certificados:</strong> <span id="resumoDocCertificados"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(17)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Comprovante de residência:</strong> <span id="resumoDocComprovante"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(18)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Foto de perfil:</strong> <span id="resumoDocFoto"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(19)" title="Editar">✎</button>
+                    </div>
+                </div>
+            </div>
 
-            <label class="aceite">
-                <input type="checkbox" id="aceitoConfirmaB4" required>
-                Confirmo que todas as informações e documentos fornecidos são verdadeiros.
-            </label>
+            <div class="termos">
+                <h2>Declarações e Política de Privacidade</h2>
 
-            <label class="aceite">
-                <input type="checkbox" id="aceitoAnaliseB4" required>
-                Estou ciente de que meu cadastro somente será ativado após a análise
-                e verificação dos documentos pela equipe Happy Baby.
-            </label>
+                <label class="aceite">
+                    <input type="checkbox" required>
+                    Confirmo que todas as informações e documentos fornecidos são verdadeiros.
+                </label>
 
-            <label class="aceite">
-                <input type="checkbox" id="aceitoDadosB4" required>
-                Autorizo a Happy Baby a utilizar meus dados e documentos exclusivamente
-                para fins de verificação e intermediação de contratações.
-            </label>
+                <label class="aceite">
+                    <input type="checkbox" required>
+                    Estou ciente de que meu cadastro somente será ativado após a análise
+                    e verificação dos documentos pela equipe Happy Baby.
+                </label>
 
-            <label class="aceite">
-                <input type="checkbox" id="aceitoTermosB4" required>
-                Li e concordo com os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a>.
-            </label>
-        </div>
+                <label class="aceite">
+                    <input type="checkbox" required>
+                    Autorizo a Happy Baby a utilizar meus dados e documentos exclusivamente
+                    para fins de verificação e intermediação de contratações.
+                </label>
 
-        <div class="linha-form">
-            <button type="button" class="btn-voltar" onclick="voltarEtapaBaba()">← Voltar</button>
-            <button type="button" class="btn-contratar" onclick="finalizarCadastroBaba()">Enviar cadastro</button>
+                <label class="aceite">
+                    <input type="checkbox" required>
+                    Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Política de Privacidade</a>.
+                </label>
+            </div>
+
+            <div class="linha-form pergunta-botoes">
+                <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
+                <button type="button" class="btn-contratar" onclick="finalizarCadastroBaba()">Enviar cadastro</button>
+            </div>
+
         </div>
 
     </div>
