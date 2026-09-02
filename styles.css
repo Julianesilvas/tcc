@@ -2291,139 +2291,17 @@ h3 { font-size: 1.2rem; }
     color: var(--texto-suave);
 }
 /* ================================================
-   RESUMO NA REVISÃO — itens com lápis de edição
+   LÁPIS DE EDIÇÃO NO CARD DA BABÁ (revisão da contratação)
    ================================================ */
 
-.resumo-item-grupo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.card-resumo {
+    position: relative;
 }
 
-.resumo-item {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(166,136,93,0.15);
-    font-size: 15px;
-    color: var(--marrom-escuro);
-}
-
-.resumo-item:last-child {
-    border-bottom: none;
-}
-
-.resumo-item span {
-    flex: 1;
-    color: var(--texto-suave);
-}
-
-.btn-edit {
-    background: none;
-    border: none;
-    color: var(--marrom);
-    font-size: 16px;
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 6px;
-    transition: background 0.2s;
-    flex-shrink: 0;
-}
-
-.btn-edit:hover {
-    background: #f4eee8;
-}
-
-/* ================================================
-   CALENDÁRIO DE DISPONIBILIDADE (cadastro de babá)
-   ================================================ */
-
-.calendario-disponibilidade {
-    overflow-x: auto;
-    margin-bottom: 10px;
-}
-
-.tabela-disponibilidade {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 4px;
-    min-width: 420px;
-}
-
-.tabela-disponibilidade th {
-    background: var(--marrom);
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 10px 6px;
-    border-radius: 8px;
-}
-
-.tabela-disponibilidade td {
-    background: #f4eee8;
-    border-radius: 8px;
-    padding: 12px 6px;
-    text-align: center;
-    color: var(--marrom-escuro);
-    font-size: 14px;
-}
-
-.tabela-disponibilidade td:first-child {
-    text-align: left;
-    font-weight: 700;
-    padding-left: 12px;
-}
-
-.tabela-disponibilidade input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--marrom);
-    cursor: pointer;
-}
-
-/* ================================================
-   CERTIFICADOS — campos dinâmicos
-   ================================================ */
-
-.certificado-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.btn-remover-certificado {
-    background: transparent;
-    border: 1.5px solid #b23b3b;
-    color: #b23b3b;
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-
-.btn-remover-certificado:hover {
-    background: #b23b3b;
-    color: white;
-}
-
-.btn-adicionar-certificado {
-    background: transparent;
-    border: 1.5px dashed var(--marrom);
-    color: var(--marrom);
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-family: var(--fonte-corpo);
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    margin: 6px 0 16px;
-    transition: background 0.2s;
-}
-
-.btn-adicionar-certificado:hover {
-    background: #f4eee8;
+.card-resumo .btn-edit {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
