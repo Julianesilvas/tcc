@@ -2290,3 +2290,18 @@ h3 { font-size: 1.2rem; }
     background: #f0e8e0;
     color: var(--texto-suave);
 }
+/* ================================================
+   LÁPIS DE EDIÇÃO NO CARD DA BABÁ (revisão da contratação)
+   ================================================ */
+
+.card-resumo {
+    position: relative;
+}
+
+.card-resumo .btn-edit {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
