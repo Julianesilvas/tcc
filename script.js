@@ -498,13 +498,26 @@ function aplicarMascaraCPF(input) {
 // ===== Monta o resumo da Etapa 4 =====
 function preencherResumoBaba() {
 
+    // --- Dados pessoais ---
     const nome = document.getElementById("nomeBaba").value;
     const cpf = document.getElementById("cpfBaba").value;
+    const nascimento = document.getElementById("nascimentoBaba").value;
+    const telefone = document.getElementById("telefoneBaba").value;
+    const email = document.getElementById("emailBaba").value;
     const cidade = document.getElementById("cidadeBaba").value;
     const estado = document.getElementById("estadoBaba").value;
+    const endereco = document.getElementById("enderecoBaba").value;
+    const cep = document.getElementById("cepBaba").value;
+
+    // --- Experiência ---
     const experiencia = document.getElementById("experienciaBaba").value;
     const valorHora = document.getElementById("valorHoraBaba").value;
-    const periodo = document.getElementById("periodoBaba").value;
+    const sobre = document.getElementById("sobreBaba").value;
+    const estiloTrabalho = document.getElementById("estiloTrabalhoBaba").value;
+
+    const faixasMarcadas = Array.from(
+        document.querySelectorAll('input[name="faixaEtaria"]:checked')
+    ).map(chk => chk.value);
 
     const cursosMarcados = Array.from(
         document.querySelectorAll('input[name="cursoBaba"]:checked')
@@ -523,21 +536,35 @@ function preencherResumoBaba() {
         disponibilidadeMarcada.push(`${nomesDias[dia]} (${nomesPeriodos[periodo]})`);
     });
 
+    // Formata a data de nascimento dd/mm/aaaa
+    let nascimentoFormatado = "-";
+    if (nascimento) {
+        const [ano, mes, dia] = nascimento.split("-");
+        nascimentoFormatado = `${dia}/${mes}/${ano}`;
+    }
+
     document.getElementById("resumoNomeBaba2").textContent = nome || "-";
     document.getElementById("resumoCpfBaba").textContent = cpf || "-";
-    document.getElementById("resumoCidadeBaba2").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
+    document.getElementById("resumoNascimentoBaba").textContent = nascimentoFormatado;
+    document.getElementById("resumoTelefoneBaba").textContent = telefone || "-";
+    document.getElementById("resumoEmailBaba").textContent = email || "-";
+    document.getElementById("resumoEnderecoBaba").textContent =
+        (endereco || cidade || estado || cep)
+            ? `${endereco || "-"}, ${cidade || "-"} - ${estado || "-"} · CEP ${cep || "-"}`
+            : "-";
     document.getElementById("resumoExperienciaBaba2").textContent = experiencia || "-";
     document.getElementById("resumoValorBaba").textContent = valorHora ? `R$ ${valorHora}/hora` : "-";
+    document.getElementById("resumoFaixaEtariaBaba").textContent = faixasMarcadas.length ? faixasMarcadas.join(", ") : "-";
     document.getElementById("resumoCursosBaba").textContent = cursosMarcados.length ? cursosMarcados.join(", ") : "-";
     document.getElementById("resumoDiasBaba").textContent = disponibilidadeMarcada.length ? disponibilidadeMarcada.join(", ") : "-";
-    document.getElementById("resumoPeriodoBaba").textContent = periodo || "-";
+    document.getElementById("resumoSobreBaba").textContent = sobre || "-";
+    document.getElementById("resumoEstiloTrabalhoBaba").textContent = estiloTrabalho || "-";
 
     // --- Status dos documentos ---
     const documentos = [
         { input: "arquivoRG", resumo: "resumoDocRG" },
         { input: "arquivoAntecedenteEstadual", resumo: "resumoDocAntecedenteEst" },
         { input: "arquivoAntecedenteFederal", resumo: "resumoDocAntecedenteF" },
-        { input: "arquivoCertificados", resumo: "resumoDocCertificados" },
         { input: "arquivoComprovante", resumo: "resumoDocComprovante" },
         { input: "arquivoFoto", resumo: "resumoDocFoto" }
     ];
@@ -549,6 +576,46 @@ function preencherResumoBaba() {
             resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
         }
     });
+
+    // --- Certificados: soma os arquivos de todos os campos dinâmicos ---
+    let totalCertificados = 0;
+    document.querySelectorAll(".input-certificado").forEach(input => {
+        totalCertificados += input.files.length;
+    });
+    const resumoCert = document.getElementById("resumoDocCertificados");
+    if (resumoCert) {
+        resumoCert.textContent = totalCertificados > 0
+            ? `✔ ${totalCertificados} arquivo${totalCertificados > 1 ? "s" : ""} anexado${totalCertificados > 1 ? "s" : ""}`
+            : "Não anexado";
+    }
+}
+
+// ===== Campos dinâmicos de certificado (Etapa de documentos) =====
+function adicionarCampoCertificado() {
+    const container = document.getElementById("containerCertificados");
+    const novoItem = document.createElement("div");
+    novoItem.className = "upload-item certificado-item";
+    novoItem.innerHTML = `
+        <input type="file" class="input-certificado" accept=".pdf,.jpg,.jpeg,.png" onchange="atualizarNomeCertificado(this)">
+        <span class="nome-arquivo">Nenhum arquivo selecionado</span>
+        <button type="button" class="btn-remover-certificado" onclick="removerCampoCertificado(this)">Remover</button>
+    `;
+    container.appendChild(novoItem);
+}
+
+function removerCampoCertificado(botao) {
+    botao.closest(".certificado-item").remove();
+}
+
+function atualizarNomeCertificado(input) {
+    const span = input.nextElementSibling;
+    if (input.files.length > 0) {
+        span.textContent = "✔ " + input.files[0].name;
+        span.classList.add("arquivo-ok");
+    } else {
+        span.textContent = "Nenhum arquivo selecionado";
+        span.classList.remove("arquivo-ok");
+    }
 }
 
 function finalizarCadastroBaba() {
@@ -777,23 +844,4 @@ function fazerCadastro() {
 function fazerLogout() {
     localStorage.removeItem("happyBabyUsuarioLogado");
     atualizarAreaConta();
-}
-
-// ===== Filtro de babás por cidade =====
-function filtrarBabas() {
-    const input = document.getElementById("buscaCidade");
-    const filtro = input.value.toUpperCase();
-    const babas = document.querySelectorAll(".baba");
-
-    babas.forEach(baba => {
-        const nome = baba.querySelector("h3").textContent;
-        const cidade = baba.querySelector("p").textContent;
-        const texto = nome + " " + cidade;
-
-        if (texto.toUpperCase().indexOf(filtro) > -1) {
-            baba.style.display = "";
-        } else {
-            baba.style.display = "none";
-        }
-    });
 }

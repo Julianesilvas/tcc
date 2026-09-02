@@ -355,12 +355,17 @@
             <h2 class="pergunta-titulo">Tem certificados de cursos? Envie aqui.
                 <span class="tag-pergunta tag-opcional">Opcional</span>
             </h2>
-            <p class="texto-etapa">Primeiros socorros, recreação infantil, e outros que você tenha.</p>
-            <div class="upload-item">
-                <input type="file" id="arquivoCertificados" accept=".pdf,.jpg,.jpeg,.png" multiple
-                    onchange="mostrarNomeArquivo('arquivoCertificados','nomeArquivoCertificados')">
-                <span class="nome-arquivo" id="nomeArquivoCertificados">Nenhum arquivo selecionado</span>
+            <p class="texto-etapa">Primeiros socorros, recreação infantil, e outros que você tenha. Você pode anexar quantos precisar — um por campo.</p>
+
+            <div id="containerCertificados">
+                <div class="upload-item certificado-item">
+                    <input type="file" class="input-certificado" accept=".pdf,.jpg,.jpeg,.png" onchange="atualizarNomeCertificado(this)">
+                    <span class="nome-arquivo">Nenhum arquivo selecionado</span>
+                </div>
             </div>
+
+            <button type="button" class="btn-adicionar-certificado" onclick="adicionarCampoCertificado()">+ Adicionar outro certificado</button>
+
             <div class="linha-form pergunta-botoes">
                 <button type="button" class="btn-voltar" onclick="voltarPerguntaBaba()">← Voltar</button>
                 <button type="button" class="btn-contratar" onclick="proximaPerguntaBaba()">Continuar →</button>
@@ -410,7 +415,7 @@
             </p>
 
             <div class="resumo-solicitacao">
-                <h2>Seus dados</h2>
+                <h2>Dados pessoais</h2>
                 <div class="resumo-item-grupo">
                     <div class="resumo-item">
                         <strong>Nome:</strong> <span id="resumoNomeBaba2"></span>
@@ -421,9 +426,27 @@
                         <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(2)" title="Editar">✎</button>
                     </div>
                     <div class="resumo-item">
-                        <strong>Cidade:</strong> <span id="resumoCidadeBaba2"></span>
+                        <strong>Data de nascimento:</strong> <span id="resumoNascimentoBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(3)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Telefone:</strong> <span id="resumoTelefoneBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(4)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>E-mail:</strong> <span id="resumoEmailBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(5)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Endereço:</strong> <span id="resumoEnderecoBaba"></span>
                         <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(6)" title="Editar">✎</button>
                     </div>
+                </div>
+            </div>
+
+            <div class="resumo-solicitacao">
+                <h2>Experiência e disponibilidade</h2>
+                <div class="resumo-item-grupo">
                     <div class="resumo-item">
                         <strong>Experiência:</strong> <span id="resumoExperienciaBaba2"></span>
                         <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(7)" title="Editar">✎</button>
@@ -431,6 +454,10 @@
                     <div class="resumo-item">
                         <strong>Valor por hora:</strong> <span id="resumoValorBaba"></span>
                         <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(8)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Faixas etárias atendidas:</strong> <span id="resumoFaixaEtariaBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(9)" title="Editar">✎</button>
                     </div>
                     <div class="resumo-item">
                         <strong>Cursos:</strong> <span id="resumoCursosBaba"></span>
@@ -441,8 +468,12 @@
                         <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(11)" title="Editar">✎</button>
                     </div>
                     <div class="resumo-item">
-                        <strong>Período:</strong> <span id="resumoPeriodoBaba"></span>
-                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(11)" title="Editar">✎</button>
+                        <strong>Sobre você:</strong> <span id="resumoSobreBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(12)" title="Editar">✎</button>
+                    </div>
+                    <div class="resumo-item">
+                        <strong>Como gosta de trabalhar:</strong> <span id="resumoEstiloTrabalhoBaba"></span>
+                        <button type="button" class="btn-edit" onclick="irParaPerguntaBaba(13)" title="Editar">✎</button>
                     </div>
                 </div>
             </div>
