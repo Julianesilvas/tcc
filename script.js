@@ -778,3 +778,22 @@ function fazerLogout() {
     localStorage.removeItem("happyBabyUsuarioLogado");
     atualizarAreaConta();
 }
+
+// ===== Filtro de babás por cidade =====
+function filtrarBabas() {
+    const input = document.getElementById("buscaCidade");
+    const filtro = input.value.toUpperCase();
+    const babas = document.querySelectorAll(".baba");
+
+    babas.forEach(baba => {
+        const nome = baba.querySelector("h3").textContent;
+        const cidade = baba.querySelector("p").textContent;
+        const texto = nome + " " + cidade;
+
+        if (texto.toUpperCase().indexOf(filtro) > -1) {
+            baba.style.display = "";
+        } else {
+            baba.style.display = "none";
+        }
+    });
+}

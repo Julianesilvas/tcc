@@ -658,9 +658,20 @@ footer {
 }
 
 .beneficio-icone {
-    font-size: 30px;
-    display: block;
-    margin-bottom: 14px;
+     width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+    background: #f4eee8;
+    color: var(--marrom);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.beneficio-icone svg {
+    width: 26px;
+    height: 26px;
 }
 
 .beneficio-card h3 {
@@ -2194,4 +2205,88 @@ h3 { font-size: 1.2rem; }
     color: var(--marrom);
     font-weight: 700;
     text-decoration: none;
+}
+
+/* ================================================
+   CONTRATAR — uma pergunta por tela
+   ================================================ */
+
+.progresso-perguntas {
+    max-width: 640px;
+    margin: 0 auto 10px;
+}
+
+.progresso-texto {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--texto-suave);
+    font-weight: 700;
+    text-align: right;
+}
+
+.wizard-perguntas {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.wizard-perguntas .etapa {
+    margin-bottom: 0;
+}
+
+.wizard-perguntas .barra-progresso {
+    display: none;
+}
+
+.pergunta-titulo {
+    font-family: var(--fonte-titulo);
+    font-size: 24px;
+    color: var(--marrom-escuro);
+    margin-bottom: 26px;
+    line-height: 1.3;
+}
+
+.pergunta-campo input,
+.pergunta-campo select,
+.pergunta-campo textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: var(--fonte-corpo);
+}
+
+.pergunta-campo textarea {
+    resize: vertical;
+}
+
+.pergunta-botoes {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .pergunta-titulo {
+        font-size: 20px;
+    }
+}
+.tag-pergunta {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 3px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.tag-obrigatoria {
+    background: #f4e3df;
+    color: #a4432f;
+}
+
+.tag-opcional {
+    background: #f0e8e0;
+    color: var(--texto-suave);
 }
