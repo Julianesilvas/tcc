@@ -122,7 +122,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
     </h2>
 
         <div class="pergunta-campo">
-            <input type="tel" id="telefoneResponsavel" placeholder="Telefone / WhatsApp" required>
+            <input type="tel" id="telefoneResponsavel" placeholder="(00) 00000-0000" maxlength="15" oninput="aplicarMascaraTelefone(this)" required>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -161,7 +161,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
         </div>
         <div class="linha-form">
             <input type="text" id="enderecoResponsavel" placeholder="Endereço" required>
-            <input type="text" id="cepResponsavel" placeholder="CEP (opcional)">
+            <input type="text" id="cepResponsavel" placeholder="CEP" maxlength="9" oninput="aplicarMascaraCEP(this)" required>
         </div>
 
     <div class="linha-form pergunta-botoes">
