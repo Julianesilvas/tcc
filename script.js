@@ -84,8 +84,10 @@ function voltarBabas() {
 //  CONTRATAR — navegação entre etapas do formulário
 // ================================================
 
-let etapaAtual = 1;
-const totalEtapas = 5;
+let perguntaAtual = 1;
+const totalPerguntas = 31;
+const perguntaEscolhaBaba = 26;
+const perguntaRevisao = 31;
 
 // "Banco de dados" das babás (site estático, sem back-end).
 // Se as fotos das babás estiverem em outra pasta, ajuste os caminhos abaixo.
@@ -188,40 +190,44 @@ const bancoBabas = {
     }
 };
 
-function mostrarEtapa(numero) {
-    // Esconde todas as etapas
-    document.querySelectorAll(".etapa").forEach(etapa => {
-        etapa.style.display = "none";
+function mostrarPergunta(numero) {
+    // Só roda na página de contratar (que tem o wizard de perguntas)
+    if (!document.getElementById("pergunta1")) return;
+
+    // Esconde todas as perguntas
+    document.querySelectorAll(".pergunta").forEach(pergunta => {
+        pergunta.style.display = "none";
     });
 
-    // Mostra só a etapa pedida
-    const etapa = document.getElementById("etapa" + numero);
-    if (etapa) {
-        etapa.style.display = "block";
+    // Mostra só a pergunta pedida
+    const pergunta = document.getElementById("pergunta" + numero);
+    if (pergunta) {
+        pergunta.style.display = "block";
     }
 
-    // Atualiza a barra de progresso
-    document.querySelectorAll(".progresso").forEach(barra => {
-        barra.classList.remove("ativa");
-    });
-    const barraAtual = document.querySelector(".etapa" + numero);
-    if (barraAtual) {
-        barraAtual.classList.add("ativa");
+    // Atualiza a barra de progresso (uma barra única, percentual)
+    const barra = document.getElementById("barraProgressoContratar");
+    const texto = document.getElementById("progressoTextoContratar");
+    if (barra) {
+        barra.style.width = Math.round((numero / totalPerguntas) * 100) + "%";
+    }
+    if (texto) {
+        texto.textContent = `Pergunta ${numero} de ${totalPerguntas}`;
     }
 
-    etapaAtual = numero;
+    perguntaAtual = numero;
 
-    // Se chegou na etapa 5, monta o resumo com os dados preenchidos
-    if (numero === 5) {
+    // Ao chegar na revisão final, monta o resumo com os dados preenchidos
+    if (numero === perguntaRevisao) {
         preencherResumo();
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function irProximaEtapa() {
-    const etapa = document.getElementById("etapa" + etapaAtual);
-    const camposObrigatorios = etapa.querySelectorAll("[required]");
+function proximaPergunta() {
+    const pergunta = document.getElementById("pergunta" + perguntaAtual);
+    const camposObrigatorios = pergunta.querySelectorAll("[required]");
 
     for (const campo of camposObrigatorios) {
         if (!campo.checkValidity()) {
@@ -230,26 +236,22 @@ function irProximaEtapa() {
         }
     }
 
-    // Checagem extra: na Etapa 4, precisa ter escolhido uma babá no grid
-    if (etapaAtual === 4 && !document.getElementById("selectBaba").value) {
+    // Checagem extra: na pergunta de escolha da babá, precisa ter selecionado alguém no grid
+    if (perguntaAtual === perguntaEscolhaBaba && !document.getElementById("selectBaba").value) {
         document.getElementById("avisoSelecaoBaba").style.display = "block";
         document.getElementById("gridSelecaoBaba").scrollIntoView({ behavior: "smooth", block: "center" });
         return;
     }
 
-    if (etapaAtual < totalEtapas) {
-        mostrarEtapa(etapaAtual + 1);
+    if (perguntaAtual < totalPerguntas) {
+        mostrarPergunta(perguntaAtual + 1);
     }
 }
 
-function voltarEtapa() {
-    if (etapaAtual > 1) {
-        mostrarEtapa(etapaAtual - 1);
+function voltarPergunta() {
+    if (perguntaAtual > 1) {
+        mostrarPergunta(perguntaAtual - 1);
     }
-}
-
-function editarEtapa(numero) {
-    mostrarEtapa(numero);
 }
 
 // ===== Gera os cards de seleção da babá (Etapa 4) =====
@@ -351,9 +353,23 @@ function preencherResumo() {
 }
 
 function finalizarContratacao() {
-    document.querySelectorAll(".etapa").forEach(etapa => {
-        etapa.style.display = "none";
+    const revisao = document.getElementById("pergunta" + perguntaRevisao);
+    const camposObrigatorios = revisao.querySelectorAll("[required]");
+    for (const campo of camposObrigatorios) {
+        if (!campo.checkValidity()) {
+            campo.reportValidity();
+            return;
+        }
+    }
+
+    document.querySelectorAll(".pergunta").forEach(pergunta => {
+        pergunta.style.display = "none";
     });
+
+    const progresso = document.querySelector(".progresso-perguntas");
+    if (progresso) {
+        progresso.style.display = "none";
+    }
 
     const sucesso = document.getElementById("sucesso");
     if (sucesso) {
@@ -363,10 +379,10 @@ function finalizarContratacao() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Inicializa mostrando só a etapa 1 e escondendo a tela de sucesso
+// Inicializa mostrando só a primeira pergunta e escondendo a tela de sucesso
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("etapa1")) {
-        mostrarEtapa(1);
+    if (document.getElementById("pergunta1")) {
+        mostrarPergunta(1);
     }
     const sucesso = document.getElementById("sucesso");
     if (sucesso) {
@@ -376,37 +392,47 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ================================================
-//  QUERO SER BABÁ — cadastro em 5 etapas
+//  QUERO SER BABÁ — 19 perguntas + revisão (uma por vez)
 // ================================================
 
-let etapaAtualBaba = 1;
-const totalEtapasBaba = 5;
+let perguntaAtualBaba = 1;
+const totalPerguntasBaba = 20;
+const perguntaRevisaoBaba = 20;
+let modoEdicaoBaba = false;
 
-function mostrarEtapaBaba(numero) {
-    document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
-        etapa.style.display = "none";
+function mostrarPerguntaBaba(numero) {
+    if (!document.getElementById("perguntaBaba1")) return; // só roda na quero-ser-baba.html
+
+    document.querySelectorAll("#wizardBaba .pergunta").forEach(pergunta => {
+        pergunta.style.display = "none";
     });
 
-    const etapa = document.getElementById("etapaB" + numero);
-    if (etapa) {
-        etapa.style.display = "block";
+    const pergunta = document.getElementById("perguntaBaba" + numero);
+    if (pergunta) {
+        pergunta.style.display = "block";
     }
 
-    document.querySelectorAll(".progresso.etapaB1, .progresso.etapaB2, .progresso.etapaB3, .progresso.etapaB4")
-        .forEach(barra => barra.classList.remove("ativa"));
+    const barra = document.getElementById("barraProgressoBaba");
+    const texto = document.getElementById("progressoTextoBaba");
+    if (barra) {
+        barra.style.width = Math.round((numero / totalPerguntasBaba) * 100) + "%";
+    }
+    if (texto) {
+        texto.textContent = `Pergunta ${numero} de ${totalPerguntasBaba}`;
+    }
 
-    etapaAtualBaba = numero;
+    perguntaAtualBaba = numero;
 
-    if (numero === 4) {
+    if (numero === perguntaRevisaoBaba) {
         preencherResumoBaba();
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function irProximaEtapaBaba() {
-    const etapa = document.getElementById("etapaB" + etapaAtualBaba);
-    const camposObrigatorios = etapa.querySelectorAll("[required]");
+function proximaPerguntaBaba() {
+    const pergunta = document.getElementById("perguntaBaba" + perguntaAtualBaba);
+    const camposObrigatorios = pergunta.querySelectorAll("[required]");
 
     for (const campo of camposObrigatorios) {
         if (!campo.checkValidity()) {
@@ -415,19 +441,28 @@ function irProximaEtapaBaba() {
         }
     }
 
-    if (etapaAtualBaba < totalEtapasBaba) {
-        mostrarEtapaBaba(etapaAtualBaba + 1);
+    // Se veio de um lápis de edição no resumo, volta direto pra revisão
+    if (modoEdicaoBaba) {
+        modoEdicaoBaba = false;
+        mostrarPerguntaBaba(perguntaRevisaoBaba);
+        return;
+    }
+
+    if (perguntaAtualBaba < totalPerguntasBaba) {
+        mostrarPerguntaBaba(perguntaAtualBaba + 1);
     }
 }
 
-function voltarEtapaBaba() {
-    if (etapaAtualBaba > 1) {
-        mostrarEtapaBaba(etapaAtualBaba - 1);
+function voltarPerguntaBaba() {
+    if (perguntaAtualBaba > 1) {
+        mostrarPerguntaBaba(perguntaAtualBaba - 1);
     }
 }
 
-function editarEtapaBaba(numero) {
-    mostrarEtapaBaba(numero);
+// Usado pelos lápis (✎) no resumo final, pra pular direto pra pergunta certa
+function irParaPerguntaBaba(numero) {
+    modoEdicaoBaba = true;
+    mostrarPerguntaBaba(numero);
 }
 
 // ===== Mostra o nome do(s) arquivo(s) escolhido(s) em um input file =====
@@ -460,13 +495,6 @@ function aplicarMascaraCPF(input) {
     input.value = valor;
 }
 
-// ===== Máscara de CEP (00000-000) =====
-function aplicarMascaraCEP(input) {
-    let valor = input.value.replace(/\D/g, "").slice(0, 8);
-    valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
-    input.value = valor;
-}
-
 // ===== Monta o resumo da Etapa 4 =====
 function preencherResumoBaba() {
 
@@ -476,16 +504,23 @@ function preencherResumoBaba() {
     const estado = document.getElementById("estadoBaba").value;
     const experiencia = document.getElementById("experienciaBaba").value;
     const valorHora = document.getElementById("valorHoraBaba").value;
+    const periodo = document.getElementById("periodoBaba").value;
 
     const cursosMarcados = Array.from(
         document.querySelectorAll('input[name="cursoBaba"]:checked')
     ).map(chk => chk.value);
 
-    const diasPeriodos = [];
-    document.querySelectorAll('input[type="checkbox"][name*="_"]').forEach(checkbox => {
-        if (checkbox.checked) {
-            diasPeriodos.push(checkbox.name.replace(/_/g, ' '));
-        }
+    // --- Dias e períodos marcados na tabela de disponibilidade ---
+    const nomesDias = {
+        segunda: "Segunda", terca: "Terça", quarta: "Quarta",
+        quinta: "Quinta", sexta: "Sexta", sabado: "Sábado", domingo: "Domingo"
+    };
+    const nomesPeriodos = { manha: "Manhã", tarde: "Tarde", noite: "Noite" };
+
+    const disponibilidadeMarcada = [];
+    document.querySelectorAll('.tabela-disponibilidade input[type="checkbox"]:checked').forEach(chk => {
+        const [dia, periodo] = chk.name.split("_");
+        disponibilidadeMarcada.push(`${nomesDias[dia]} (${nomesPeriodos[periodo]})`);
     });
 
     document.getElementById("resumoNomeBaba2").textContent = nome || "-";
@@ -494,13 +529,14 @@ function preencherResumoBaba() {
     document.getElementById("resumoExperienciaBaba2").textContent = experiencia || "-";
     document.getElementById("resumoValorBaba").textContent = valorHora ? `R$ ${valorHora}/hora` : "-";
     document.getElementById("resumoCursosBaba").textContent = cursosMarcados.length ? cursosMarcados.join(", ") : "-";
-    document.getElementById("resumoDiasBaba").textContent = diasPeriodos.length ? diasPeriodos.join(", ") : "-";
+    document.getElementById("resumoDiasBaba").textContent = disponibilidadeMarcada.length ? disponibilidadeMarcada.join(", ") : "-";
+    document.getElementById("resumoPeriodoBaba").textContent = periodo || "-";
 
     // --- Status dos documentos ---
     const documentos = [
         { input: "arquivoRG", resumo: "resumoDocRG" },
         { input: "arquivoAntecedenteEstadual", resumo: "resumoDocAntecedenteEst" },
-        { input: "arquivoAntecedenteFedera", resumo: "resumoDocAntecedenteF" },
+        { input: "arquivoAntecedenteFederal", resumo: "resumoDocAntecedenteF" },
         { input: "arquivoCertificados", resumo: "resumoDocCertificados" },
         { input: "arquivoComprovante", resumo: "resumoDocComprovante" },
         { input: "arquivoFoto", resumo: "resumoDocFoto" }
@@ -516,9 +552,23 @@ function preencherResumoBaba() {
 }
 
 function finalizarCadastroBaba() {
-    document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
-        etapa.style.display = "none";
+    const revisao = document.getElementById("perguntaBaba" + perguntaRevisaoBaba);
+    const camposObrigatorios = revisao.querySelectorAll("[required]");
+    for (const campo of camposObrigatorios) {
+        if (!campo.checkValidity()) {
+            campo.reportValidity();
+            return;
+        }
+    }
+
+    document.querySelectorAll("#wizardBaba .pergunta").forEach(pergunta => {
+        pergunta.style.display = "none";
     });
+
+    const progresso = document.querySelector(".progresso-perguntas");
+    if (progresso) {
+        progresso.style.display = "none";
+    }
 
     const sucesso = document.getElementById("sucessoBaba");
     if (sucesso) {
@@ -528,35 +578,34 @@ function finalizarCadastroBaba() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Inicializa: mostra só a etapa 1, esconde sucesso, liga a máscara de CPF e CEP
+// ===== Máscara de CEP (00000-000) =====
+function aplicarMascaraCEP(input) {
+    let valor = input.value.replace(/\D/g, "").slice(0, 8);
+    valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+    input.value = valor;
+}
+
+// ===== Máscara de telefone ((00) 00000-0000) =====
+function aplicarMascaraTelefone(input) {
+    let valor = input.value.replace(/\D/g, "").slice(0, 11);
+    if (valor.length > 10) {
+        valor = valor.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+    } else if (valor.length > 5) {
+        valor = valor.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+    } else if (valor.length > 2) {
+        valor = valor.replace(/(\d{2})(\d{0,5})/, "($1) $2");
+    }
+    input.value = valor.replace(/-$/, "").replace(/\)\s$/, ") ");
+}
+
+// Inicializa: mostra só a primeira pergunta e esconde a tela de sucesso
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("etapaB1")) {
-        mostrarEtapaBaba(1);
+    if (document.getElementById("perguntaBaba1")) {
+        mostrarPerguntaBaba(1);
     }
     const sucessoBaba = document.getElementById("sucessoBaba");
     if (sucessoBaba) {
         sucessoBaba.style.display = "none";
-    }
-
-    const campoCpf = document.getElementById("cpfBaba");
-    if (campoCpf) {
-        campoCpf.addEventListener("input", () => aplicarMascaraCPF(campoCpf));
-    }
-
-    const campoCep = document.getElementById("cepBaba");
-    if (campoCep) {
-        campoCep.addEventListener("input", () => aplicarMascaraCEP(campoCep));
-    }
-
-    // Máscara para CPF do responsável em contratar.html
-    const campoCpfResp = document.getElementById("cpfResponsavel");
-    if (campoCpfResp) {
-        campoCpfResp.addEventListener("input", () => aplicarMascaraCPF(campoCpfResp));
-    }
-
-    const campoCepResp = document.getElementById("cepResponsavel");
-    if (campoCepResp) {
-        campoCepResp.addEventListener("input", () => aplicarMascaraCEP(campoCepResp));
     }
 });
 
@@ -728,23 +777,4 @@ function fazerCadastro() {
 function fazerLogout() {
     localStorage.removeItem("happyBabyUsuarioLogado");
     atualizarAreaConta();
-}
-
-// ===== Filtro de babás por cidade =====
-function filtrarBabas() {
-    const input = document.getElementById("buscaCidade");
-    const filtro = input.value.toUpperCase();
-    const babas = document.querySelectorAll(".baba");
-
-    babas.forEach(baba => {
-        const nome = baba.querySelector("h3").textContent;
-        const cidade = baba.querySelector("p").textContent;
-        const texto = nome + " " + cidade;
-
-        if (texto.toUpperCase().indexOf(filtro) > -1) {
-            baba.style.display = "";
-        } else {
-            baba.style.display = "none";
-        }
-    });
 }
