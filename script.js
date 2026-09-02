@@ -85,6 +85,7 @@ function voltarBabas() {
 // ================================================
 
 let perguntaAtual = 1;
+let modoEdicao = false;
 const totalPerguntas = 31;
 const perguntaEscolhaBaba = 26;
 const perguntaRevisao = 31;
@@ -217,12 +218,42 @@ function mostrarPergunta(numero) {
 
     perguntaAtual = numero;
 
+    // Ao entrar na pergunta 9, gera um bloco de campos por criança
+    if (numero === 9) {
+        gerarCamposCriancas();
+    }
+
     // Ao chegar na revisão final, monta o resumo com os dados preenchidos
     if (numero === perguntaRevisao) {
         preencherResumo();
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ===== Gera um bloco de idade + alergia para cada criança informada =====
+// Só recria os blocos se a quantidade mudou, pra não apagar o que já foi digitado
+function gerarCamposCriancas() {
+    const qtd = parseInt(document.getElementById("qtdCriancas").value, 10) || 1;
+    const container = document.getElementById("containerCriancas");
+    if (!container) return;
+
+    if (container.children.length === qtd) return; // já está correto, não mexe
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= qtd; i++) {
+        const bloco = document.createElement("div");
+        bloco.className = "bloco-crianca";
+        bloco.innerHTML = `
+            <h4>Criança ${i}</h4>
+            <div class="linha-form">
+                <input type="text" id="idadeCrianca${i}" class="campo-idade-crianca" placeholder="Idade" required>
+                <input type="text" id="alergiaCrianca${i}" class="campo-alergia-crianca" placeholder="Alergias (opcional)">
+            </div>
+        `;
+        container.appendChild(bloco);
+    }
 }
 
 function proximaPergunta() {
@@ -243,6 +274,13 @@ function proximaPergunta() {
         return;
     }
 
+    // Se veio de um lápis de edição no resumo, volta direto pra revisão
+    if (modoEdicao) {
+        modoEdicao = false;
+        mostrarPergunta(perguntaRevisao);
+        return;
+    }
+
     if (perguntaAtual < totalPerguntas) {
         mostrarPergunta(perguntaAtual + 1);
     }
@@ -252,6 +290,12 @@ function voltarPergunta() {
     if (perguntaAtual > 1) {
         mostrarPergunta(perguntaAtual - 1);
     }
+}
+
+// Usado pelos lápis (✎) no resumo final, pra pular direto pra pergunta certa
+function irParaPergunta(numero) {
+    modoEdicao = true;
+    mostrarPergunta(numero);
 }
 
 // ===== Gera os cards de seleção da babá (Etapa 4) =====
@@ -326,10 +370,20 @@ function preencherResumo() {
     const cidade = document.getElementById("cidadeResponsavel").value;
     const estado = document.getElementById("estadoResponsavel").value;
     const qtdCriancas = document.getElementById("qtdCriancas").value;
-    const idades = document.getElementById("idadesCriancas").value;
     const dataInicio = document.getElementById("dataInicio").value;
     const periodo = document.getElementById("periodoContratacao").value;
     const duracao = document.getElementById("duracaoContratacao").value;
+
+    // --- Idades e alergias de cada criança (campos dinâmicos) ---
+    const qtd = parseInt(qtdCriancas, 10) || 0;
+    const idadesLista = [];
+    const alergiasLista = [];
+    for (let i = 1; i <= qtd; i++) {
+        const campoIdade = document.getElementById("idadeCrianca" + i);
+        const campoAlergia = document.getElementById("alergiaCrianca" + i);
+        if (campoIdade && campoIdade.value) idadesLista.push(campoIdade.value);
+        if (campoAlergia && campoAlergia.value) alergiasLista.push(`Criança ${i}: ${campoAlergia.value}`);
+    }
 
     const diasMarcados = Array.from(
         document.querySelectorAll('input[name="diaSemana"]:checked')
@@ -345,7 +399,8 @@ function preencherResumo() {
     document.getElementById("resumoResponsavel").textContent = nome || "-";
     document.getElementById("resumoCidade").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
     document.getElementById("resumoCriancas").textContent = qtdCriancas || "-";
-    document.getElementById("resumoIdades").textContent = idades || "-";
+    document.getElementById("resumoIdades").textContent = idadesLista.length ? idadesLista.join(", ") : "-";
+    document.getElementById("resumoAlergias").textContent = alergiasLista.length ? alergiasLista.join(" · ") : "Nenhuma informada";
     document.getElementById("resumoPeriodo").textContent = periodo || "-";
     document.getElementById("resumoDuracao").textContent = duracao || "-";
     document.getElementById("resumoDias").textContent = diasMarcados.length ? diasMarcados.join(", ") : "-";
@@ -392,47 +447,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ================================================
-//  QUERO SER BABÁ — 19 perguntas + revisão (uma por vez)
+//  QUERO SER BABÁ — cadastro em 4 etapas
 // ================================================
 
-let perguntaAtualBaba = 1;
-const totalPerguntasBaba = 20;
-const perguntaRevisaoBaba = 20;
-let modoEdicaoBaba = false;
+let etapaAtualBaba = 1;
+const totalEtapasBaba = 4;
 
-function mostrarPerguntaBaba(numero) {
-    if (!document.getElementById("perguntaBaba1")) return; // só roda na quero-ser-baba.html
-
-    document.querySelectorAll("#wizardBaba .pergunta").forEach(pergunta => {
-        pergunta.style.display = "none";
+function mostrarEtapaBaba(numero) {
+    document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
+        etapa.style.display = "none";
     });
 
-    const pergunta = document.getElementById("perguntaBaba" + numero);
-    if (pergunta) {
-        pergunta.style.display = "block";
+    const etapa = document.getElementById("etapaB" + numero);
+    if (etapa) {
+        etapa.style.display = "block";
     }
 
-    const barra = document.getElementById("barraProgressoBaba");
-    const texto = document.getElementById("progressoTextoBaba");
-    if (barra) {
-        barra.style.width = Math.round((numero / totalPerguntasBaba) * 100) + "%";
-    }
-    if (texto) {
-        texto.textContent = `Pergunta ${numero} de ${totalPerguntasBaba}`;
-    }
+    document.querySelectorAll(".progresso.etapaB1, .progresso.etapaB2, .progresso.etapaB3, .progresso.etapaB4")
+        .forEach(barra => barra.classList.remove("ativa"));
 
-    perguntaAtualBaba = numero;
+    etapaAtualBaba = numero;
 
-    if (numero === perguntaRevisaoBaba) {
+    if (numero === 4) {
         preencherResumoBaba();
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function proximaPerguntaBaba() {
-    const pergunta = document.getElementById("perguntaBaba" + perguntaAtualBaba);
-    const camposObrigatorios = pergunta.querySelectorAll("[required]");
+function irProximaEtapaBaba() {
+    const etapa = document.getElementById("etapaB" + etapaAtualBaba);
+    const camposObrigatorios = etapa.querySelectorAll("[required]");
 
     for (const campo of camposObrigatorios) {
         if (!campo.checkValidity()) {
@@ -441,28 +486,15 @@ function proximaPerguntaBaba() {
         }
     }
 
-    // Se veio de um lápis de edição no resumo, volta direto pra revisão
-    if (modoEdicaoBaba) {
-        modoEdicaoBaba = false;
-        mostrarPerguntaBaba(perguntaRevisaoBaba);
-        return;
-    }
-
-    if (perguntaAtualBaba < totalPerguntasBaba) {
-        mostrarPerguntaBaba(perguntaAtualBaba + 1);
+    if (etapaAtualBaba < totalEtapasBaba) {
+        mostrarEtapaBaba(etapaAtualBaba + 1);
     }
 }
 
-function voltarPerguntaBaba() {
-    if (perguntaAtualBaba > 1) {
-        mostrarPerguntaBaba(perguntaAtualBaba - 1);
+function voltarEtapaBaba() {
+    if (etapaAtualBaba > 1) {
+        mostrarEtapaBaba(etapaAtualBaba - 1);
     }
-}
-
-// Usado pelos lápis (✎) no resumo final, pra pular direto pra pergunta certa
-function irParaPerguntaBaba(numero) {
-    modoEdicaoBaba = true;
-    mostrarPerguntaBaba(numero);
 }
 
 // ===== Mostra o nome do(s) arquivo(s) escolhido(s) em um input file =====
@@ -510,33 +542,22 @@ function preencherResumoBaba() {
         document.querySelectorAll('input[name="cursoBaba"]:checked')
     ).map(chk => chk.value);
 
-    // --- Dias e períodos marcados na tabela de disponibilidade ---
-    const nomesDias = {
-        segunda: "Segunda", terca: "Terça", quarta: "Quarta",
-        quinta: "Quinta", sexta: "Sexta", sabado: "Sábado", domingo: "Domingo"
-    };
-    const nomesPeriodos = { manha: "Manhã", tarde: "Tarde", noite: "Noite" };
-
-    const disponibilidadeMarcada = [];
-    document.querySelectorAll('.tabela-disponibilidade input[type="checkbox"]:checked').forEach(chk => {
-        const [dia, periodo] = chk.name.split("_");
-        disponibilidadeMarcada.push(`${nomesDias[dia]} (${nomesPeriodos[periodo]})`);
-    });
-
+    const diasMarcados = Array.from(
+        document.querySelectorAll('input[name="diaDisponivelBaba"]:checked')
+    ).map(chk => chk.value);
     document.getElementById("resumoNomeBaba2").textContent = nome || "-";
     document.getElementById("resumoCpfBaba").textContent = cpf || "-";
     document.getElementById("resumoCidadeBaba2").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
     document.getElementById("resumoExperienciaBaba2").textContent = experiencia || "-";
     document.getElementById("resumoValorBaba").textContent = valorHora ? `R$ ${valorHora}/hora` : "-";
     document.getElementById("resumoCursosBaba").textContent = cursosMarcados.length ? cursosMarcados.join(", ") : "-";
-    document.getElementById("resumoDiasBaba").textContent = disponibilidadeMarcada.length ? disponibilidadeMarcada.join(", ") : "-";
+    document.getElementById("resumoDiasBaba").textContent = diasMarcados.length ? diasMarcados.join(", ") : "-";
     document.getElementById("resumoPeriodoBaba").textContent = periodo || "-";
 
     // --- Status dos documentos ---
     const documentos = [
         { input: "arquivoRG", resumo: "resumoDocRG" },
-        { input: "arquivoAntecedenteEstadual", resumo: "resumoDocAntecedenteEst" },
-        { input: "arquivoAntecedenteFederal", resumo: "resumoDocAntecedenteF" },
+        { input: "arquivoAntecedentes", resumo: "resumoDocAntecedentes" },
         { input: "arquivoCertificados", resumo: "resumoDocCertificados" },
         { input: "arquivoComprovante", resumo: "resumoDocComprovante" },
         { input: "arquivoFoto", resumo: "resumoDocFoto" }
@@ -545,30 +566,14 @@ function preencherResumoBaba() {
     documentos.forEach(doc => {
         const input = document.getElementById(doc.input);
         const resumo = document.getElementById(doc.resumo);
-        if (input && resumo) {
-            resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
-        }
+        resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
     });
 }
 
 function finalizarCadastroBaba() {
-    const revisao = document.getElementById("perguntaBaba" + perguntaRevisaoBaba);
-    const camposObrigatorios = revisao.querySelectorAll("[required]");
-    for (const campo of camposObrigatorios) {
-        if (!campo.checkValidity()) {
-            campo.reportValidity();
-            return;
-        }
-    }
-
-    document.querySelectorAll("#wizardBaba .pergunta").forEach(pergunta => {
-        pergunta.style.display = "none";
+    document.querySelectorAll("#etapaB1, #etapaB2, #etapaB3, #etapaB4").forEach(etapa => {
+        etapa.style.display = "none";
     });
-
-    const progresso = document.querySelector(".progresso-perguntas");
-    if (progresso) {
-        progresso.style.display = "none";
-    }
 
     const sucesso = document.getElementById("sucessoBaba");
     if (sucesso) {
@@ -578,34 +583,19 @@ function finalizarCadastroBaba() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ===== Máscara de CEP (00000-000) =====
-function aplicarMascaraCEP(input) {
-    let valor = input.value.replace(/\D/g, "").slice(0, 8);
-    valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
-    input.value = valor;
-}
-
-// ===== Máscara de telefone ((00) 00000-0000) =====
-function aplicarMascaraTelefone(input) {
-    let valor = input.value.replace(/\D/g, "").slice(0, 11);
-    if (valor.length > 10) {
-        valor = valor.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
-    } else if (valor.length > 5) {
-        valor = valor.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-    } else if (valor.length > 2) {
-        valor = valor.replace(/(\d{2})(\d{0,5})/, "($1) $2");
-    }
-    input.value = valor.replace(/-$/, "").replace(/\)\s$/, ") ");
-}
-
-// Inicializa: mostra só a primeira pergunta e esconde a tela de sucesso
+// Inicializa: mostra só a etapa 1, esconde sucesso, liga a máscara de CPF
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("perguntaBaba1")) {
-        mostrarPerguntaBaba(1);
+    if (document.getElementById("etapaB1")) {
+        mostrarEtapaBaba(1);
     }
     const sucessoBaba = document.getElementById("sucessoBaba");
     if (sucessoBaba) {
         sucessoBaba.style.display = "none";
+    }
+
+    const campoCpf = document.getElementById("cpfBaba");
+    if (campoCpf) {
+        campoCpf.addEventListener("input", () => aplicarMascaraCPF(campoCpf));
     }
 });
 
@@ -777,23 +767,4 @@ function fazerCadastro() {
 function fazerLogout() {
     localStorage.removeItem("happyBabyUsuarioLogado");
     atualizarAreaConta();
-}
-
-// ===== Filtro de babás por cidade =====
-function filtrarBabas() {
-    const input = document.getElementById("buscaCidade");
-    const filtro = input.value.toUpperCase();
-    const babas = document.querySelectorAll(".baba");
-
-    babas.forEach(baba => {
-        const nome = baba.querySelector("h3").textContent;
-        const cidade = baba.querySelector("p").textContent;
-        const texto = nome + " " + cidade;
-
-        if (texto.toUpperCase().indexOf(filtro) > -1) {
-            baba.style.display = "";
-        } else {
-            baba.style.display = "none";
-        }
-    });
 }

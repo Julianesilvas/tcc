@@ -122,7 +122,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
     </h2>
 
         <div class="pergunta-campo">
-            <input type="tel" id="telefoneResponsavel" placeholder="(00) 00000-0000" maxlength="15" oninput="aplicarMascaraTelefone(this)" required>
+            <input type="tel" id="telefoneResponsavel" placeholder="Telefone / WhatsApp" required>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -161,7 +161,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
         </div>
         <div class="linha-form">
             <input type="text" id="enderecoResponsavel" placeholder="Endereço" required>
-            <input type="text" id="cepResponsavel" placeholder="CEP" maxlength="9" oninput="aplicarMascaraCEP(this)" required>
+            <input type="text" id="cepResponsavel" placeholder="CEP (opcional)">
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -670,46 +670,21 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
                 <p id="resumoExperienciaBaba"></p>
                 <ul id="resumoDestaquesBaba" class="lista-destaques"></ul>
             </div>
-            <button type="button" class="btn-edit" onclick="irParaPergunta(26)" title="Editar">✎</button>
         </div>
     </div>
 
     <div class="resumo-solicitacao">
         <h2>Resumo da solicitação</h2>
-        <div class="resumo-item-grupo">
-            <div class="resumo-item">
-                <strong>Responsável:</strong> <span id="resumoResponsavel"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(1)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Cidade:</strong> <span id="resumoCidade"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(6)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Crianças:</strong> <span id="resumoCriancas"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(8)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Idades:</strong> <span id="resumoIdades"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(9)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Período:</strong> <span id="resumoPeriodo"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(19)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Duração da contratação:</strong> <span id="resumoDuracao"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(20)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Dias:</strong> <span id="resumoDias"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(22)" title="Editar">✎</button>
-            </div>
-            <div class="resumo-item">
-                <strong>Início previsto:</strong> <span id="resumoInicio"></span>
-                <button type="button" class="btn-edit" onclick="irParaPergunta(18)" title="Editar">✎</button>
-            </div>
-        </div>
+        <ul>
+            <li><strong>Responsável:</strong> <span id="resumoResponsavel"></span></li>
+            <li><strong>Cidade:</strong> <span id="resumoCidade"></span></li>
+            <li><strong>Crianças:</strong> <span id="resumoCriancas"></span></li>
+            <li><strong>Idades:</strong> <span id="resumoIdades"></span></li>
+            <li><strong>Período:</strong> <span id="resumoPeriodo"></span></li>
+            <li><strong>Duração da contratação:</strong> <span id="resumoDuracao"></span></li>
+            <li><strong>Dias:</strong> <span id="resumoDias"></span></li>
+            <li><strong>Início previsto:</strong> <span id="resumoInicio"></span></li>
+        </ul>
     </div>
 
     <div class="termos">
@@ -732,7 +707,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 
         <label class="aceite">
             <input type="checkbox" required>
-            Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Política de Privacidade</a>.
+            Li e concordo com os Termos de Uso e Política de Privacidade.
         </label>
     </div>
 
