@@ -217,12 +217,42 @@ function mostrarPergunta(numero) {
 
     perguntaAtual = numero;
 
+    // Ao entrar na pergunta 9, gera um bloco de campos por criança
+    if (numero === 9) {
+        gerarCamposCriancas();
+    }
+
     // Ao chegar na revisão final, monta o resumo com os dados preenchidos
     if (numero === perguntaRevisao) {
         preencherResumo();
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ===== Gera um bloco de idade + alergia para cada criança informada =====
+// Só recria os blocos se a quantidade mudou, pra não apagar o que já foi digitado
+function gerarCamposCriancas() {
+    const qtd = parseInt(document.getElementById("qtdCriancas").value, 10) || 1;
+    const container = document.getElementById("containerCriancas");
+    if (!container) return;
+
+    if (container.children.length === qtd) return; // já está correto, não mexe
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= qtd; i++) {
+        const bloco = document.createElement("div");
+        bloco.className = "bloco-crianca";
+        bloco.innerHTML = `
+            <h4>Criança ${i}</h4>
+            <div class="linha-form">
+                <input type="text" id="idadeCrianca${i}" class="campo-idade-crianca" placeholder="Idade" required>
+                <input type="text" id="alergiaCrianca${i}" class="campo-alergia-crianca" placeholder="Alergias (opcional)">
+            </div>
+        `;
+        container.appendChild(bloco);
+    }
 }
 
 function proximaPergunta() {
@@ -326,10 +356,20 @@ function preencherResumo() {
     const cidade = document.getElementById("cidadeResponsavel").value;
     const estado = document.getElementById("estadoResponsavel").value;
     const qtdCriancas = document.getElementById("qtdCriancas").value;
-    const idades = document.getElementById("idadesCriancas").value;
     const dataInicio = document.getElementById("dataInicio").value;
     const periodo = document.getElementById("periodoContratacao").value;
     const duracao = document.getElementById("duracaoContratacao").value;
+
+    // --- Idades e alergias de cada criança (campos dinâmicos) ---
+    const qtd = parseInt(qtdCriancas, 10) || 0;
+    const idadesLista = [];
+    const alergiasLista = [];
+    for (let i = 1; i <= qtd; i++) {
+        const campoIdade = document.getElementById("idadeCrianca" + i);
+        const campoAlergia = document.getElementById("alergiaCrianca" + i);
+        if (campoIdade && campoIdade.value) idadesLista.push(campoIdade.value);
+        if (campoAlergia && campoAlergia.value) alergiasLista.push(`Criança ${i}: ${campoAlergia.value}`);
+    }
 
     const diasMarcados = Array.from(
         document.querySelectorAll('input[name="diaSemana"]:checked')
@@ -345,7 +385,8 @@ function preencherResumo() {
     document.getElementById("resumoResponsavel").textContent = nome || "-";
     document.getElementById("resumoCidade").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
     document.getElementById("resumoCriancas").textContent = qtdCriancas || "-";
-    document.getElementById("resumoIdades").textContent = idades || "-";
+    document.getElementById("resumoIdades").textContent = idadesLista.length ? idadesLista.join(", ") : "-";
+    document.getElementById("resumoAlergias").textContent = alergiasLista.length ? alergiasLista.join(" · ") : "Nenhuma informada";
     document.getElementById("resumoPeriodo").textContent = periodo || "-";
     document.getElementById("resumoDuracao").textContent = duracao || "-";
     document.getElementById("resumoDias").textContent = diasMarcados.length ? diasMarcados.join(", ") : "-";
@@ -498,13 +539,26 @@ function aplicarMascaraCPF(input) {
 // ===== Monta o resumo da Etapa 4 =====
 function preencherResumoBaba() {
 
+    // --- Dados pessoais ---
     const nome = document.getElementById("nomeBaba").value;
     const cpf = document.getElementById("cpfBaba").value;
+    const nascimento = document.getElementById("nascimentoBaba").value;
+    const telefone = document.getElementById("telefoneBaba").value;
+    const email = document.getElementById("emailBaba").value;
     const cidade = document.getElementById("cidadeBaba").value;
     const estado = document.getElementById("estadoBaba").value;
+    const endereco = document.getElementById("enderecoBaba").value;
+    const cep = document.getElementById("cepBaba").value;
+
+    // --- Experiência ---
     const experiencia = document.getElementById("experienciaBaba").value;
     const valorHora = document.getElementById("valorHoraBaba").value;
-    const periodo = document.getElementById("periodoBaba").value;
+    const sobre = document.getElementById("sobreBaba").value;
+    const estiloTrabalho = document.getElementById("estiloTrabalhoBaba").value;
+
+    const faixasMarcadas = Array.from(
+        document.querySelectorAll('input[name="faixaEtaria"]:checked')
+    ).map(chk => chk.value);
 
     const cursosMarcados = Array.from(
         document.querySelectorAll('input[name="cursoBaba"]:checked')
@@ -523,21 +577,35 @@ function preencherResumoBaba() {
         disponibilidadeMarcada.push(`${nomesDias[dia]} (${nomesPeriodos[periodo]})`);
     });
 
+    // Formata a data de nascimento dd/mm/aaaa
+    let nascimentoFormatado = "-";
+    if (nascimento) {
+        const [ano, mes, dia] = nascimento.split("-");
+        nascimentoFormatado = `${dia}/${mes}/${ano}`;
+    }
+
     document.getElementById("resumoNomeBaba2").textContent = nome || "-";
     document.getElementById("resumoCpfBaba").textContent = cpf || "-";
-    document.getElementById("resumoCidadeBaba2").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
+    document.getElementById("resumoNascimentoBaba").textContent = nascimentoFormatado;
+    document.getElementById("resumoTelefoneBaba").textContent = telefone || "-";
+    document.getElementById("resumoEmailBaba").textContent = email || "-";
+    document.getElementById("resumoEnderecoBaba").textContent =
+        (endereco || cidade || estado || cep)
+            ? `${endereco || "-"}, ${cidade || "-"} - ${estado || "-"} · CEP ${cep || "-"}`
+            : "-";
     document.getElementById("resumoExperienciaBaba2").textContent = experiencia || "-";
     document.getElementById("resumoValorBaba").textContent = valorHora ? `R$ ${valorHora}/hora` : "-";
+    document.getElementById("resumoFaixaEtariaBaba").textContent = faixasMarcadas.length ? faixasMarcadas.join(", ") : "-";
     document.getElementById("resumoCursosBaba").textContent = cursosMarcados.length ? cursosMarcados.join(", ") : "-";
     document.getElementById("resumoDiasBaba").textContent = disponibilidadeMarcada.length ? disponibilidadeMarcada.join(", ") : "-";
-    document.getElementById("resumoPeriodoBaba").textContent = periodo || "-";
+    document.getElementById("resumoSobreBaba").textContent = sobre || "-";
+    document.getElementById("resumoEstiloTrabalhoBaba").textContent = estiloTrabalho || "-";
 
     // --- Status dos documentos ---
     const documentos = [
         { input: "arquivoRG", resumo: "resumoDocRG" },
         { input: "arquivoAntecedenteEstadual", resumo: "resumoDocAntecedenteEst" },
         { input: "arquivoAntecedenteFederal", resumo: "resumoDocAntecedenteF" },
-        { input: "arquivoCertificados", resumo: "resumoDocCertificados" },
         { input: "arquivoComprovante", resumo: "resumoDocComprovante" },
         { input: "arquivoFoto", resumo: "resumoDocFoto" }
     ];
@@ -549,6 +617,46 @@ function preencherResumoBaba() {
             resumo.textContent = input.files.length > 0 ? "✔ Anexado" : "Não anexado";
         }
     });
+
+    // --- Certificados: soma os arquivos de todos os campos dinâmicos ---
+    let totalCertificados = 0;
+    document.querySelectorAll(".input-certificado").forEach(input => {
+        totalCertificados += input.files.length;
+    });
+    const resumoCert = document.getElementById("resumoDocCertificados");
+    if (resumoCert) {
+        resumoCert.textContent = totalCertificados > 0
+            ? `✔ ${totalCertificados} arquivo${totalCertificados > 1 ? "s" : ""} anexado${totalCertificados > 1 ? "s" : ""}`
+            : "Não anexado";
+    }
+}
+
+// ===== Campos dinâmicos de certificado (Etapa de documentos) =====
+function adicionarCampoCertificado() {
+    const container = document.getElementById("containerCertificados");
+    const novoItem = document.createElement("div");
+    novoItem.className = "upload-item certificado-item";
+    novoItem.innerHTML = `
+        <input type="file" class="input-certificado" accept=".pdf,.jpg,.jpeg,.png" onchange="atualizarNomeCertificado(this)">
+        <span class="nome-arquivo">Nenhum arquivo selecionado</span>
+        <button type="button" class="btn-remover-certificado" onclick="removerCampoCertificado(this)">Remover</button>
+    `;
+    container.appendChild(novoItem);
+}
+
+function removerCampoCertificado(botao) {
+    botao.closest(".certificado-item").remove();
+}
+
+function atualizarNomeCertificado(input) {
+    const span = input.nextElementSibling;
+    if (input.files.length > 0) {
+        span.textContent = "✔ " + input.files[0].name;
+        span.classList.add("arquivo-ok");
+    } else {
+        span.textContent = "Nenhum arquivo selecionado";
+        span.classList.remove("arquivo-ok");
+    }
 }
 
 function finalizarCadastroBaba() {
