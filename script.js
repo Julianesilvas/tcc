@@ -85,6 +85,7 @@ function voltarBabas() {
 // ================================================
 
 let perguntaAtual = 1;
+let modoEdicao = false;
 const totalPerguntas = 31;
 const perguntaEscolhaBaba = 26;
 const perguntaRevisao = 31;
@@ -273,6 +274,13 @@ function proximaPergunta() {
         return;
     }
 
+    // Se veio de um lápis de edição no resumo, volta direto pra revisão
+    if (modoEdicao) {
+        modoEdicao = false;
+        mostrarPergunta(perguntaRevisao);
+        return;
+    }
+
     if (perguntaAtual < totalPerguntas) {
         mostrarPergunta(perguntaAtual + 1);
     }
@@ -282,6 +290,12 @@ function voltarPergunta() {
     if (perguntaAtual > 1) {
         mostrarPergunta(perguntaAtual - 1);
     }
+}
+
+// Usado pelos lápis (✎) no resumo final, pra pular direto pra pergunta certa
+function irParaPergunta(numero) {
+    modoEdicao = true;
+    mostrarPergunta(numero);
 }
 
 // ===== Gera os cards de seleção da babá (Etapa 4) =====
