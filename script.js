@@ -223,6 +223,17 @@ function mostrarPergunta(numero) {
         gerarCamposCriancas();
     }
 
+    // Perguntas de medicamentos e rotinas também são geradas por criança
+    if (numero === 13) {
+        gerarCamposMedicamentos();
+    }
+    if (numero === 14) {
+        gerarCamposRotinaSono();
+    }
+    if (numero === 16) {
+        gerarCamposRotinaGeral();
+    }
+
     // Ao chegar na revisão final, monta o resumo com os dados preenchidos
     if (numero === perguntaRevisao) {
         preencherResumo();
@@ -231,7 +242,7 @@ function mostrarPergunta(numero) {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ===== Gera um bloco de idade + alergia para cada criança informada =====
+// ===== Gera um bloco de nome + idade + alergia para cada criança informada =====
 // Só recria os blocos se a quantidade mudou, pra não apagar o que já foi digitado
 function gerarCamposCriancas() {
     const qtd = parseInt(document.getElementById("qtdCriancas").value, 10) || 1;
@@ -248,12 +259,94 @@ function gerarCamposCriancas() {
         bloco.innerHTML = `
             <h4>Criança ${i}</h4>
             <div class="linha-form">
+                <input type="text" id="nomeCrianca${i}" class="campo-nome-crianca" placeholder="Nome da criança" required>
                 <input type="text" id="idadeCrianca${i}" class="campo-idade-crianca" placeholder="Idade" required>
-                <input type="text" id="alergiaCrianca${i}" class="campo-alergia-crianca" placeholder="Alergias (opcional)">
             </div>
+            <input type="text" id="alergiaCrianca${i}" class="campo-alergia-crianca" placeholder="Alergias (opcional)">
         `;
         container.appendChild(bloco);
     }
+}
+
+// Retorna o nome que a família deu pra criança (ou "Criança N" se ainda não preencheu)
+function obterNomeCrianca(indice) {
+    const campo = document.getElementById("nomeCrianca" + indice);
+    return (campo && campo.value.trim()) ? campo.value.trim() : `Criança ${indice}`;
+}
+
+// ===== Gera um campo de medicamentos por criança, usando o nome dela no título =====
+function gerarCamposMedicamentos() {
+    const qtd = parseInt(document.getElementById("qtdCriancas").value, 10) || 1;
+    const container = document.getElementById("containerMedicamentos");
+    if (!container) return;
+
+    if (container.children.length !== qtd) {
+        container.innerHTML = "";
+        for (let i = 1; i <= qtd; i++) {
+            const bloco = document.createElement("div");
+            bloco.className = "bloco-crianca";
+            bloco.innerHTML = `
+                <h4 class="titulo-crianca" data-indice="${i}"></h4>
+                <input type="text" id="medicamentoCrianca${i}" placeholder="Medicamentos (opcional)">
+            `;
+            container.appendChild(bloco);
+        }
+    }
+
+    container.querySelectorAll(".titulo-crianca").forEach(titulo => {
+        titulo.textContent = obterNomeCrianca(titulo.getAttribute("data-indice"));
+    });
+}
+
+// ===== Gera os campos de rotina de sono por criança, usando o nome dela no título =====
+function gerarCamposRotinaSono() {
+    const qtd = parseInt(document.getElementById("qtdCriancas").value, 10) || 1;
+    const container = document.getElementById("containerRotinaSono");
+    if (!container) return;
+
+    if (container.children.length !== qtd) {
+        container.innerHTML = "";
+        for (let i = 1; i <= qtd; i++) {
+            const bloco = document.createElement("div");
+            bloco.className = "bloco-crianca";
+            bloco.innerHTML = `
+                <h4 class="titulo-crianca" data-indice="${i}"></h4>
+                <div class="linha-form">
+                    <input type="text" id="horarioAcordarCrianca${i}" placeholder="Horário que costuma acordar (opcional)">
+                    <input type="text" id="horarioDormirCrianca${i}" placeholder="Horário que costuma dormir (opcional)">
+                </div>
+            `;
+            container.appendChild(bloco);
+        }
+    }
+
+    container.querySelectorAll(".titulo-crianca").forEach(titulo => {
+        titulo.textContent = obterNomeCrianca(titulo.getAttribute("data-indice"));
+    });
+}
+
+// ===== Gera o campo de rotina geral por criança, usando o nome dela no título =====
+function gerarCamposRotinaGeral() {
+    const qtd = parseInt(document.getElementById("qtdCriancas").value, 10) || 1;
+    const container = document.getElementById("containerRotinaGeral");
+    if (!container) return;
+
+    if (container.children.length !== qtd) {
+        container.innerHTML = "";
+        for (let i = 1; i <= qtd; i++) {
+            const bloco = document.createElement("div");
+            bloco.className = "bloco-crianca";
+            bloco.innerHTML = `
+                <h4 class="titulo-crianca" data-indice="${i}"></h4>
+                <textarea id="rotinaCrianca${i}" rows="5" placeholder="Alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes."></textarea>
+            `;
+            container.appendChild(bloco);
+        }
+    }
+
+    container.querySelectorAll(".titulo-crianca").forEach(titulo => {
+        titulo.textContent = obterNomeCrianca(titulo.getAttribute("data-indice"));
+    });
 }
 
 function proximaPergunta() {
@@ -705,6 +798,30 @@ function aplicarMascaraCEP(input) {
     let valor = input.value.replace(/\D/g, "").slice(0, 8);
     valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
     input.value = valor;
+}
+
+// ===== Busca endereço automaticamente a partir do CEP (API ViaCEP) =====
+// Chamada junto com a máscara: só faz a busca quando o CEP tiver os 8 dígitos completos
+function buscarEnderecoPorCEP(inputCep, idEndereco, idCidade, idEstado) {
+    const cepLimpo = inputCep.value.replace(/\D/g, "");
+    if (cepLimpo.length !== 8) return;
+
+    const campoEndereco = document.getElementById(idEndereco);
+    const campoCidade = document.getElementById(idCidade);
+    const campoEstado = document.getElementById(idEstado);
+
+    fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
+        .then(resposta => resposta.json())
+        .then(dados => {
+            if (dados.erro) return; // CEP não encontrado — deixa a pessoa preencher manualmente
+
+            if (campoEndereco && dados.logradouro) campoEndereco.value = dados.logradouro;
+            if (campoCidade && dados.localidade) campoCidade.value = dados.localidade;
+            if (campoEstado && dados.uf) campoEstado.value = dados.uf;
+        })
+        .catch(() => {
+            // Falha de conexão: não trava o formulário, a pessoa preenche manualmente
+        });
 }
 
 // ===== Máscara de telefone ((00) 00000-0000) =====

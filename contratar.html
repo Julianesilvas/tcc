@@ -122,7 +122,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
     </h2>
 
         <div class="pergunta-campo">
-            <input type="tel" id="telefoneResponsavel" placeholder="Telefone / WhatsApp" required>
+            <input type="tel" id="telefoneResponsavel" placeholder="(00) 00000-0000" maxlength="15" oninput="aplicarMascaraTelefone(this)" required>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -156,12 +156,15 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
     </h2>
 
         <div class="linha-form">
-            <input type="text" id="cidadeResponsavel" placeholder="Cidade" required>
-            <input type="text" id="estadoResponsavel" placeholder="Estado" required>
+            <input type="text" id="cepResponsavel" placeholder="CEP (opcional)" maxlength="9"
+                oninput="aplicarMascaraCEP(this); buscarEnderecoPorCEP(this, 'enderecoResponsavel', 'cidadeResponsavel', 'estadoResponsavel')">
         </div>
         <div class="linha-form">
             <input type="text" id="enderecoResponsavel" placeholder="Endereço" required>
-            <input type="text" id="cepResponsavel" placeholder="CEP (opcional)">
+        </div>
+        <div class="linha-form">
+            <input type="text" id="cidadeResponsavel" placeholder="Cidade" required>
+            <input type="text" id="estadoResponsavel" placeholder="Estado" required>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -211,7 +214,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
         <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
-        <p class="texto-etapa">Informe a idade e, se houver, alergias de cada criança.</p>
+        <p class="texto-etapa">Informe o nome, a idade e, se houver, alergias de cada criança.</p>
         <div id="containerCriancas"></div>
 
     <div class="linha-form pergunta-botoes">
@@ -285,13 +288,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 
 <div class="etapa pergunta" id="pergunta13">
 
-    <h2 class="pergunta-titulo">A criança utiliza algum medicamento?
+    <h2 class="pergunta-titulo">Alguma criança utiliza medicamento?
         <span class="tag-pergunta tag-opcional">Opcional</span>
     </h2>
 
-        <div class="pergunta-campo">
-            <input type="text" id="medicamentosCrianca" placeholder="Medicamentos (opcional)">
-        </div>
+        <div id="containerMedicamentos"></div>
 
     <div class="linha-form pergunta-botoes">
             <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
@@ -302,14 +303,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 
 <div class="etapa pergunta" id="pergunta14">
 
-    <h2 class="pergunta-titulo">Qual a rotina de sono da criança?
+    <h2 class="pergunta-titulo">Qual a rotina de sono de cada criança?
         <span class="tag-pergunta tag-opcional">Opcional</span>
     </h2>
 
-        <div class="linha-form">
-            <input type="text" id="horarioAcordar" placeholder="Horário que costuma acordar (opcional)">
-            <input type="text" id="horarioDormir" placeholder="Horário que costuma dormir (opcional)">
-        </div>
+        <div id="containerRotinaSono"></div>
 
     <div class="linha-form pergunta-botoes">
             <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
@@ -337,13 +335,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 
 <div class="etapa pergunta" id="pergunta16">
 
-    <h2 class="pergunta-titulo">Como é a rotina da criança?
+    <h2 class="pergunta-titulo">Como é a rotina de cada criança?
         <span class="tag-pergunta tag-opcional">Opcional</span>
     </h2>
 
-        <div class="pergunta-campo">
-            <textarea id="rotinaCrianca" rows="6" placeholder="Alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes."></textarea>
-        </div>
+        <div id="containerRotinaGeral"></div>
 
     <div class="linha-form pergunta-botoes">
             <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>

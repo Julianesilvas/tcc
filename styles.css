@@ -2464,3 +2464,10 @@ h3 { font-size: 1.2rem; }
 .bloco-crianca .linha-form {
     margin-bottom: 0;
 }
+
+.titulo-crianca {
+    color: var(--marrom-escuro);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
