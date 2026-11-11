@@ -12,9 +12,9 @@
 // ===== CONFIGURAÇÃO — TROQUE AQUI PELOS DADOS REAIS =====
 // É o único lugar que precisa ser editado.
 const CT_CONFIG = {
-    whatsapp: "5516999999999",              // só números: 55 + DDD + número
-    whatsappExibicao: "(16) 99999-9999",    // como aparece na tela
-    email: "contato@happybaby.com.br",
+    whatsapp: "5516982433302",              // só números: 55 + DDD + número
+    whatsappExibicao: "(16) 98243-3302",    // como aparece na tela
+    email: "happybaby72026@gmail.com",
     horario: "Segunda a sexta, das 9h às 18h"
 };
 
