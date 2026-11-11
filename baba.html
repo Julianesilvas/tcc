@@ -118,7 +118,7 @@
                     <img src="imgs/Camila.jpeg" alt="Foto de Camila Santos">
                     <div class="baba-info">
                         <h3>Camila Santos</h3>
-                        <p>Angra dos Reis - RJ</p>
+                        <p>Angra dos Reis — RJ</p>
                         <div class="avaliacao">⭐⭐☆☆☆</div>
                         <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil9')">Ver Perfil</button>
                     </div>
@@ -128,7 +128,7 @@
                     <img src="imgs/Cátia.jpeg" alt="Foto de Cátia">
                     <div class="baba-info">
                         <h3>Cátia Fernandes</h3>
-                        <p>Tiradentes - MG</p>
+                        <p>Tiradentes — MG</p>
                         <div class="avaliacao">⭐⭐⭐⭐☆</div>
                         <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil10')">Ver Perfil</button>
                     </div>
@@ -138,7 +138,7 @@
                     <img src="imgs/Angelica.jpeg" alt="Foto de Angelica">
                     <div class="baba-info">
                         <h3>Angelica Camargo</h3>
-                        <p>Gramado - RS</p>
+                        <p>Gramado — RS</p>
                         <div class="avaliacao">⭐⭐⭐☆☆</div>
                         <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil11')">Ver Perfil</button>
                     </div>
@@ -148,7 +148,7 @@
                     <img src="imgs/Sonia.jpeg" alt="Foto de Sonia">
                     <div class="baba-info">
                         <h3>Sonia Ribeiro</h3>
-                        <p>São Paulo - SP</p>
+                        <p>São Paulo — SP</p>
                         <div class="avaliacao">⭐⭐⭐⭐☆</div>
                         <button class="btn-contratar btn-anim" onclick="mostrarPerfil('perfil12')">Ver Perfil</button>
                     </div>
@@ -649,6 +649,8 @@
                         <th>Qua</th>
                         <th>Qui</th>
                         <th>Sex</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
                     </tr>
 
                     <tr>
@@ -658,6 +660,8 @@
                         <td>✔</td>
                         <td>✔</td>
                         <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
                     </tr>
 
                     <tr>
@@ -667,6 +671,8 @@
                         <td>✔</td>
                         <td>✖</td>
                         <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
                     </tr>
 
                     <tr>
@@ -675,6 +681,8 @@
                         <td>✔</td>
                         <td>✖</td>
                         <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
                         <td>✖</td>
                     </tr>
 
@@ -868,6 +876,8 @@
                         <th>Qua</th>
                         <th>Qui</th>
                         <th>Sex</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
                     </tr>
 
                     <tr>
@@ -877,6 +887,8 @@
                         <td>✔</td>
                         <td>✔</td>
                         <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
                     </tr>
 
                     <tr>
@@ -886,6 +898,8 @@
                         <td>✖</td>
                         <td>✔</td>
                         <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
                     </tr>
 
                     <tr>
@@ -893,6 +907,8 @@
                         <td>✔</td>
                         <td>✔</td>
                         <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
                         <td>✖</td>
                         <td>✖</td>
                     </tr>
@@ -1981,41 +1997,878 @@
 </div>
 
             <div id="perfil9" class="perfil" style="display:none;">
-                <img src="imgs/Camila.jpeg" alt="Camila Santos" class="foto-grande">
-                <h2>Camila Santos</h2>
-                <p class="perfil-local">Angra dos Reis - RJ</p>
-                <p class= "perfil-experiencia">1 ano e 7 meses de experiência</p>
-                <p class="perfil-nota">Muito cuidadosa</p>
-                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+
+    <button class="btn-voltar btn-anim" onclick="voltarBabas()">
+        ← Voltar para Babás
+    </button>
+
+    <div class="perfil-container">
+
+        <!-- LADO ESQUERDO -->
+
+        <div class="perfil-esquerda">
+
+            <img src="imgs/Camila.jpeg" alt="Foto de Camila Santos" class="foto-grande">
+
+            <div class="disponibilidade">
+
+                <h3>Disponibilidade</h3>
+
+                <table class="tabela-calendario">
+
+                    <tr>
+                        <th></th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
+                    </tr>
+
+                    <tr>
+                        <td>Manhã</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tarde</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Noite</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                    </tr>
+
+                </table>
+
             </div>
 
-            <div id="perfil10" class="perfil" style="display:none;">  
-                <img src="imgs/Cátia.jpeg" alt="Cátia Fernandes" class="foto-grande">
-                <h2>Cátia Fernandes</h2>
-                <p class="perfil-local">Tiradentes - MG</p>
-                <p class= "perfil-experiencia">7 anos de experiência</p>
-                <p class="perfil-nota">Atenciosa e dedicada</p>
-                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
-            </div>
-            
-            <div id="perfil11" class="perfil" style="display:none;">  
-                <img src="imgs/Angelica.jpeg" alt="Angelica Camargo" class="foto-grande">
-                <h2>Angelica Camargo</h2>
-                <p class="perfil-local">Gramado - RS</p>
-                <p class= "perfil-experiencia">3 anos de experiência</p>
-                <p class="perfil-nota">Criativa e carinhosa</p>
-                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+        </div>
+
+        <!-- LADO DIREITO -->
+
+        <div class="perfil-direita">
+
+            <h2>Camila Santos (24)</h2>
+
+            <p class="cidade">
+                Angra dos Reis - RJ
+            </p>
+
+            <div class="avaliacao">
+
+                ⭐⭐☆☆☆
+
+                <span>(4 avaliações)</span>
+
             </div>
 
-            <div id="perfil12" class="perfil" style="display:none;">  
-                <img src="imgs/Sonia.jpeg" alt="Sonia Ribeiro" class="foto-grande">
-                <h2>Sonia Ribeiro Fonseca</h2>
-                <p class="perfil-local">São Paulo - SP</p>
-                <p class= "perfil-experiencia"> 4 anos de experiência</p>
-                <p class="perfil-nota">Experiente e acolhedora</p>
-                <button class="btn-voltar btn-anim" onclick="voltarBabas()">← Voltar</button>
+            <div class="perfil-info">
+
+                <span>R$25/hora</span>
+
+                <span>1 ano e 7 meses de experiência</span>
+
+                <span>Cuidadosa</span>
+
+                <span>Atenta</span>
+
+                <span>Tranquila</span>
+
             </div>
 
+            <section>
+
+                <h3>Sobre mim</h3>
+
+                <p>
+
+                    Tenho 24 anos e trabalho com crianças desde que ajudava a cuidar dos meus primos mais novos. Sou cuidadosa e atenta à rotina de cada criança, e gosto de manter um ambiente calmo e seguro durante todo o dia.
+
+                </p>
+
+            </section>
+
+            <section>
+
+                <h3>Minha experiência</h3>
+
+                <ul>
+
+                    <li>Crianças de 1 a 6 anos</li>
+
+                    <li>Alimentação</li>
+
+                    <li>Banho</li>
+
+                    <li>Brincadeiras</li>
+
+                    <li>Organização dos brinquedos</li>
+
+                    <li>Passeios supervisionados</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Cursos</h3>
+
+                <ul>
+
+                    <li>Primeiros Socorros Básico</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Avaliações dos pais</h3>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Renata Moura ⭐⭐⭐☆☆</h4>
+
+                        <small>Maio de 2025</small>
+
+                        <p>
+
+                            Camila foi cuidadosa com nosso filho e seguiu bem a rotina que combinamos.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Diego Martins ⭐⭐☆☆☆</h4>
+
+                        <small>Março de 2025</small>
+
+                        <p>
+
+                            Cuidou bem das crianças, mas ainda está ganhando experiência e precisou de algumas orientações.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Aline Costa ⭐⭐☆☆☆</h4>
+
+                        <small>Janeiro de 2025</small>
+
+                        <p>
+
+                            Foi educada e atenciosa. Acredito que com mais tempo de prática vai evoluir bastante.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <a href="contratar.html" class="btn-contratar">Contratar babá</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <div id="perfil10" class="perfil" style="display:none;">
+
+    <button class="btn-voltar btn-anim" onclick="voltarBabas()">
+        ← Voltar para Babás
+    </button>
+
+    <div class="perfil-container">
+
+        <!-- LADO ESQUERDO -->
+
+        <div class="perfil-esquerda">
+
+            <img src="imgs/Cátia.jpeg" alt="Foto de Cátia Fernandes" class="foto-grande">
+
+            <div class="disponibilidade">
+
+                <h3>Disponibilidade</h3>
+
+                <table class="tabela-calendario">
+
+                    <tr>
+                        <th></th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
+                    </tr>
+
+                    <tr>
+                        <td>Manhã</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tarde</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Noite</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- LADO DIREITO -->
+
+        <div class="perfil-direita">
+
+            <h2>Cátia Fernandes (38)</h2>
+
+            <p class="cidade">
+                Tiradentes - MG
+            </p>
+
+            <div class="avaliacao">
+
+                ⭐⭐⭐⭐☆
+
+                <span>(12 avaliações)</span>
+
+            </div>
+
+            <div class="perfil-info">
+
+                <span>R$35/hora</span>
+
+                <span>7 anos de experiência</span>
+
+                <span>Atenciosa</span>
+
+                <span>Dedicada</span>
+
+                <span>Responsável</span>
+
+            </div>
+
+            <section>
+
+                <h3>Sobre mim</h3>
+
+                <p>
+
+                    Tenho 38 anos e sete anos de experiência cuidando de crianças de diferentes idades. Sou atenciosa e dedicada, gosto de criar uma rotina organizada e de conversar com as famílias para entender as necessidades de cada criança.
+
+                </p>
+
+            </section>
+
+            <section>
+
+                <h3>Minha experiência</h3>
+
+                <ul>
+
+                    <li>Crianças de 0 a 10 anos</li>
+
+                    <li>Cuidados com bebês</li>
+
+                    <li>Alimentação</li>
+
+                    <li>Banho</li>
+
+                    <li>Auxílio nas tarefas escolares</li>
+
+                    <li>Passeios supervisionados</li>
+
+                    <li>Organização do quarto da criança</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Cursos</h3>
+
+                <ul>
+
+                    <li>Primeiros Socorros Básico</li>
+
+                    <li>Cuidados com Bebês</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Avaliações dos pais</h3>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Marcela Duarte ⭐⭐⭐⭐⭐</h4>
+
+                        <small>Julho de 2025</small>
+
+                        <p>
+
+                            Cátia é muito experiente e deixou nosso bebê tranquilo desde o primeiro dia. Super recomendo.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Paulo Henrique ⭐⭐⭐⭐☆</h4>
+
+                        <small>Maio de 2025</small>
+
+                        <p>
+
+                            Atenciosa e dedicada. Sempre nos mantinha informados sobre como foi o dia das crianças.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Sandra Lima ⭐⭐⭐⭐☆</h4>
+
+                        <small>Março de 2025</small>
+
+                        <p>
+
+                            Muito responsável e organizada. Nossos filhos adoram ela.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <a href="contratar.html" class="btn-contratar">Contratar babá</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <div id="perfil11" class="perfil" style="display:none;">
+
+    <button class="btn-voltar btn-anim" onclick="voltarBabas()">
+        ← Voltar para Babás
+    </button>
+
+    <div class="perfil-container">
+
+        <!-- LADO ESQUERDO -->
+
+        <div class="perfil-esquerda">
+
+            <img src="imgs/Angelica.jpeg" alt="Foto de Angelica Camargo" class="foto-grande">
+
+            <div class="disponibilidade">
+
+                <h3>Disponibilidade</h3>
+
+                <table class="tabela-calendario">
+
+                    <tr>
+                        <th></th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
+                    </tr>
+
+                    <tr>
+                        <td>Manhã</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tarde</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Noite</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- LADO DIREITO -->
+
+        <div class="perfil-direita">
+
+            <h2>Angelica Camargo (29)</h2>
+
+            <p class="cidade">
+                Gramado - RS
+            </p>
+
+            <div class="avaliacao">
+
+                ⭐⭐⭐☆☆
+
+                <span>(7 avaliações)</span>
+
+            </div>
+
+            <div class="perfil-info">
+
+                <span>R$30/hora</span>
+
+                <span>3 anos de experiência</span>
+
+                <span>Criativa</span>
+
+                <span>Carinhosa</span>
+
+                <span>Animada</span>
+
+            </div>
+
+            <section>
+
+                <h3>Sobre mim</h3>
+
+                <p>
+
+                    Tenho 29 anos e três anos de experiência como babá. Sou criativa e carinhosa, adoro inventar brincadeiras, histórias e atividades manuais para estimular a imaginação das crianças.
+
+                </p>
+
+            </section>
+
+            <section>
+
+                <h3>Minha experiência</h3>
+
+                <ul>
+
+                    <li>Crianças de 2 a 9 anos</li>
+
+                    <li>Alimentação</li>
+
+                    <li>Banho</li>
+
+                    <li>Atividades manuais e artísticas</li>
+
+                    <li>Leitura infantil</li>
+
+                    <li>Brincadeiras educativas</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Cursos</h3>
+
+                <ul>
+
+                    <li>Recreação Infantil</li>
+
+                    <li>Primeiros Socorros Básico</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Avaliações dos pais</h3>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Camila Rocha ⭐⭐⭐⭐☆</h4>
+
+                        <small>Junho de 2025</small>
+
+                        <p>
+
+                            Angelica é muito criativa. Nossa filha ficou encantada com as atividades que ela inventou.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Eduardo Prado ⭐⭐⭐☆☆</h4>
+
+                        <small>Abril de 2025</small>
+
+                        <p>
+
+                            Foi carinhosa com as crianças e a experiência correu bem.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Letícia Faria ⭐⭐⭐☆☆</h4>
+
+                        <small>Fevereiro de 2025</small>
+
+                        <p>
+
+                            Atenciosa e animada, as crianças se divertiram bastante.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <a href="contratar.html" class="btn-contratar">Contratar babá</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <div id="perfil12" class="perfil" style="display:none;">
+
+    <button class="btn-voltar btn-anim" onclick="voltarBabas()">
+        ← Voltar para Babás
+    </button>
+
+    <div class="perfil-container">
+
+        <!-- LADO ESQUERDO -->
+
+        <div class="perfil-esquerda">
+
+            <img src="imgs/Sonia.jpeg" alt="Foto de Sonia Ribeiro Fonseca" class="foto-grande">
+
+            <div class="disponibilidade">
+
+                <h3>Disponibilidade</h3>
+
+                <table class="tabela-calendario">
+
+                    <tr>
+                        <th></th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
+                    </tr>
+
+                    <tr>
+                        <td>Manhã</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tarde</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                    </tr>
+
+                    <tr>
+                        <td>Noite</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                        <td>✖</td>
+                        <td>✔</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- LADO DIREITO -->
+
+        <div class="perfil-direita">
+
+            <h2>Sonia Ribeiro Fonseca (42)</h2>
+
+            <p class="cidade">
+                São Paulo - SP
+            </p>
+
+            <div class="avaliacao">
+
+                ⭐⭐⭐⭐☆
+
+                <span>(15 avaliações)</span>
+
+            </div>
+
+            <div class="perfil-info">
+
+                <span>R$38/hora</span>
+
+                <span>4 anos de experiência</span>
+
+                <span>Experiente</span>
+
+                <span>Acolhedora</span>
+
+                <span>Organizada</span>
+
+            </div>
+
+            <section>
+
+                <h3>Sobre mim</h3>
+
+                <p>
+
+                    Tenho 42 anos e quatro anos de experiência como babá, além de já ter criado meus próprios filhos. Sou acolhedora e organizada, e gosto de transmitir segurança tanto para as crianças quanto para os pais.
+
+                </p>
+
+            </section>
+
+            <section>
+
+                <h3>Minha experiência</h3>
+
+                <ul>
+
+                    <li>Crianças de 0 a 12 anos</li>
+
+                    <li>Cuidados com bebês</li>
+
+                    <li>Alimentação</li>
+
+                    <li>Banho</li>
+
+                    <li>Auxílio nas tarefas escolares</li>
+
+                    <li>Preparo de mamadeiras</li>
+
+                    <li>Passeios supervisionados</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Cursos</h3>
+
+                <ul>
+
+                    <li>Primeiros Socorros Básico</li>
+
+                    <li>Cuidados com Bebês</li>
+
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h3>Avaliações dos pais</h3>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Beatriz Nogueira ⭐⭐⭐⭐⭐</h4>
+
+                        <small>Agosto de 2025</small>
+
+                        <p>
+
+                            Sonia é muito acolhedora e experiente. Nos sentimos seguros deixando nossos filhos com ela.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Ricardo Almeida ⭐⭐⭐⭐☆</h4>
+
+                        <small>Junho de 2025</small>
+
+                        <p>
+
+                            Organizada e pontual. As crianças criaram vínculo rápido com ela.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="comentario">
+
+                    <div>
+
+                        <h4>Tatiana Gomes ⭐⭐⭐⭐☆</h4>
+
+                        <small>Abril de 2025</small>
+
+                        <p>
+
+                            Excelente com bebês, muito cuidadosa e atenciosa.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <a href="contratar.html" class="btn-contratar">Contratar babá</a>
+
+        </div>
+
+    </div>
+
+</div>
 
 
         </section>

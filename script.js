@@ -160,32 +160,32 @@ const bancoBabas = {
     "Camila Santos": {
         foto: "imgs/Camila.jpeg",
         cidade: "Angra dos Reis - RJ",
-        avaliacoes: null,
-        preco: "Sob consulta",
+        avaliacoes: 4,
+        preco: "R$ 25/hora",
         experiencia: "1 ano e 7 meses de experiência",
         destaques: []
     },
     "Cátia Fernandes": {
         foto: "imgs/Cátia.jpeg",
         cidade: "Tiradentes - MG",
-        avaliacoes: null,
-        preco: "Sob consulta",
+        avaliacoes: 12,
+        preco: "R$ 35/hora",
         experiencia: "7 anos de experiência",
         destaques: []
     },
     "Angelica Camargo": {
         foto: "imgs/Angelica.jpeg",
         cidade: "Gramado - RS",
-        avaliacoes: null,
-        preco: "Sob consulta",
+        avaliacoes: 7,
+        preco: "R$ 30/hora",
         experiencia: "3 anos de experiência",
         destaques: []
     },
     "Sonia Ribeiro": {
         foto: "imgs/Sonia.jpeg",
         cidade: "São Paulo - SP",
-        avaliacoes: null,
-        preco: "Sob consulta",
+        avaliacoes: 15,
+        preco: "R$ 38/hora",
         experiencia: "4 anos de experiência",
         destaques: []
     }
