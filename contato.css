@@ -1,0 +1,357 @@
+/* ================================================
+   HAPPY BABY — contato.css
+   Estilos exclusivos da página de contato.
+   Usa as variáveis de cor e fonte do styles.css.
+   ================================================ */
+
+.ct-container {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* ===== CANAIS DE ATENDIMENTO ===== */
+
+.ct-canais {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+    margin-bottom: 44px;
+}
+
+.ct-canal {
+    background: var(--bege-card);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 30px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ct-canal-icone {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #f4eee8;
+    color: var(--marrom);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.ct-canal-icone svg {
+    width: 26px;
+    height: 26px;
+}
+
+.ct-canal h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--marrom-escuro);
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.ct-canal p {
+    color: var(--texto-suave);
+    font-size: 15px;
+    margin-bottom: 16px;
+    word-break: break-word;
+}
+
+.ct-canal-link {
+    margin-top: auto;
+    color: var(--marrom);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.ct-canal-link:hover {
+    border-bottom-color: var(--marrom);
+}
+
+.ct-canal-nota {
+    margin-top: auto;
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+/* ===== ABAS ===== */
+
+.ct-abas {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+}
+
+.ct-aba {
+    background: transparent;
+    border: 2px solid var(--marrom);
+    color: var(--marrom);
+    padding: 11px 26px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ct-aba:hover {
+    background: #f4eee8;
+}
+
+.ct-aba.ct-aba-ativa {
+    background: var(--marrom);
+    color: white;
+}
+
+/* ===== PAINEL ===== */
+
+.ct-painel {
+    background: var(--bege-card);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 40px 44px;
+    animation: subir 0.4s ease both;
+}
+
+.ct-painel[hidden] {
+    display: none;
+}
+
+.ct-painel h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--marrom-escuro);
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.ct-painel-texto {
+    color: var(--texto-suave);
+    margin-bottom: 26px;
+    line-height: 1.7;
+}
+
+/* ===== ALERTA DE RISCO ===== */
+
+.ct-alerta {
+    background: #f9ece8;
+    border-left: 4px solid #a4432f;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 26px;
+    color: #6b2f22;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.ct-alerta strong {
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* ===== FORMULÁRIO ===== */
+
+.ct-linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.ct-campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.ct-campo label {
+    color: var(--marrom-escuro);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.ct-opcional {
+    color: var(--texto-suave);
+    font-weight: 600;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.ct-campo input,
+.ct-campo select,
+.ct-campo textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d6cbbd;
+    border-radius: 12px;
+    font-family: var(--fonte-corpo);
+    font-size: 15px;
+    color: var(--marrom-escuro);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ct-campo textarea {
+    resize: vertical;
+    margin-top: 0;
+}
+
+.ct-campo input:focus,
+.ct-campo select:focus,
+.ct-campo textarea:focus {
+    outline: none;
+    border-color: var(--marrom);
+    box-shadow: 0 0 0 3px rgba(166, 136, 93, 0.18);
+}
+
+.ct-aceite {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--texto-suave);
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.ct-aceite input {
+    margin-top: 3px;
+    accent-color: var(--marrom);
+}
+
+/* ===== BOTÕES ===== */
+
+.ct-botoes {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.ct-btn {
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-family: var(--fonte-corpo);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.ct-btn:hover {
+    transform: translateY(-2px);
+}
+
+.ct-btn-primario {
+    background: var(--marrom);
+    color: white;
+    border: 2px solid var(--marrom);
+}
+
+.ct-btn-primario:hover {
+    background: var(--marrom-escuro);
+    border-color: var(--marrom-escuro);
+}
+
+.ct-btn-secundario {
+    background: transparent;
+    color: var(--marrom);
+    border: 2px solid var(--marrom);
+}
+
+.ct-btn-secundario:hover {
+    background: #f4eee8;
+}
+
+.ct-nota {
+    color: var(--texto-suave);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 16px;
+}
+
+/* ===== AVISO APÓS CLICAR EM ENVIAR ===== */
+
+.ct-aviso {
+    background: #f4eee8;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-top: 22px;
+    color: var(--marrom-escuro);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.ct-aviso[hidden] {
+    display: none;
+}
+
+.ct-aviso p {
+    margin: 0;
+}
+
+.ct-protocolo-rotulo {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--texto-suave);
+}
+
+.ct-protocolo-numero {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--marrom);
+    margin: 4px 0 10px;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 700px) {
+    .ct-painel {
+        padding: 28px 22px;
+    }
+
+    .ct-linha {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .ct-btn {
+        width: 100%;
+    }
+}
+
+/* ===== ALTERNATIVAS QUANDO O E-MAIL NÃO ABRE ===== */
+
+.ct-fallback {
+    margin-top: 12px !important;
+    padding-top: 12px;
+    border-top: 1px solid rgba(166, 136, 93, 0.3);
+    font-size: 13px;
+}
+
+.ct-fallback a,
+.ct-link-btn {
+    color: var(--marrom);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.ct-link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
