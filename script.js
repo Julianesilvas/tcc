@@ -122,21 +122,48 @@ function diaDaSemanaDaData(dataISO) {
 }
 
 // Retorna "disponivel", "indisponivel" ou "flexivel" (babá com agenda flexível, sem horários fixos)
-function situacaoDisponibilidade(dadosBaba, dia, exigidos) {
+// Ela precisa estar livre, nos períodos exigidos, em TODOS os dias pedidos.
+function situacaoDisponibilidade(dadosBaba, dias, exigidos) {
     if (!dadosBaba.disponibilidade) return "flexivel";
-    if (!dia || exigidos.length === 0) return "disponivel";
-    const livres = dadosBaba.disponibilidade[dia.chave] || [];
-    return exigidos.every(periodo => livres.includes(periodo)) ? "disponivel" : "indisponivel";
+    if (dias.length === 0 || exigidos.length === 0) return "disponivel";
+    const atendeTodos = dias.every(dia => {
+        const livres = dadosBaba.disponibilidade[dia.chave] || [];
+        return exigidos.every(periodo => livres.includes(periodo));
+    });
+    return atendeTodos ? "disponivel" : "indisponivel";
 }
 
-// Lê data e período já preenchidos no formulário
+// Valor dos checkboxes de "dias da semana" -> chave usada na agenda das babás
+const CHAVE_DIA_MARCADO = {
+    "Segunda": "seg", "Terça": "ter", "Quarta": "qua", "Quinta": "qui",
+    "Sexta": "sex", "Sábado": "sab", "Domingo": "dom"
+};
+
+// Lê data, período, duração e dias da semana já preenchidos no formulário.
+// Quais dias contam:
+//  - "Um único dia": só o dia da semana da data escolhida;
+//  - senão, se a pessoa marcou dias da semana, valem os dias marcados;
+//  - senão, vale o dia da semana da data de início.
 function lerFiltroDisponibilidade() {
-    return {
-        dataISO: document.getElementById("dataInicio").value,
-        periodo: document.getElementById("periodoContratacao").value,
-        dia: diaDaSemanaDaData(document.getElementById("dataInicio").value),
-        exigidos: periodosExigidos(document.getElementById("periodoContratacao").value)
-    };
+    const dataISO = document.getElementById("dataInicio").value;
+    const periodo = document.getElementById("periodoContratacao").value;
+    const duracao = document.getElementById("duracaoContratacao").value;
+    const diaDaData = diaDaSemanaDaData(dataISO);
+
+    const diasMarcados = Array.from(document.querySelectorAll('input[name="diaSemana"]:checked'))
+        .map(caixa => DIAS_SEMANA.find(dia => dia.chave === CHAVE_DIA_MARCADO[caixa.value]))
+        .filter(Boolean);
+
+    let dias, origemDias;
+    if (duracao !== "Um único dia" && diasMarcados.length > 0) {
+        dias = diasMarcados;
+        origemDias = "marcados";
+    } else {
+        dias = diaDaData ? [diaDaData] : [];
+        origemDias = "data";
+    }
+
+    return { dataISO, periodo, dias, origemDias, exigidos: periodosExigidos(periodo) };
 }
 
 // Depois de mudar data/período: a babá já escolhida continua livre?
@@ -145,7 +172,7 @@ function babaEscolhidaContinuaLivre() {
     const dados = bancoBabas[nome];
     if (!nome || !dados) return true;
     const filtro = lerFiltroDisponibilidade();
-    return situacaoDisponibilidade(dados, filtro.dia, filtro.exigidos) !== "indisponivel";
+    return situacaoDisponibilidade(dados, filtro.dias, filtro.exigidos) !== "indisponivel";
 }
 
 // "Banco de dados" das babás (site estático, sem back-end).
@@ -447,7 +474,8 @@ function proximaPergunta() {
     // Se veio de um lápis de edição (ou de "alterar data/período"), volta pro destino combinado
     if (modoEdicao) {
         // Mudou data ou período: a babá já escolhida ainda está livre? Se não, vai escolher outra.
-        const mudouDataOuPeriodo = perguntaAtual === 18 || perguntaAtual === 19;
+        // 18 = data, 19 = período, 20 = duração, 22 = dias da semana
+        const mudouDataOuPeriodo = [18, 19, 20, 22].includes(perguntaAtual);
         if (mudouDataOuPeriodo && destinoEdicao !== perguntaEscolhaBaba && !babaEscolhidaContinuaLivre()) {
             mostrarPergunta(perguntaEscolhaBaba); // continua em modo edição, depois segue pra revisão
             return;
@@ -528,7 +556,7 @@ function renderizarGridBabas() {
     const disponiveis = [];
     const flexiveis = [];
     Object.keys(bancoBabas).forEach(nome => {
-        const situacao = situacaoDisponibilidade(bancoBabas[nome], filtro.dia, filtro.exigidos);
+        const situacao = situacaoDisponibilidade(bancoBabas[nome], filtro.dias, filtro.exigidos);
         if (situacao === "disponivel") disponiveis.push(nome);
         if (situacao === "flexivel") flexiveis.push(nome);
     });
@@ -541,24 +569,35 @@ function renderizarGridBabas() {
 
     if (perdeuEscolhida) {
         campoEscolhida.value = "";
-        avisoIndisponivel.textContent = `${escolhida} não está livre nesse dia e período. Escolha outra profissional ou altere a data.`;
+        avisoIndisponivel.textContent = `${escolhida} não está livre nos dias e período escolhidos. Escolha outra profissional ou altere os dias, a data ou o período.`;
     }
     avisoIndisponivel.style.display = perdeuEscolhida ? "block" : "none";
 
     // Texto que explica o filtro aplicado
     const info = document.getElementById("infoDisponibilidadeBaba");
-    if (filtro.dia && filtro.exigidos.length) {
-        const [ano, mes, dia] = filtro.dataISO.split("-");
+    if (filtro.dias.length && filtro.exigidos.length) {
         const periodoTexto = filtro.periodo === "Integral" ? "integral (manhã e tarde)" : filtro.periodo.toLowerCase();
-        info.textContent = `Profissionais livres em ${filtro.dia.nome}, ${dia}/${mes}/${ano}, no período ${periodoTexto}.`;
+        if (filtro.origemDias === "marcados") {
+            const nomes = filtro.dias.map(dia => dia.nome);
+            const lista = nomes.length === 1 ? nomes[0] : nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1];
+            info.textContent = `Profissionais livres nos dias escolhidos (${lista}), no período ${periodoTexto}.`;
+        } else {
+            const [ano, mes, dia] = filtro.dataISO.split("-");
+            info.textContent = `Profissionais livres em ${filtro.dias[0].nome}, ${dia}/${mes}/${ano}, no período ${periodoTexto}.`;
+        }
     } else {
         info.textContent = "Escolha uma data e um período para ver quem está livre.";
     }
 
     // Cards disponíveis (mostra em quais períodos ela está livre naquele dia)
     disponiveis.forEach(nome => {
-        const livres = filtro.dia ? bancoBabas[nome].disponibilidade[filtro.dia.chave] : [];
-        const texto = livres.length ? `Livre: ${listarPeriodos(livres)}` : "";
+        let texto = "";
+        if (filtro.dias.length === 1) {
+            const livres = bancoBabas[nome].disponibilidade[filtro.dias[0].chave];
+            texto = livres.length ? `Livre: ${listarPeriodos(livres)}` : "";
+        } else if (filtro.dias.length > 1) {
+            texto = "Livre em todos os dias escolhidos";
+        }
         gridDisponiveis.appendChild(criarCardBaba(nome, bancoBabas[nome], texto));
     });
 
