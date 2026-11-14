@@ -18,6 +18,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contratar.css">
 
 </head>
 
@@ -550,8 +551,30 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
         <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
+        <p class="info-disponibilidade" id="infoDisponibilidadeBaba"></p>
+        <div class="alterar-filtro">
+            <button type="button" class="link-alterar" onclick="irParaPerguntaComRetorno(18, 26)">Alterar data</button>
+            <button type="button" class="link-alterar" onclick="irParaPerguntaComRetorno(19, 26)">Alterar período</button>
+        </div>
+
+        <p class="aviso-selecao" id="avisoBabaIndisponivel" style="display:none;"></p>
+
         <p class="texto-etapa">Clique na foto da profissional que você deseja contratar.</p>
         <div class="grid-selecao-baba" id="gridSelecaoBaba"></div>
+
+        <div class="aviso-sem-babas" id="avisoSemBabas" style="display:none;">
+            Nenhuma profissional com agenda fixa está livre nesse dia e período. Você pode escolher uma profissional com agenda flexível, logo abaixo, ou usar os botões acima para alterar a data ou o período.
+        </div>
+
+        <div id="blocoFlexivelBaba" style="display:none;">
+            <h3 class="titulo-grupo-baba">Agenda flexível</h3>
+            <p class="texto-etapa">
+                Estas profissionais têm agenda flexível e se adaptam a diferentes datas e períodos.
+                Nossa equipe alinha o horário com a profissional antes de qualquer contato.
+            </p>
+            <div class="grid-selecao-baba" id="gridFlexivelBaba"></div>
+        </div>
+
         <p class="aviso-selecao" id="avisoSelecaoBaba" style="display:none;">Selecione uma profissional para continuar.</p>
         <input type="hidden" id="selectBaba">
 

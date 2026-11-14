@@ -1,0 +1,55 @@
+/* ================================================
+   HAPPY BABY — contratar.css
+   Estilos extras do formulário de contratação:
+   lista de babás filtrada por disponibilidade.
+   Usa as variáveis de cor e fonte do styles.css.
+   ================================================ */
+
+.info-disponibilidade {
+    color: var(--marrom-escuro);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.alterar-filtro {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.link-alterar {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--marrom);
+    font-family: var(--fonte-corpo);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.card-selecao-info .card-selecao-disp {
+    margin-top: 6px;
+    color: var(--marrom);
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.aviso-sem-babas {
+    background: #f4eee8;
+    border-radius: 12px;
+    padding: 16px 18px;
+    color: var(--marrom-escuro);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.titulo-grupo-baba {
+    font-family: var(--fonte-titulo);
+    color: var(--marrom-escuro);
+    font-size: 17px;
+    margin: 28px 0 6px;
+}

@@ -89,8 +89,68 @@ let modoEdicao = false;
 const totalPerguntas = 31;
 const perguntaEscolhaBaba = 26;
 const perguntaRevisao = 31;
+let destinoEdicao = perguntaRevisao; // pra onde voltar depois de editar uma resposta
+
+// ===== Disponibilidade das babás por data e período =====
+
+const DIAS_SEMANA = [
+    { chave: "dom", nome: "domingo" },
+    { chave: "seg", nome: "segunda-feira" },
+    { chave: "ter", nome: "terça-feira" },
+    { chave: "qua", nome: "quarta-feira" },
+    { chave: "qui", nome: "quinta-feira" },
+    { chave: "sex", nome: "sexta-feira" },
+    { chave: "sab", nome: "sábado" }
+];
+
+// Períodos que a contratação exige. "Integral" = manhã + tarde.
+function periodosExigidos(periodoEscolhido) {
+    switch (periodoEscolhido) {
+        case "Manhã": return ["manha"];
+        case "Tarde": return ["tarde"];
+        case "Noite": return ["noite"];
+        case "Integral": return ["manha", "tarde"];
+        default: return [];
+    }
+}
+
+// Descobre o dia da semana de uma data aaaa-mm-dd (sem erro de fuso horário)
+function diaDaSemanaDaData(dataISO) {
+    if (!dataISO) return null;
+    const [ano, mes, dia] = dataISO.split("-").map(Number);
+    return DIAS_SEMANA[new Date(ano, mes - 1, dia).getDay()];
+}
+
+// Retorna "disponivel", "indisponivel" ou "flexivel" (babá com agenda flexível, sem horários fixos)
+function situacaoDisponibilidade(dadosBaba, dia, exigidos) {
+    if (!dadosBaba.disponibilidade) return "flexivel";
+    if (!dia || exigidos.length === 0) return "disponivel";
+    const livres = dadosBaba.disponibilidade[dia.chave] || [];
+    return exigidos.every(periodo => livres.includes(periodo)) ? "disponivel" : "indisponivel";
+}
+
+// Lê data e período já preenchidos no formulário
+function lerFiltroDisponibilidade() {
+    return {
+        dataISO: document.getElementById("dataInicio").value,
+        periodo: document.getElementById("periodoContratacao").value,
+        dia: diaDaSemanaDaData(document.getElementById("dataInicio").value),
+        exigidos: periodosExigidos(document.getElementById("periodoContratacao").value)
+    };
+}
+
+// Depois de mudar data/período: a babá já escolhida continua livre?
+function babaEscolhidaContinuaLivre() {
+    const nome = document.getElementById("selectBaba").value;
+    const dados = bancoBabas[nome];
+    if (!nome || !dados) return true;
+    const filtro = lerFiltroDisponibilidade();
+    return situacaoDisponibilidade(dados, filtro.dia, filtro.exigidos) !== "indisponivel";
+}
 
 // "Banco de dados" das babás (site estático, sem back-end).
+// disponibilidade: agenda por dia da semana e período. "null" = agenda flexível
+// (a profissional aparece em qualquer data e período).
 // Se as fotos das babás estiverem em outra pasta, ajuste os caminhos abaixo.
 const bancoBabas = {
     "Ana Laura": {
@@ -99,7 +159,8 @@ const bancoBabas = {
         avaliacoes: 18,
         preco: "R$ 30/hora",
         experiencia: "4 anos de experiência",
-        destaques: ["Primeiros Socorros", "Recreação Infantil"]
+        destaques: ["Primeiros Socorros", "Recreação Infantil"],
+        disponibilidade: { seg: ["manha", "tarde"], ter: ["manha", "tarde", "noite"], qua: ["manha", "tarde"], qui: ["manha", "tarde", "noite"], sex: ["manha", "tarde"], sab: [], dom: [] }
     },
     "Mariany Ruas": {
         foto: "imgs/Mariany.jpeg",
@@ -107,7 +168,8 @@ const bancoBabas = {
         avaliacoes: 13,
         preco: "R$ 35/hora",
         experiencia: "3 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["manha", "tarde"], ter: ["manha", "tarde", "noite"], qua: ["tarde", "noite"], qui: ["manha", "noite"], sex: ["tarde"], sab: [], dom: [] }
     },
     "Julia Penedo": {
         foto: "imgs/Julia.jpeg",
@@ -115,7 +177,8 @@ const bancoBabas = {
         avaliacoes: 21,
         preco: "R$ 40/hora",
         experiencia: "6 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["manha", "tarde", "noite"], ter: ["tarde", "noite"], qua: ["manha", "tarde"], qui: ["manha", "noite"], sex: ["manha", "tarde"], sab: [], dom: [] }
     },
     "Heloisa Inácio": {
         foto: "imgs/Heloisa.jpeg",
@@ -123,7 +186,8 @@ const bancoBabas = {
         avaliacoes: 29,
         preco: "R$ 45/hora",
         experiencia: "8 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["manha", "tarde", "noite"], ter: ["manha", "tarde", "noite"], qua: ["manha", "noite"], qui: ["manha", "tarde"], sex: ["manha", "tarde"], sab: [], dom: [] }
     },
     "Juliane Santana": {
         foto: "imgs/Juliane.jpeg",
@@ -131,7 +195,8 @@ const bancoBabas = {
         avaliacoes: 34,
         preco: "R$ 42/hora",
         experiencia: "7 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["manha", "tarde"], ter: ["manha", "tarde", "noite"], qua: ["manha", "tarde"], qui: ["manha", "tarde", "noite"], sex: ["manha", "tarde", "noite"], sab: ["manha", "tarde", "noite"], dom: ["tarde", "noite"] }
     },
     "Caroline Aparecida": {
         foto: "imgs/Carol.jpeg",
@@ -139,7 +204,8 @@ const bancoBabas = {
         avaliacoes: 47,
         preco: "R$ 48/hora",
         experiencia: "10 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["manha", "tarde", "noite"], ter: ["manha", "tarde", "noite"], qua: ["manha", "tarde"], qui: ["manha", "tarde", "noite"], sex: ["manha", "tarde", "noite"], sab: ["manha", "noite"], dom: ["manha"] }
     },
     "Lorena Costa": {
         foto: "imgs/Lorena.jpeg",
@@ -147,7 +213,8 @@ const bancoBabas = {
         avaliacoes: 17,
         preco: "R$ 32/hora",
         experiencia: "2 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["tarde", "noite"], ter: ["manha", "tarde"], qua: ["manha", "noite"], qui: ["tarde", "noite"], sex: ["manha", "tarde"], sab: ["manha", "noite"], dom: ["tarde"] }
     },
     "Letícia Mendes": {
         foto: "imgs/Leticia.jpeg",
@@ -155,7 +222,8 @@ const bancoBabas = {
         avaliacoes: 9,
         preco: "R$ 28/hora",
         experiencia: "1 ano de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: { seg: ["manha", "tarde"], ter: ["manha", "noite"], qua: ["manha", "tarde"], qui: ["tarde", "noite"], sex: ["manha", "tarde"], sab: ["tarde", "noite"], dom: ["noite"] }
     },
     "Camila Santos": {
         foto: "imgs/Camila.jpeg",
@@ -163,7 +231,8 @@ const bancoBabas = {
         avaliacoes: 4,
         preco: "R$ 25/hora",
         experiencia: "1 ano e 7 meses de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: null
     },
     "Cátia Fernandes": {
         foto: "imgs/Cátia.jpeg",
@@ -171,7 +240,8 @@ const bancoBabas = {
         avaliacoes: 12,
         preco: "R$ 35/hora",
         experiencia: "7 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: null
     },
     "Angelica Camargo": {
         foto: "imgs/Angelica.jpeg",
@@ -179,7 +249,8 @@ const bancoBabas = {
         avaliacoes: 7,
         preco: "R$ 30/hora",
         experiencia: "3 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: null
     },
     "Sonia Ribeiro": {
         foto: "imgs/Sonia.jpeg",
@@ -187,7 +258,8 @@ const bancoBabas = {
         avaliacoes: 15,
         preco: "R$ 38/hora",
         experiencia: "4 anos de experiência",
-        destaques: []
+        destaques: [],
+        disponibilidade: null
     }
 };
 
@@ -232,6 +304,11 @@ function mostrarPergunta(numero) {
     }
     if (numero === 16) {
         gerarCamposRotinaGeral();
+    }
+
+    // Na escolha da babá, mostra só quem está livre na data e período escolhidos
+    if (numero === perguntaEscolhaBaba) {
+        renderizarGridBabas();
     }
 
     // Ao chegar na revisão final, monta o resumo com os dados preenchidos
@@ -367,10 +444,19 @@ function proximaPergunta() {
         return;
     }
 
-    // Se veio de um lápis de edição no resumo, volta direto pra revisão
+    // Se veio de um lápis de edição (ou de "alterar data/período"), volta pro destino combinado
     if (modoEdicao) {
+        // Mudou data ou período: a babá já escolhida ainda está livre? Se não, vai escolher outra.
+        const mudouDataOuPeriodo = perguntaAtual === 18 || perguntaAtual === 19;
+        if (mudouDataOuPeriodo && destinoEdicao !== perguntaEscolhaBaba && !babaEscolhidaContinuaLivre()) {
+            mostrarPergunta(perguntaEscolhaBaba); // continua em modo edição, depois segue pra revisão
+            return;
+        }
+
         modoEdicao = false;
-        mostrarPergunta(perguntaRevisao);
+        const destino = destinoEdicao;
+        destinoEdicao = perguntaRevisao;
+        mostrarPergunta(destino);
         return;
     }
 
@@ -388,35 +474,106 @@ function voltarPergunta() {
 // Usado pelos lápis (✎) no resumo final, pra pular direto pra pergunta certa
 function irParaPergunta(numero) {
     modoEdicao = true;
+    destinoEdicao = perguntaRevisao;
     mostrarPergunta(numero);
 }
 
-// ===== Gera os cards de seleção da babá (Etapa 4) =====
+// Pula pra uma pergunta e, depois de responder, volta pra outra (ex.: alterar a data e voltar à lista de babás)
+function irParaPerguntaComRetorno(numero, retorno) {
+    modoEdicao = true;
+    destinoEdicao = retorno;
+    mostrarPergunta(numero);
+}
+
+// ===== Gera os cards de seleção da babá, filtrando pela data e período escolhidos =====
+
+// "manhã", "manhã e tarde", "manhã, tarde e noite"
+function listarPeriodos(periodos) {
+    const nomes = { manha: "manhã", tarde: "tarde", noite: "noite" };
+    const lista = periodos.map(p => nomes[p]);
+    if (lista.length <= 1) return lista.join("");
+    return lista.slice(0, -1).join(", ") + " e " + lista[lista.length - 1];
+}
+
+function criarCardBaba(nome, dados, textoDisponibilidade) {
+    const card = document.createElement("div");
+    card.className = "card-selecao-baba";
+    card.setAttribute("data-nome", nome);
+
+    card.innerHTML = `
+        <img src="${dados.foto}" alt="${nome}">
+        <div class="card-selecao-info">
+            <h4>${nome}</h4>
+            <p>${dados.cidade}</p>
+            <p>${dados.preco}</p>
+            <p class="card-selecao-disp">${textoDisponibilidade}</p>
+        </div>
+        <span class="selo-selecionada">✓</span>
+    `;
+
+    card.addEventListener("click", () => selecionarBaba(nome));
+    return card;
+}
+
 function renderizarGridBabas() {
-    const grid = document.getElementById("gridSelecaoBaba");
-    if (!grid) return; // só roda na contratar.html
+    const gridDisponiveis = document.getElementById("gridSelecaoBaba");
+    const gridFlexivel = document.getElementById("gridFlexivelBaba");
+    if (!gridDisponiveis || !gridFlexivel) return; // só roda na contratar.html
 
-    grid.innerHTML = "";
+    const filtro = lerFiltroDisponibilidade();
 
+    gridDisponiveis.innerHTML = "";
+    gridFlexivel.innerHTML = "";
+
+    const disponiveis = [];
+    const flexiveis = [];
     Object.keys(bancoBabas).forEach(nome => {
-        const dados = bancoBabas[nome];
+        const situacao = situacaoDisponibilidade(bancoBabas[nome], filtro.dia, filtro.exigidos);
+        if (situacao === "disponivel") disponiveis.push(nome);
+        if (situacao === "flexivel") flexiveis.push(nome);
+    });
 
-        const card = document.createElement("div");
-        card.className = "card-selecao-baba";
-        card.setAttribute("data-nome", nome);
+    // Se a profissional escolhida antes não aparece mais, limpa a escolha e avisa
+    const campoEscolhida = document.getElementById("selectBaba");
+    const escolhida = campoEscolhida.value;
+    const avisoIndisponivel = document.getElementById("avisoBabaIndisponivel");
+    const perdeuEscolhida = escolhida && !disponiveis.includes(escolhida) && !flexiveis.includes(escolhida);
 
-        card.innerHTML = `
-            <img src="${dados.foto}" alt="${nome}">
-            <div class="card-selecao-info">
-                <h4>${nome}</h4>
-                <p>${dados.cidade}</p>
-                <p>${dados.preco}</p>
-            </div>
-            <span class="selo-selecionada">✓</span>
-        `;
+    if (perdeuEscolhida) {
+        campoEscolhida.value = "";
+        avisoIndisponivel.textContent = `${escolhida} não está livre nesse dia e período. Escolha outra profissional ou altere a data.`;
+    }
+    avisoIndisponivel.style.display = perdeuEscolhida ? "block" : "none";
 
-        card.addEventListener("click", () => selecionarBaba(nome));
-        grid.appendChild(card);
+    // Texto que explica o filtro aplicado
+    const info = document.getElementById("infoDisponibilidadeBaba");
+    if (filtro.dia && filtro.exigidos.length) {
+        const [ano, mes, dia] = filtro.dataISO.split("-");
+        const periodoTexto = filtro.periodo === "Integral" ? "integral (manhã e tarde)" : filtro.periodo.toLowerCase();
+        info.textContent = `Profissionais livres em ${filtro.dia.nome}, ${dia}/${mes}/${ano}, no período ${periodoTexto}.`;
+    } else {
+        info.textContent = "Escolha uma data e um período para ver quem está livre.";
+    }
+
+    // Cards disponíveis (mostra em quais períodos ela está livre naquele dia)
+    disponiveis.forEach(nome => {
+        const livres = filtro.dia ? bancoBabas[nome].disponibilidade[filtro.dia.chave] : [];
+        const texto = livres.length ? `Livre: ${listarPeriodos(livres)}` : "";
+        gridDisponiveis.appendChild(criarCardBaba(nome, bancoBabas[nome], texto));
+    });
+
+    // Mensagem quando ninguém com agenda cadastrada está livre
+    document.getElementById("avisoSemBabas").style.display = disponiveis.length ? "none" : "block";
+
+    // Babás com agenda flexível aparecem em qualquer data e período
+    flexiveis.forEach(nome => {
+        gridFlexivel.appendChild(criarCardBaba(nome, bancoBabas[nome], "Agenda flexível"));
+    });
+    document.getElementById("blocoFlexivelBaba").style.display = flexiveis.length ? "block" : "none";
+
+    // Mantém marcada a profissional já escolhida
+    document.querySelectorAll(".card-selecao-baba").forEach(card => {
+        card.classList.toggle("selecionada", card.getAttribute("data-nome") === campoEscolhida.value);
     });
 }
 
@@ -429,6 +586,7 @@ function selecionarBaba(nome) {
     });
 
     document.getElementById("avisoSelecaoBaba").style.display = "none";
+    document.getElementById("avisoBabaIndisponivel").style.display = "none";
 }
 
 // ===== Monta o resumo da Etapa 5 com os dados reais preenchidos =====
@@ -536,7 +694,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sucesso) {
         sucesso.style.display = "none";
     }
-    renderizarGridBabas();
+    // Não permite escolher datas que já passaram
+    const campoData = document.getElementById("dataInicio");
+    if (campoData) {
+        const hoje = new Date();
+        const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+        const dia = String(hoje.getDate()).padStart(2, "0");
+        campoData.min = `${hoje.getFullYear()}-${mes}-${dia}`;
+    }
 });
 
 // ================================================
