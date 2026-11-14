@@ -659,6 +659,10 @@ function preencherResumo() {
     const nome = document.getElementById("nomeResponsavel").value;
     const cidade = document.getElementById("cidadeResponsavel").value;
     const estado = document.getElementById("estadoResponsavel").value;
+    const endereco = document.getElementById("enderecoResponsavel").value;
+    const complemento = document.getElementById("complementoResponsavel").value.trim();
+    const referencia = document.getElementById("referenciaResponsavel").value.trim();
+    const cep = document.getElementById("cepResponsavel").value;
     const qtdCriancas = document.getElementById("qtdCriancas").value;
     const dataInicio = document.getElementById("dataInicio").value;
     const periodo = document.getElementById("periodoContratacao").value;
@@ -687,7 +691,13 @@ function preencherResumo() {
     }
 
     document.getElementById("resumoResponsavel").textContent = nome || "-";
-    document.getElementById("resumoCidade").textContent = cidade && estado ? `${cidade} - ${estado}` : "-";
+    // Endereço completo: rua, complemento, cidade - estado e CEP (só o que foi preenchido)
+    const partesEndereco = [endereco, complemento, cidade && estado ? `${cidade} - ${estado}` : (cidade || estado)]
+        .filter(Boolean);
+    let enderecoCompleto = partesEndereco.join(", ");
+    if (enderecoCompleto && cep) enderecoCompleto += ` · CEP ${cep}`;
+    document.getElementById("resumoEndereco").textContent = enderecoCompleto || "-";
+    document.getElementById("resumoReferencia").textContent = referencia || "-";
     document.getElementById("resumoCriancas").textContent = qtdCriancas || "-";
     document.getElementById("resumoIdades").textContent = idadesLista.length ? idadesLista.join(", ") : "-";
     document.getElementById("resumoAlergias").textContent = alergiasLista.length ? alergiasLista.join(" · ") : "Nenhuma informada";

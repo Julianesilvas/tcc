@@ -164,6 +164,12 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
             <input type="text" id="enderecoResponsavel" placeholder="Endereço" required>
         </div>
         <div class="linha-form">
+            <input type="text" id="complementoResponsavel" placeholder="Complemento (ex.: apto 42, bloco B ou casa)"
+                pattern=".*\S.*" title="Preencha este campo." required>
+            <input type="text" id="referenciaResponsavel" placeholder="Ponto de referência (ex.: em frente à padaria)"
+                pattern=".*\S.*" title="Preencha este campo." required>
+        </div>
+        <div class="linha-form">
             <input type="text" id="cidadeResponsavel" placeholder="Cidade" required>
             <input type="text" id="estadoResponsavel" placeholder="Estado" required>
         </div>
@@ -701,7 +707,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
                 <button type="button" class="btn-edit" onclick="irParaPergunta(1)" title="Editar">✎</button>
             </div>
             <div class="resumo-item">
-                <strong>Cidade:</strong> <span id="resumoCidade"></span>
+                <strong>Endereço:</strong> <span id="resumoEndereco"></span>
+                <button type="button" class="btn-edit" onclick="irParaPergunta(6)" title="Editar">✎</button>
+            </div>
+            <div class="resumo-item">
+                <strong>Ponto de referência:</strong> <span id="resumoReferencia"></span>
                 <button type="button" class="btn-edit" onclick="irParaPergunta(6)" title="Editar">✎</button>
             </div>
             <div class="resumo-item">
