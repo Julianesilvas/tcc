@@ -53,3 +53,11 @@
     font-size: 17px;
     margin: 28px 0 6px;
 }
+
+/* ===== CAMPO NÚMERO (ao lado do endereço) ===== */
+/* Só em telas largas: no celular os campos ficam empilhados e ocupam a largura toda. */
+@media (min-width: 901px) {
+    .linha-form input.campo-numero {
+        flex: 0 0 160px;
+    }
+}

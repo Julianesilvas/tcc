@@ -660,6 +660,7 @@ function preencherResumo() {
     const cidade = document.getElementById("cidadeResponsavel").value;
     const estado = document.getElementById("estadoResponsavel").value;
     const endereco = document.getElementById("enderecoResponsavel").value;
+    const numero = document.getElementById("numeroResponsavel").value.trim();
     const complemento = document.getElementById("complementoResponsavel").value.trim();
     const referencia = document.getElementById("referenciaResponsavel").value.trim();
     const cep = document.getElementById("cepResponsavel").value;
@@ -691,8 +692,8 @@ function preencherResumo() {
     }
 
     document.getElementById("resumoResponsavel").textContent = nome || "-";
-    // Endereço completo: rua, complemento, cidade - estado e CEP (só o que foi preenchido)
-    const partesEndereco = [endereco, complemento, cidade && estado ? `${cidade} - ${estado}` : (cidade || estado)]
+    // Endereço completo: rua, número, complemento, cidade - estado e CEP (só o que foi preenchido)
+    const partesEndereco = [endereco, numero, complemento, cidade && estado ? `${cidade} - ${estado}` : (cidade || estado)]
         .filter(Boolean);
     let enderecoCompleto = partesEndereco.join(", ");
     if (enderecoCompleto && cep) enderecoCompleto += ` · CEP ${cep}`;

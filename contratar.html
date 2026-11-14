@@ -161,7 +161,9 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
                 oninput="aplicarMascaraCEP(this); buscarEnderecoPorCEP(this, 'enderecoResponsavel', 'cidadeResponsavel', 'estadoResponsavel')">
         </div>
         <div class="linha-form">
-            <input type="text" id="enderecoResponsavel" placeholder="Endereço" required>
+            <input type="text" id="enderecoResponsavel" placeholder="Rua / Avenida" required>
+            <input type="text" id="numeroResponsavel" class="campo-numero" placeholder="Número (ou S/N)" maxlength="10"
+                pattern=".*\S.*" title="Preencha este campo." required>
         </div>
         <div class="linha-form">
             <input type="text" id="complementoResponsavel" placeholder="Complemento (ex.: apto 42, bloco B ou casa)"
