@@ -274,9 +274,10 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta12">
 
     <h2 class="pergunta-titulo">Alguma criança utiliza medicamento?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
+        <p class="texto-etapa">Se a criança não usa nenhum medicamento, escreva "Nenhum".</p>
         <div id="containerMedicamentos"></div>
 
     <div class="linha-form pergunta-botoes">
@@ -321,7 +322,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta15">
 
     <h2 class="pergunta-titulo">Como é a rotina de cada criança?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div id="containerRotinaGeral"></div>
@@ -426,11 +427,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta20">
 
     <h2 class="pergunta-titulo">Qual o horário aproximado do serviço?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div class="pergunta-campo">
-            <input type="text" id="horarioAproximado" placeholder="Ex.: 07h às 18h (opcional)">
+            <input type="text" id="horarioAproximado" placeholder="Ex.: 07h às 18h" pattern=".*\S.*" title="Preencha este campo." required>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -443,10 +444,10 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta21">
 
     <h2 class="pergunta-titulo">Quais dias da semana você precisa da babá?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
-        <div class="dias">
+        <div class="dias" data-grupo-obrigatorio onchange="this.nextElementSibling.style.display='none'">
             <label><input type="checkbox" name="diaSemana" value="Segunda"> Segunda</label>
             <label><input type="checkbox" name="diaSemana" value="Terça"> Terça</label>
             <label><input type="checkbox" name="diaSemana" value="Quarta"> Quarta</label>
@@ -455,6 +456,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
             <label><input type="checkbox" name="diaSemana" value="Sábado"> Sábado</label>
             <label><input type="checkbox" name="diaSemana" value="Domingo"> Domingo</label>
         </div>
+        <p class="aviso-selecao" style="display:none;">Selecione pelo menos um dia da semana.</p>
 
     <div class="linha-form pergunta-botoes">
             <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>

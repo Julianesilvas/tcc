@@ -391,7 +391,7 @@ function gerarCamposMedicamentos() {
             bloco.className = "bloco-crianca";
             bloco.innerHTML = `
                 <h4 class="titulo-crianca" data-indice="${i}"></h4>
-                <input type="text" id="medicamentoCrianca${i}" placeholder="Medicamentos (opcional)">
+                <input type="text" id="medicamentoCrianca${i}" placeholder="Medicamento (ou escreva Nenhum)" required>
             `;
             container.appendChild(bloco);
         }
@@ -442,7 +442,7 @@ function gerarCamposRotinaGeral() {
             bloco.className = "bloco-crianca";
             bloco.innerHTML = `
                 <h4 class="titulo-crianca" data-indice="${i}"></h4>
-                <textarea id="rotinaCrianca${i}" rows="5" placeholder="Alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes."></textarea>
+                <textarea id="rotinaCrianca${i}" rows="5" required placeholder="Alimentação, escola, atividades, brincadeiras, televisão, cochilos, entre outras informações importantes."></textarea>
             `;
             container.appendChild(bloco);
         }
@@ -453,16 +453,38 @@ function gerarCamposRotinaGeral() {
     });
 }
 
-function proximaPergunta() {
-    const pergunta = document.getElementById("pergunta" + perguntaAtual);
-    const camposObrigatorios = pergunta.querySelectorAll("[required]");
+// Confere se a pergunta está preenchida. Retorna true quando pode avançar.
+//  - campos com "required" não podem ficar vazios (nem só com espaços);
+//  - grupos de caixinhas marcados com data-grupo-obrigatorio precisam de ao menos uma marcada.
+function validarPergunta(pergunta) {
+    for (const campo of pergunta.querySelectorAll("[required]")) {
+        const ehTexto = campo.tagName === "TEXTAREA" || ["text", "tel", "email"].includes(campo.type);
+        const soEspacos = ehTexto && campo.value !== "" && campo.value.trim() === "";
+        campo.setCustomValidity(soEspacos ? "Preencha este campo." : "");
 
-    for (const campo of camposObrigatorios) {
         if (!campo.checkValidity()) {
             campo.reportValidity();
-            return;
+            return false;
         }
     }
+
+    for (const grupo of pergunta.querySelectorAll("[data-grupo-obrigatorio]")) {
+        const aviso = grupo.nextElementSibling;
+        const marcouAlgum = grupo.querySelector("input:checked") !== null;
+        if (aviso) aviso.style.display = marcouAlgum ? "none" : "block";
+        if (!marcouAlgum) {
+            grupo.scrollIntoView({ behavior: "smooth", block: "center" });
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function proximaPergunta() {
+    const pergunta = document.getElementById("pergunta" + perguntaAtual);
+
+    if (!validarPergunta(pergunta)) return;
 
     // Checagem extra: na pergunta de escolha da babá, precisa ter selecionado alguém no grid
     if (perguntaAtual === perguntaEscolhaBaba && !document.getElementById("selectBaba").value) {
