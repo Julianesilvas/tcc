@@ -86,9 +86,9 @@ function voltarBabas() {
 
 let perguntaAtual = 1;
 let modoEdicao = false;
-const totalPerguntas = 31;
-const perguntaEscolhaBaba = 26;
-const perguntaRevisao = 31;
+const totalPerguntas = 30;
+const perguntaEscolhaBaba = 25;
+const perguntaRevisao = 30;
 let destinoEdicao = perguntaRevisao; // pra onde voltar depois de editar uma resposta
 
 // ===== Disponibilidade das babás por data e período =====
@@ -323,13 +323,13 @@ function mostrarPergunta(numero) {
     }
 
     // Perguntas de medicamentos e rotinas também são geradas por criança
-    if (numero === 13) {
+    if (numero === 12) {
         gerarCamposMedicamentos();
     }
-    if (numero === 14) {
+    if (numero === 13) {
         gerarCamposRotinaSono();
     }
-    if (numero === 16) {
+    if (numero === 15) {
         gerarCamposRotinaGeral();
     }
 
@@ -474,8 +474,8 @@ function proximaPergunta() {
     // Se veio de um lápis de edição (ou de "alterar data/período"), volta pro destino combinado
     if (modoEdicao) {
         // Mudou data ou período: a babá já escolhida ainda está livre? Se não, vai escolher outra.
-        // 18 = data, 19 = período, 20 = duração, 22 = dias da semana
-        const mudouDataOuPeriodo = [18, 19, 20, 22].includes(perguntaAtual);
+        // 17 = data, 18 = período, 19 = duração, 21 = dias da semana
+        const mudouDataOuPeriodo = [17, 18, 19, 21].includes(perguntaAtual);
         if (mudouDataOuPeriodo && destinoEdicao !== perguntaEscolhaBaba && !babaEscolhidaContinuaLivre()) {
             mostrarPergunta(perguntaEscolhaBaba); // continua em modo edição, depois segue pra revisão
             return;
