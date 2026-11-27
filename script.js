@@ -243,6 +243,7 @@ const bancoBabas = {
     },
     "Letícia Mendes": {
         foto: "imgs/Leticia.jpeg",
+        fotoIA: true, // foto gerada por IA: mostra o selo em todo lugar
         cidade: "Araraquara - SP",
         avaliacoes: 9,
         preco: "R$ 28/hora",
@@ -252,6 +253,7 @@ const bancoBabas = {
     },
     "Camila Santos": {
         foto: "imgs/Camila.jpeg",
+        fotoIA: true, // foto gerada por IA: mostra o selo em todo lugar
         cidade: "Angra dos Reis - RJ",
         avaliacoes: 4,
         preco: "R$ 25/hora",
@@ -261,6 +263,7 @@ const bancoBabas = {
     },
     "Cátia Fernandes": {
         foto: "imgs/Cátia.jpeg",
+        fotoIA: true, // foto gerada por IA: mostra o selo em todo lugar
         cidade: "Tiradentes - MG",
         avaliacoes: 12,
         preco: "R$ 35/hora",
@@ -270,6 +273,7 @@ const bancoBabas = {
     },
     "Angelica Camargo": {
         foto: "imgs/Angelica.jpeg",
+        fotoIA: true, // foto gerada por IA: mostra o selo em todo lugar
         cidade: "Gramado - RS",
         avaliacoes: 7,
         preco: "R$ 30/hora",
@@ -279,6 +283,7 @@ const bancoBabas = {
     },
     "Sonia Ribeiro": {
         foto: "imgs/Sonia.jpeg",
+        fotoIA: true, // foto gerada por IA: mostra o selo em todo lugar
         cidade: "São Paulo - SP",
         avaliacoes: 15,
         preco: "R$ 38/hora",
@@ -1353,3 +1358,70 @@ function fazerLogout() {
     localStorage.removeItem("happyBabyUsuarioLogado");
     atualizarAreaConta();
 }
+
+
+// ================================================
+//  SELO "FOTO GERADA POR IA"
+//  Aparece em toda foto das babás marcadas com fotoIA: true em bancoBabas
+//  (página das babás, perfil, escolha da profissional e resumo da solicitação).
+//  A foto é reconhecida pelo nome do arquivo ou pelo texto alternativo (alt) com o nome da babá.
+// ================================================
+
+function normalizarTexto(texto) {
+    return (texto || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function nomeDoArquivo(caminho) {
+    let ultimo = (caminho || "").split("?")[0].split("#")[0].split("/").pop();
+    try { ultimo = decodeURIComponent(ultimo); } catch (erro) { }
+    return normalizarTexto(ultimo);
+}
+
+function ehFotoGeradaPorIA(img) {
+    const arquivo = nomeDoArquivo(img.getAttribute("src"));
+    const alt = normalizarTexto(img.getAttribute("alt"));
+
+    return Object.keys(bancoBabas).some(nome => {
+        const dados = bancoBabas[nome];
+        if (!dados.fotoIA) return false;
+        const mesmoArquivo = arquivo !== "" && arquivo === nomeDoArquivo(dados.foto);
+        const mesmoNome = alt !== "" && alt.includes(normalizarTexto(nome));
+        return mesmoArquivo || mesmoNome;
+    });
+}
+
+function marcarFotosIA() {
+    document.querySelectorAll("img").forEach(img => {
+        const pai = img.parentElement;
+        let envoltorio = pai && pai.classList.contains("foto-ia-wrap") ? pai : null;
+        const geradaPorIA = ehFotoGeradaPorIA(img);
+
+        if (!envoltorio) {
+            if (!geradaPorIA) return;
+            envoltorio = document.createElement("span");
+            envoltorio.className = "foto-ia-wrap";
+            img.parentNode.insertBefore(envoltorio, img);
+            envoltorio.appendChild(img);
+
+            const selo = document.createElement("span");
+            selo.className = "selo-foto-ia";
+            selo.textContent = "Foto gerada por IA";
+            envoltorio.appendChild(selo);
+        }
+
+        // Se a imagem trocou (ex.: resumo mostrando outra babá), mostra ou esconde o selo
+        const selo = envoltorio.querySelector(".selo-foto-ia");
+        if (selo) selo.hidden = !geradaPorIA;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    marcarFotosIA();
+    // Cards e resumo são criados/atualizados depois pelo JavaScript
+    new MutationObserver(marcarFotosIA).observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["src", "alt"]
+    });
+});

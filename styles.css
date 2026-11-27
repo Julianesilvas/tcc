@@ -2471,3 +2471,45 @@ h3 { font-size: 1.2rem; }
     font-weight: 700;
     margin-bottom: 10px;
 }
+
+
+/* ===== SELO "FOTO GERADA POR IA" ===== */
+.foto-ia-wrap {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.selo-foto-ia {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    max-width: calc(100% - 20px);
+    background: rgba(58, 40, 18, 0.78);
+    color: #fff;
+    font-family: var(--fonte-corpo);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.2px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    pointer-events: none;
+}
+
+.selo-foto-ia[hidden] {
+    display: none;
+}
+
+.card-selecao-baba .selo-foto-ia,
+.card-resumo .selo-foto-ia {
+    left: 8px;
+    bottom: 8px;
+    max-width: calc(100% - 16px);
+    font-size: 10px;
+    padding: 3px 8px;
+}
+
+.foto-grande + .selo-foto-ia {
+    font-size: 12px;
+}
