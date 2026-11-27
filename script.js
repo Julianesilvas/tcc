@@ -290,6 +290,25 @@ const bancoBabas = {
     }
 };
 
+// ===== Duração da contratação: opção "Outro" abre um campo para o tempo personalizado =====
+function alternarDuracaoOutro() {
+    const select = document.getElementById("duracaoContratacao");
+    const campo = document.getElementById("duracaoOutro");
+    if (!select || !campo) return;
+    const ehOutro = select.value === "Outro";
+    campo.style.display = ehOutro ? "block" : "none";
+    campo.required = ehOutro;
+    if (ehOutro) campo.focus();
+}
+
+// Texto final da duração (usa o que a pessoa digitou quando escolhe "Outro")
+function obterDuracao() {
+    const valor = document.getElementById("duracaoContratacao").value;
+    if (valor !== "Outro") return valor;
+    const texto = document.getElementById("duracaoOutro").value.trim();
+    return texto ? "Outro: " + texto : "Outro";
+}
+
 function mostrarPergunta(numero) {
     // Só roda na página de contratar (que tem o wizard de perguntas)
     if (!document.getElementById("pergunta1")) return;
@@ -689,7 +708,7 @@ function preencherResumo() {
     const qtdCriancas = document.getElementById("qtdCriancas").value;
     const dataInicio = document.getElementById("dataInicio").value;
     const periodo = document.getElementById("periodoContratacao").value;
-    const duracao = document.getElementById("duracaoContratacao").value;
+    const duracao = obterDuracao();
 
     // --- Idades e alergias de cada criança (campos dinâmicos) ---
     const qtd = parseInt(qtdCriancas, 10) || 0;
