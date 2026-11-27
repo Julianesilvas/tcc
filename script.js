@@ -366,7 +366,7 @@ function gerarCamposCriancas() {
                 <input type="text" id="nomeCrianca${i}" class="campo-nome-crianca" placeholder="Nome da criança" required>
                 <input type="text" id="idadeCrianca${i}" class="campo-idade-crianca" placeholder="Idade" required>
             </div>
-            <input type="text" id="alergiaCrianca${i}" class="campo-alergia-crianca" placeholder="Alergias (opcional)">
+            <input type="text" id="alergiaCrianca${i}" class="campo-alergia-crianca" placeholder="Alergias (ou escreva Nenhuma)" required>
         `;
         container.appendChild(bloco);
     }
@@ -416,8 +416,8 @@ function gerarCamposRotinaSono() {
             bloco.innerHTML = `
                 <h4 class="titulo-crianca" data-indice="${i}"></h4>
                 <div class="linha-form">
-                    <input type="text" id="horarioAcordarCrianca${i}" placeholder="Horário que costuma acordar (opcional)">
-                    <input type="text" id="horarioDormirCrianca${i}" placeholder="Horário que costuma dormir (opcional)">
+                    <input type="text" id="horarioAcordarCrianca${i}" placeholder="Horário que costuma acordar" required>
+                    <input type="text" id="horarioDormirCrianca${i}" placeholder="Horário que costuma dormir" required>
                 </div>
             `;
             container.appendChild(bloco);

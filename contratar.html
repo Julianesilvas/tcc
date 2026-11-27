@@ -157,7 +157,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
     </h2>
 
         <div class="linha-form">
-            <input type="text" id="cepResponsavel" placeholder="CEP (opcional)" maxlength="9"
+            <input type="text" id="cepResponsavel" placeholder="CEP" maxlength="9" pattern="\d{5}-\d{3}" title="Informe o CEP completo (00000-000)." required
                 oninput="aplicarMascaraCEP(this); buscarEnderecoPorCEP(this, 'enderecoResponsavel', 'cidadeResponsavel', 'estadoResponsavel')">
         </div>
         <div class="linha-form">
@@ -186,11 +186,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta7">
 
     <h2 class="pergunta-titulo">Qual é a sua profissão?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div class="pergunta-campo">
-            <input type="text" id="profissaoResponsavel" placeholder="Profissão (opcional)">
+            <input type="text" id="profissaoResponsavel" placeholder="Profissão" required>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -223,7 +223,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
         <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
-        <p class="texto-etapa">Informe o nome, a idade e, se houver, alergias de cada criança.</p>
+        <p class="texto-etapa">Informe o nome, a idade e as alergias de cada criança. Se não houver alergias, escreva "Nenhuma".</p>
         <div id="containerCriancas"></div>
 
     <div class="linha-form pergunta-botoes">
@@ -252,7 +252,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta11">
 
     <h2 class="pergunta-titulo">Qual a rotina de sono de cada criança?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div id="containerRotinaSono"></div>
@@ -267,11 +267,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta12">
 
     <h2 class="pergunta-titulo">Conte um pouco sobre a personalidade da criança.
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div class="pergunta-campo">
-            <textarea id="personalidadeCrianca" rows="6" placeholder="Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
+            <textarea id="personalidadeCrianca" rows="6" required placeholder="Ela é mais calma ou agitada? Gosta de brincar? Tem alguma dificuldade?"></textarea>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -299,10 +299,10 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta14">
 
     <h2 class="pergunta-titulo">De quais atividades a criança gosta?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
-        <div class="dias">
+        <div class="dias" data-grupo-obrigatorio onchange="this.nextElementSibling.style.display='none'">
             <label><input type="checkbox" name="atividadeCrianca" value="Brincadeiras"> Brincadeiras</label>
             <label><input type="checkbox" name="atividadeCrianca" value="Desenhar"> Desenhar</label>
             <label><input type="checkbox" name="atividadeCrianca" value="Pintar"> Pintar</label>
@@ -316,6 +316,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
             <label><input type="checkbox" name="atividadeCrianca" value="Esportes"> Esportes</label>
             <label><input type="checkbox" name="atividadeCrianca" value="Outras"> Outras</label>
         </div>
+        <p class="aviso-selecao" style="display:none;">Selecione pelo menos uma opção.</p>
 
     <div class="linha-form pergunta-botoes">
             <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
@@ -371,7 +372,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 
         <div class="pergunta-campo">
             <select id="duracaoContratacao" required>
-                <option selected disabled>Duração da contratação</option>
+                <option value="" selected disabled>Duração da contratação</option>
                 <option>Um único dia</option>
                 <option>Uma semana</option>
                 <option>Um mês</option>
@@ -430,10 +431,10 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta20">
 
     <h2 class="pergunta-titulo">Quais atividades você espera da profissional?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
-        <div class="dias">
+        <div class="dias" data-grupo-obrigatorio onchange="this.nextElementSibling.style.display='none'">
             <label><input type="checkbox" name="atividadeEsperada" value="Cuidados com bebês"> Cuidados com bebês</label>
             <label><input type="checkbox" name="atividadeEsperada" value="Preparar refeições"> Preparar refeições</label>
             <label><input type="checkbox" name="atividadeEsperada" value="Dar banho"> Dar banho</label>
@@ -451,6 +452,7 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
             <label><input type="checkbox" name="atividadeEsperada" value="Acompanhar consultas médicas"> Acompanhar consultas médicas</label>
             <label><input type="checkbox" name="atividadeEsperada" value="Dormir na residência"> Dormir na residência</label>
         </div>
+        <p class="aviso-selecao" style="display:none;">Selecione pelo menos uma opção.</p>
 
     <div class="linha-form pergunta-botoes">
             <button type="button" class="btn-voltar" onclick="voltarPergunta()">← Voltar</button>
@@ -462,11 +464,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta21">
 
     <h2 class="pergunta-titulo">Existe alguma regra importante da casa?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div class="pergunta-campo">
-            <textarea id="regraCasa" rows="6" placeholder="Exemplo: tempo de tela limitado, alimentação específica, rotina de estudos, horários, religião, costumes da família ou outras informações importantes."></textarea>
+            <textarea id="regraCasa" rows="6" required placeholder="Exemplo: tempo de tela limitado, alimentação específica, rotina de estudos, horários, religião, costumes da família ou outras informações importantes."></textarea>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -479,11 +481,11 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta22">
 
     <h2 class="pergunta-titulo">Deseja adicionar alguma informação sobre o serviço?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div class="pergunta-campo">
-            <textarea id="informacoesAdicionaisServico" rows="6" placeholder="Escreva qualquer informação que possa ajudar nossa equipe a encontrar a profissional ideal para sua família."></textarea>
+            <textarea id="informacoesAdicionaisServico" rows="6" required placeholder="Escreva qualquer informação que possa ajudar nossa equipe a encontrar a profissional ideal para sua família."></textarea>
         </div>
 
     <div class="linha-form pergunta-botoes">
@@ -537,15 +539,15 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta24">
 
     <h2 class="pergunta-titulo">Se a profissional não estiver disponível...
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <label class="aceite">
-            <input type="radio" name="substituta" value="Aceito que a Happy Baby indique outra profissional com perfil semelhante.">
+            <input type="radio" name="substituta" required value="Aceito que a Happy Baby indique outra profissional com perfil semelhante.">
             Aceito que a Happy Baby indique outra profissional com perfil semelhante.
         </label>
         <label class="aceite">
-            <input type="radio" name="substituta" value="Prefiro aguardar a disponibilidade da profissional escolhida.">
+            <input type="radio" name="substituta" required value="Prefiro aguardar a disponibilidade da profissional escolhida.">
             Prefiro aguardar a disponibilidade da profissional escolhida.
         </label>
 
@@ -559,12 +561,12 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta25">
 
     <h2 class="pergunta-titulo">Como você conheceu a Happy Baby?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <div class="pergunta-campo">
-            <select id="comoConheceu">
-                <option selected disabled>Selecione</option>
+            <select id="comoConheceu" required>
+                <option value="" selected disabled>Selecione</option>
                 <option>Instagram</option>
                 <option>Facebook</option>
                 <option>Google</option>
@@ -584,12 +586,16 @@ Pensando nisso, a Happy Baby realiza toda a intermediação entre a família e a
 <div class="etapa pergunta" id="pergunta26">
 
     <h2 class="pergunta-titulo">Deseja receber novidades da Happy Baby?
-        <span class="tag-pergunta tag-opcional">Opcional</span>
+        <span class="tag-pergunta tag-obrigatoria">Resposta obrigatória</span>
     </h2>
 
         <label class="aceite">
-            <input type="checkbox" id="receberNovidades">
-            Quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
+            <input type="radio" name="receberNovidades" value="Sim" required>
+            Sim, quero receber dicas sobre maternidade, cuidados infantis e novidades da Happy Baby por e-mail.
+        </label>
+        <label class="aceite">
+            <input type="radio" name="receberNovidades" value="Não" required>
+            Não, obrigado(a).
         </label>
 
     <div class="linha-form pergunta-botoes">
