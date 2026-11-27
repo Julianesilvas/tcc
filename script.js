@@ -1425,3 +1425,70 @@ document.addEventListener("DOMContentLoaded", () => {
         attributeFilter: ["src", "alt"]
     });
 });
+
+
+// ================================================
+//  BUSCA NA PÁGINA DAS BABÁS — por nome, cidade ou estado
+//  Aceita sigla (SP) ou nome do estado (São Paulo), sem diferenciar acentos nem maiúsculas.
+//  Com mais de uma palavra, a babá precisa combinar com todas (ex.: "ana carlos").
+// ================================================
+
+const NOMES_ESTADOS = {
+    AC: "Acre", AL: "Alagoas", AP: "Amapá", AM: "Amazonas", BA: "Bahia", CE: "Ceará",
+    DF: "Distrito Federal", ES: "Espírito Santo", GO: "Goiás", MA: "Maranhão",
+    MT: "Mato Grosso", MS: "Mato Grosso do Sul", MG: "Minas Gerais", PA: "Pará",
+    PB: "Paraíba", PR: "Paraná", PE: "Pernambuco", PI: "Piauí", RJ: "Rio de Janeiro",
+    RN: "Rio Grande do Norte", RS: "Rio Grande do Sul", RO: "Rondônia", RR: "Roraima",
+    SC: "Santa Catarina", SP: "São Paulo", SE: "Sergipe", TO: "Tocantins"
+};
+
+// Texto pesquisável do card: nome + cidade + sigla + nome do estado
+function textoPesquisavelBaba(card) {
+    const titulo = card.querySelector("h3");
+    const local = card.querySelector(".baba-info p");
+    const nome = titulo ? titulo.textContent : "";
+    const textoLocal = local ? local.textContent : "";
+
+    const partes = textoLocal.match(/^(.*?)\s*[—–-]\s*([A-Za-z]{2})\s*$/);
+    const cidade = partes ? partes[1] : textoLocal;
+    const sigla = partes ? partes[2].toUpperCase() : "";
+    const estado = NOMES_ESTADOS[sigla] || "";
+
+    return normalizarTexto([nome, cidade, sigla, estado].join(" "));
+}
+
+function filtrarBabas() {
+    const campo = document.getElementById("buscaCidade");
+    const lista = document.getElementById("listaBabas");
+    if (!campo || !lista) return;
+
+    // Se um perfil estiver aberto, volta para a lista para mostrar o resultado
+    if (lista.style.display === "none") {
+        voltarBabas();
+    }
+
+    const termos = normalizarTexto(campo.value).split(/\s+/).filter(Boolean);
+    let encontradas = 0;
+
+    lista.querySelectorAll(".baba").forEach(card => {
+        const palavras = textoPesquisavelBaba(card).split(/\s+/);
+        const combina = termos.every(termo => palavras.some(palavra => palavra.startsWith(termo)));
+        card.style.display = combina ? "" : "none";
+        if (combina) encontradas++;
+    });
+
+    let aviso = document.getElementById("semResultadosBabas");
+    if (!aviso) {
+        aviso = document.createElement("p");
+        aviso.id = "semResultadosBabas";
+        aviso.className = "aviso-sem-babas";
+        aviso.style.textAlign = "center";
+        lista.parentNode.insertBefore(aviso, lista.nextSibling);
+    }
+    if (encontradas === 0) {
+        aviso.textContent = `Nenhuma babá encontrada para "${campo.value.trim()}". Tente buscar por outro nome, cidade ou estado.`;
+        aviso.style.display = "block";
+    } else {
+        aviso.style.display = "none";
+    }
+}
