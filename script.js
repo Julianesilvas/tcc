@@ -46,8 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    criarAreaConta();
-
 });
 
 
