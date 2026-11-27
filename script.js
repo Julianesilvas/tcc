@@ -309,6 +309,74 @@ function obterDuracao() {
     return texto ? "Outro: " + texto : "Outro";
 }
 
+// ===== Rascunho do formulário (para voltar dos Termos de Uso direto ao resumo) =====
+const CHAVE_RASCUNHO = "happyBabyRascunhoContratar";
+const VALIDADE_RASCUNHO_MS = 2 * 60 * 60 * 1000; // 2 horas
+
+// Cada campo ganha uma chave: id, name+valor, ou a posição (só as declarações finais não têm id nem name)
+function chaveCampo(campo, posicaoSemId) {
+    if (campo.id) return "id:" + campo.id;
+    if (campo.name) return "nome:" + campo.name + "|" + campo.value;
+    return "pos:" + posicaoSemId;
+}
+
+function salvarRascunho() {
+    const wizard = document.querySelector(".wizard-perguntas");
+    if (!wizard) return;
+
+    const dados = {};
+    let semId = 0;
+    wizard.querySelectorAll("input, select, textarea").forEach(campo => {
+        const posicao = (!campo.id && !campo.name) ? semId++ : 0;
+        const chave = chaveCampo(campo, posicao);
+        dados[chave] = (campo.type === "checkbox" || campo.type === "radio") ? campo.checked : campo.value;
+    });
+
+    try {
+        localStorage.setItem(CHAVE_RASCUNHO, JSON.stringify({ quando: Date.now(), dados }));
+    } catch (erro) {
+        // Sem armazenamento disponível: o formulário continua funcionando normalmente
+    }
+}
+
+function apagarRascunho() {
+    try { localStorage.removeItem(CHAVE_RASCUNHO); } catch (erro) { }
+}
+
+// Devolve true se conseguiu restaurar as respostas e abrir o resumo
+function restaurarRascunho() {
+    let salvo = null;
+    try { salvo = JSON.parse(localStorage.getItem(CHAVE_RASCUNHO) || "null"); } catch (erro) { return false; }
+    if (!salvo || !salvo.dados || Date.now() - salvo.quando > VALIDADE_RASCUNHO_MS) return false;
+
+    const wizard = document.querySelector(".wizard-perguntas");
+    if (!wizard) return false;
+
+    // 1) quantidade de crianças e os campos que dependem dela
+    document.getElementById("qtdCriancas").value = salvo.dados["id:qtdCriancas"] || "";
+    gerarCamposCriancas();
+    gerarCamposMedicamentos();
+    gerarCamposRotinaSono();
+    gerarCamposRotinaGeral();
+
+    // 2) demais respostas
+    let semId = 0;
+    wizard.querySelectorAll("input, select, textarea").forEach(campo => {
+        const posicao = (!campo.id && !campo.name) ? semId++ : 0;
+        const chave = chaveCampo(campo, posicao);
+        if (!(chave in salvo.dados)) return;
+        if (campo.type === "checkbox" || campo.type === "radio") {
+            campo.checked = salvo.dados[chave] === true;
+        } else {
+            campo.value = salvo.dados[chave];
+        }
+    });
+
+    alternarDuracaoOutro();
+    mostrarPergunta(perguntaRevisao);
+    return true;
+}
+
 function mostrarPergunta(numero) {
     // Só roda na página de contratar (que tem o wizard de perguntas)
     if (!document.getElementById("pergunta1")) return;
@@ -361,6 +429,8 @@ function mostrarPergunta(numero) {
     if (numero === perguntaRevisao) {
         preencherResumo();
     }
+
+    salvarRascunho();
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -768,6 +838,8 @@ function finalizarContratacao() {
         progresso.style.display = "none";
     }
 
+    apagarRascunho();
+
     const sucesso = document.getElementById("sucesso");
     if (sucesso) {
         sucesso.style.display = "flex";
@@ -779,7 +851,17 @@ function finalizarContratacao() {
 // Inicializa mostrando só a primeira pergunta e escondendo a tela de sucesso
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("pergunta1")) {
-        mostrarPergunta(1);
+        // Voltando dos Termos de Uso (contratar.html#resumo): reabre direto no resumo, com as respostas
+        const voltouParaResumo = window.location.hash === "#resumo" && restaurarRascunho();
+        if (!voltouParaResumo) {
+            mostrarPergunta(1);
+        }
+
+        const wizardForm = document.querySelector(".wizard-perguntas");
+        if (wizardForm) {
+            wizardForm.addEventListener("input", salvarRascunho);
+            wizardForm.addEventListener("change", salvarRascunho);
+        }
     }
     const sucesso = document.getElementById("sucesso");
     if (sucesso) {
